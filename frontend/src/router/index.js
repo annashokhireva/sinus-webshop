@@ -1,27 +1,55 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import StartPage from '../views/StartPage.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+{
+	path: '/',
+	name: 'Start Page',
+	component: StartPage
+},
+{
+	path: '/all-products',
+	name: 'All Products',
+	component: () => import(/* webpackChunkName: "about" */ '../views/AllProductsPage.vue')
+},
+{
+	path: '/skateboards',
+	name: 'Skateboards',
+	component: () => import(/* webpackChunkName: "about" */ '../views/SkateboardsPage.vue')
+},
+{
+	path: '/clothing',
+	name: 'Clothing',
+	component: () => import(/* webpackChunkName: "about" */ '../views/ClothingPage.vue')
+},
+{
+	path: '/sale',
+	name: 'Sale',
+	component: () => import(/* webpackChunkName: "about" */ '../views/SalePage.vue')
+},
+{
+	path: '/stores',
+	name: 'Stores',
+	component: () => import(/* webpackChunkName: "about" */ '../views/StoresPage.vue')
+},
+{
+	path: '/contact',
+	name: 'Contact',
+	component: () => import(/* webpackChunkName: "about" */ '../views/ContactPage.vue')
+},
+{
+	path: '/newsletter',
+	name: 'Newsletter',
+	component: () => import(/* webpackChunkName: "about" */ '../views/NewsletterPage.vue')
+}
+
 ]
 
 const router = new VueRouter({
-  routes
+routes
 })
 
 export default router

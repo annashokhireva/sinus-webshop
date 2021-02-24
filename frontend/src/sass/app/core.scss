@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Raleway&display=swap');
+@import '../essentials/variables.scss';
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+};
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+}
+
+h1, h2 { 
+	font-weight: 500;
+}
+
+h3, h4, h5 {
+	font-weight: 400;
+}
+
+h5 {
+	font-size: 20px;
+}
+
+p {
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+}
+
+p.small {
+	font-size: 10.2px;
+}
+
+p.medium {
+	font-size: 12.8px;
+	text-transform: uppercase;
+}
+
+.main {
+	padding-top: $header_height;
+}
+
