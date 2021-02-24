@@ -1,0 +1,19 @@
+{
+  "name": "sinus-webshop",
+  "version": "1.0.0",
+  "description": "Samla era erfarenheter från Kanban, Scrum och diskussionerna av Modern Agile och kom överens i \r gruppen om vilka delar och hur ni ska inkorporera detta i ert arbete. \r Dokumentera vad ni kommer överens om i README.md i ert repository.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annashokhireva/sinus-webshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annashokhireva/sinus-webshop/issues"
+  },
+  "homepage": "https://github.com/annashokhireva/sinus-webshop#readme"
+}
