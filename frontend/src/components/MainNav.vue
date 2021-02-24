@@ -54,6 +54,10 @@ export default {
 		justify-content: space-between;
 		align-items: center;
 		width: 10%;
+
+		img {
+			cursor: pointer;
+		}
 	}
 
 	

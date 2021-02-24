@@ -8,28 +8,6 @@
 
 		<div class="options">
 
-			<div class="globe">
-				<img src="../assets/icons/earth.svg" alt="Earth icon">
-				<span class="option">
-					<p class="medium">SE </p>
-					<span v-if="countryClosed">
-						<img src="../assets/icons/polygon_down.svg" alt="arrow down">
-					</span>
-					<span v-else>
-						<img src="../assets/icons/polygon_up.svg" alt="arrow up"/>
-					</span> 
-				</span> |
-				<span class="option">
-					<p class="medium">EN </p>
-					<span v-if="languageClosed">
-						<img src="../assets/icons/polygon_down.svg" alt="arrow down">
-					</span>
-					<span v-else> 
-						<img src="../assets/icons/polygon_up.svg" alt="arrow up">
-					</span>
-				</span>
-			</div>
-
 			<div class="menu">
 				<router-link to="/stores"><p class="medium">Stores</p></router-link>
 				<router-link to="/contact"><p class="medium">Contact</p></router-link>
@@ -56,9 +34,7 @@
 export default {
 	data() {
 		return {
-			countryClosed: true,
-			languageClosed: true,
-			loginClosed: true,
+			loginClosed: true
 		}
 	}
 }
@@ -79,32 +55,29 @@ export default {
 		align-items: center;
 		width: 136px;
 		margin-left: 20px;
+
+		img {
+			cursor: pointer;
+		}
 	}
 
 	.options {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		width: 55%;
-
-		.globe {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
+		width: 45%;
 
 		.option {
 			display: flex;
 			justify-content: space-evenly;
 			align-items: center;
-			margin: 0 5%;
 		}
 
 		.menu {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			width: 50%;
+			width: 60%;
 
 			a {
 				color: $black;
