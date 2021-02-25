@@ -1,6 +1,6 @@
 <template>
 	<nav>
-		<div class="go-back">
+		<div class="go-back" @click="goBack">
 			<img src="../assets/icons/arrow_left.svg" alt="Arrow left">
 			{{msg}}
 		</div>
@@ -14,6 +14,12 @@
 export default {
 	props: {
 		msg: String
+	},
+
+	methods: {
+		goBack() {
+			return this.$router.go(-1);
+		}
 	}
 
 }
@@ -33,6 +39,7 @@ export default {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
+		cursor: pointer;
 	}
 
 	.logo {
