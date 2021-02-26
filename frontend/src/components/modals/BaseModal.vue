@@ -11,7 +11,6 @@
 			
 			<div class="inner-content">
 				<component :is="component" />
-				<!-- <slot name="content"/> -->
 			</div>
 		</div>
 	</div>

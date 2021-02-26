@@ -41,7 +41,7 @@ export default {
 
 	methods: {
 		goToLogin: function() {
-			this.$router.push('../views/LoginView')
+			this.$router.push('/login')
 		}
 	}
 }
