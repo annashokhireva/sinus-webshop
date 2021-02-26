@@ -6,110 +6,176 @@
 			</template>
 		</main-header>
 		<div class="main">
-			<div class="add-window">
-				<span class="single-img">
+			<div class="ad-grid">
+				
+				<div class="single-img">
 					<img src="../assets/img/skater-wood.jpg" alt="Skater on a wooden skateboard">
-				</span>
-				<span class="squares">
-					<div class="text">
-						<h2>Natural</h2>
-						<h2 class="large">Wood</h2>
-						<h2>boards</h2>
-					</div>
+				</div>
+				
+				<div class="text">
+					<img  src="../assets/img/natural-wood-boards.svg" alt="Natural wood boards">
+				</div>
 
-					<span class="hold">
-						<img src="../assets/img/holding-sk8.jpg" alt="Skater holdiing a skateboard">
-					</span>
-					<span class="listen">
-						<img src="../assets/img/music-sk8.jpg" alt="Skater holdiing a skateboard">
+				<div class="hold">
+					<img  src="../assets/img/holding-sk8.jpg" alt="Skater holdiing a skateboard">
+				</div>
+
+				<div class="listen">
+					<img src="../assets/img/music-sk8.jpg" alt="Skater holdiing a skateboard">
+				</div>
+			
+				<div class="discover" @click="goTo('/skateboards')">
+					<img src="../assets/img/discover-collection.svg" alt="Discover latest collection">
+				</div>
+
+			</div>
+
+			<product-slider header="Best selling skateboards">
+				<template v-slot:products>
+					<div class="products-view">
+						<product-card />
+					</div>	
+				</template>
+			</product-slider>
+
+			<div class="ad-window">
+				<img src="../assets/img/clothes-ad.png" alt="Jumping man">
+				<button class="btn-medium dark" @click="goTo('/clothing')">
+					<span>
+						<p>Discover latest collection</p>
+						<img class="icon" src="../assets/icons/arrow_right_light.svg" alt="arrow">
 					</span>
 					
-					<div class="discover">
-						<router-link to="/skateboards">
-							<span class="link">
-								<p>Discover latest collection</p>
-								<img src="../assets/icons/arrow_right.svg" alt="Arrow right">
-							</span>
-						</router-link>
-					</div>
-				</span>
+				</button>
 			</div>
+
+			<product-slider header="Trending Now">
+				<template v-slot:products>
+					<div class="products-view">
+						<product-card />
+					</div>	
+				</template>
+			</product-slider>
+
 		</div>
+	
 	</div>
 </template>
 
 <script>
-import MainHeader from '../components/MainHeader.vue'
-import MainNav from '../components/MainNav.vue'
+import MainHeader from '../components/MainHeader.vue';
+import MainNav from '../components/MainNav.vue';
+import ProductCard from '../components/ProductCard.vue';
+import ProductSlider from '../components/ProductSlider.vue';
 
 export default {
 	components: { 
 		MainHeader,
-		MainNav 
+		MainNav,
+		ProductSlider,
+ProductCard
 	},
+
+	methods: {
+		goTo(path) {
+			return this.$router.push(path);
+		}
+	}
 }
 </script>
 
 <style lang="scss" scoped>
-	.add-window {
+	.ad-grid {
 		margin: $space $main_margin;
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(2, minmax($ad_height/4, $ad_height/2));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-rows: repeat(2, 1fr);
+		gap: 1%;
 	}
 
 	.single-img {
 		grid-column: 1 / span 2;
 		grid-row: 1 / span 2;
+		align-self: center;
+
+		img {
+			max-width: 100%; 
+			height: auto
+		}
+	}
+
+	.text {
+		grid-column: 3;
+		grid-row: 1;
+		align-self: center;
+
 		img {
 			width: 100%;
-			max-width: 590px;
+			height: auto;
+		}	
+	}
+
+	.hold {
+		grid-column: 4;
+		grid-row: 1;
+		align-self: center;
+
+		img {
+			width: 100%;
 			height: auto;
 		}
 	}
 
-
-
-	.text {
+	.listen {
 		grid-column: 3;
-		display:flex;
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: stretch;
-		width: 100%;
-		max-width: 285px;
-		height: auto;
+		grid-row: 2;
 
-		h2 {
-			font-family: 'Raleway', sans-serif;
-			font-weight: bold;
-
-			&:nth-of-type(2){
-				font-size: 2.1em;
-			}	
-
-			&:nth-of-type(3){
-				font-size: 1.7em;
-			}	
+		img {
+			width: 100%;
+			height: auto;
 		}
-		
 	}
 
 	.discover {
-		background-color: $bkg_gray;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 285px;
-		height: 231px;
+		grid-column: 4;
+		grid-row: 2;
+		align-self: center;
+		cursor: pointer;
+		
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
 
-		.link {
-			display: flex;
-			justify-content: space-between;
+	.ad-window {
+		margin: $space $main_margin;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: auto;
 		}
 
-		a {
-			color: $black;
+		.btn-medium {
+			position: absolute;
+			top: 75%;
+			right: 0%;
+		}
+
+		span {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		p {
+			color: white;
+		}
+
+		.icon {
+			height: 20px;
+			width: 24px;
 		}
 	}
 </style>

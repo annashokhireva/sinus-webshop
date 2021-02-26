@@ -44,6 +44,11 @@ const routes = [
 	path: '/newsletter',
 	name: 'Newsletter',
 	component: () => import(/* webpackChunkName: "about" */ '../views/NewsletterPage.vue')
+},
+{
+	path: '/login',
+	name: 'Login',
+	component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
 }
 
 ]

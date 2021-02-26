@@ -15,15 +15,16 @@
 			</div>
 
 			<div class="log-in">
-				<img src="../assets/icons/avatar.svg" alt="Avatar icon">
+				<img src="../assets/icons/avatar.svg" alt="Avatar icon"
+				@click="goToLogin">
 				<span class="option">
 					<p class="medium">Log in </p>
-					<span v-if="loginClosed">
+					<!-- <span v-if="loginClosed">
 						<img src="../assets/icons/polygon_down.svg" alt="arrow down">
 					</span>
 					<span v-else> 
 						<img src="../assets/icons/polygon_up.svg" alt="arrow up">
-					</span>
+					</span> -->
 				</span>
 			</div>
 		</div>
@@ -35,6 +36,12 @@ export default {
 	data() {
 		return {
 			loginClosed: true
+		}
+	},
+
+	methods: {
+		goToLogin: function() {
+			this.$router.push('/login')
 		}
 	}
 }
@@ -93,7 +100,8 @@ export default {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			width: 85px;
+			width: 75px;
+			cursor: pointer;
 			
 			p {
 				margin: 0;
