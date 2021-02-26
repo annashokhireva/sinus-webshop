@@ -1,23 +1,21 @@
 <template>
 	<div class="card">
 		<div class="product" @click="showModal('ProductModal')">
-			<img src="../assets/products/greta.png" alt="Greta">
+			<img :src="`../assets/products/${img}`" alt="Product image">
 		</div>
 		<div class="info">
 			<div class="top-line">
-				<p>Product.Name</p>
+				<p>{{ title }}</p>
 				<span class="cart">
 					<img src="../assets/icons/shopping-cart.svg" width="24" alt="shoppinng cart">
 				</span>
 			</div>
 			<div class="details">
-				<div class="colors">
-					<div class="color-box">
-						v-for=colors
-					</div>
+				<div class="short-desc">
+					<p> {{ desc }} </p>
 				</div>
 				<div class="price">
-					<p>kr</p>
+					<p> <b>{{price}}</b> kr</p>
 				</div>
 			</div>
 		</div>
@@ -28,6 +26,13 @@
 import { mapMutations } from 'vuex';
 
 export default {
+	props: {
+		img: String,
+		title: String,
+		desc: String,
+		price: Number
+	},
+
 	methods: {
 		...mapMutations(['showModal']),
 	},
@@ -38,11 +43,15 @@ export default {
 
 	.card {
 		height: 456px;
-		width: 242px;
+		min-width: 242px;
 		margin-right: 2%;
 
 		&:first-of-type {
 			margin-left: $main_margin;
+		}
+
+		&:last-of-type {
+			margin-right: $main_margin;
 		}
 
 		.product {

@@ -6,7 +6,7 @@
 		<article class="product-info">
 			<div class="details">
 				<h3>Product.Name</h3>
-				<div class="colors">
+				<!-- <div class="colors">
 					<div class="color-box">
 						v-for=colors
 					</div>
@@ -15,7 +15,7 @@
 					<div class="size-box">
 						v-for=sizes
 					</div>
-				</div>
+				</div> -->
 				<div class="price">
 					<h3>500kr</h3>
 				</div>
