@@ -6,7 +6,7 @@
 			</template>
 		</main-header>
 		<div class="main">
-			<div class="add-window">
+			<div class="ad-grid">
 				
 				<div class="single-img">
 					<img src="../assets/img/skater-wood.jpg" alt="Skater on a wooden skateboard">
@@ -24,13 +24,39 @@
 					<img src="../assets/img/music-sk8.jpg" alt="Skater holdiing a skateboard">
 				</div>
 			
-				<router-link to="/skateboards" tag="div" class="discover">
+				<div class="discover" @click="goTo('/skateboards')">
 					<img src="../assets/img/discover-collection.svg" alt="Discover latest collection">
-				</router-link>
+				</div>
 
 			</div>
 
-			<product-slider />
+			<product-slider header="Best selling skateboards">
+				<template v-slot:products>
+					<div class="products-view">
+						<product-card />
+					</div>	
+				</template>
+			</product-slider>
+
+			<div class="ad-window">
+				<img src="../assets/img/clothes-ad.png" alt="Jumping man">
+				<button class="btn-medium dark" @click="goTo('/clothing')">
+					<span>
+						<p>Discover latest collection</p>
+						<img class="icon" src="../assets/icons/arrow_right_light.svg" alt="arrow">
+					</span>
+					
+				</button>
+			</div>
+
+			<product-slider header="Trending Now">
+				<template v-slot:products>
+					<div class="products-view">
+						<product-card />
+					</div>	
+				</template>
+			</product-slider>
+
 		</div>
 	
 	</div>
@@ -39,19 +65,27 @@
 <script>
 import MainHeader from '../components/MainHeader.vue';
 import MainNav from '../components/MainNav.vue';
+import ProductCard from '../components/ProductCard.vue';
 import ProductSlider from '../components/ProductSlider.vue';
 
 export default {
 	components: { 
 		MainHeader,
 		MainNav,
-		ProductSlider
+		ProductSlider,
+ProductCard
 	},
+
+	methods: {
+		goTo(path) {
+			return this.$router.push(path);
+		}
+	}
 }
 </script>
 
 <style lang="scss" scoped>
-	.add-window {
+	.ad-grid {
 		margin: $space $main_margin;
 		display: grid;
 		grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -111,6 +145,37 @@ export default {
 		img {
 			width: 100%;
 			height: auto;
+		}
+	}
+
+	.ad-window {
+		margin: $space $main_margin;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+
+		.btn-medium {
+			position: absolute;
+			top: 75%;
+			right: 0%;
+		}
+
+		span {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		p {
+			color: white;
+		}
+
+		.icon {
+			height: 20px;
+			width: 24px;
 		}
 	}
 </style>

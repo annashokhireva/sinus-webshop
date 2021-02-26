@@ -5,12 +5,9 @@
 		@click.self="hideModal"
 	>
 		<div class="modal-content">
-			<div class="top">
-				<h3></h3>
-				<button class="cross" @click="hideModal">
-					<img src="../../assets/icons/cross.svg" width="24" alt="X">
-				</button>
-			</div>
+			<button class="cross" @click="hideModal">
+				<img src="../../assets/icons/cross.svg" width="24" alt="X">
+			</button>
 			
 			<div class="inner-content">
 				<component :is="component" />
@@ -81,12 +78,29 @@ export default {
 		justify-content: center;
 		background-color: rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(3px);
-		padding: 10% 20%;
+		padding: 10% 15%;
+		z-index: 2;
+	}
+
+	.cross {
+		position: fixed;
+		right: 15%;
+		z-index: 3;
 	}
 
 	.modal-content {
-		width: 50em;
-		min-height: 30em;
+		width: 100%;
+		height: 100%;
 		background-color: $bkg_gray;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+	}
+
+	.inner-content {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-content: center;
 	}
 </style>

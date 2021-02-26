@@ -100,7 +100,8 @@ export default {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			width: 85px;
+			width: 75px;
+			cursor: pointer;
 			
 			p {
 				margin: 0;

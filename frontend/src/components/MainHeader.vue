@@ -23,6 +23,7 @@ export default {
 		padding: 0;
 		height: $header_height;
 		box-shadow: 0px 5px 5px rgba(236, 236, 236, 0.247);
+		z-index: 1;
 	}
 
 	.nav {

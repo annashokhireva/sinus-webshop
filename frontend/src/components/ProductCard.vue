@@ -13,8 +13,8 @@
 			<div class="details">
 				<div class="colors">
 					<div class="color-box">
-                        v-for=colors
-                    </div>
+						v-for=colors
+					</div>
 				</div>
 				<div class="price">
 					<p>kr</p>

@@ -1,26 +1,21 @@
 <template>
 	<div class="slider">
 		<div class="headline">
-			<h3>Best selling skateboards</h3>
+			<h3>{{header}}</h3>
 			<span class="buttons">
 				<img src="../assets/icons/arrow-gray.svg" alt="arrow left" @click.prevent="slideLeft">
 				<img src="../assets/icons/arrow-black.svg" alt="arrow right" @click.prevent="slideRight">
 			</span>
 		</div>
 		
-		<div class="product-display">
-			<div>
-				<product-card />
-			</div>	
-		</div>
+		<slot name="products" class="slot" />
 	</div>
 </template>
 
 <script>
-import ProductCard from './ProductCard.vue';
 export default {
-	components: { 
-		ProductCard 
+	props: {
+		header: String
 	}
 }
 </script>
@@ -53,9 +48,13 @@ export default {
 		}
 	}
 
-	.product-display {
-		display: flex;
-		align-items: center;
-		margin-top: $space/2;
+	.slot::v-deep {
+
+		.products-view {
+			display: flex;
+			align-items: center;
+			margin-top: $space/2;
+		}
+		
 	}
 </style>
