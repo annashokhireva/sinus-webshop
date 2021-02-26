@@ -1,16 +1,19 @@
 <template>
 	<div id="app">
 		<router-view />
+		<base-modal />
 		<main-footer />
 	</div>
 </template>
 
 <script>
-import MainFooter from './components/MainFooter.vue'
+import BaseModal from './components/modals/BaseModal.vue';
+import MainFooter from './components/MainFooter.vue';
 
 export default {
 	components: { 
-		MainFooter
+		MainFooter,
+BaseModal,
 	},
 
 	

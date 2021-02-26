@@ -1,0 +1,9 @@
+@import '../essentials/variables.scss';
+
+.cross {
+	border: none;
+	cursor: pointer;
+	float: right;
+	margin: $space/2;
+	background: transparent;
+}
