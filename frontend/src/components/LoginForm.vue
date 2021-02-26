@@ -5,25 +5,37 @@
           <h3 class="title">Login</h3>
 
           <div class="login-input">
-              <label class="label-email">Email</label><label class="mandatory">*</label>
-              <input type="email" class="form-control" placeholder="Email"/>
+              <label for="email"><b>Email</b></label>
+              <label class="mandatory">*</label>
+              <input type="email" placeholder="Email" name="email" id="email" required>
           </div>
 
           <div class="login-input">
-              <label class="label-password">Password</label><label class="mandatory">*</label>
-              <input type="password" class="form-control" placeholder="Password"/>
+              <label for="psw"><b>Password</b></label>
+              <label class="mandatory">*</label>
+              <input type="password" placeholder="Password" name="psw" id="psw" required>
           </div>
 
           <button class="btn-login">LOGIN</button>
 
         </form>
+        <div class="register">
+          <p>Not a member yet?</p>
+          <p @click="goToRegister">Register here.</p>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
 
-    name: 'Login'
+    name: 'Login',
+
+    methods: {
+      goToRegister: function() {
+        this.$router.push("/register")
+      }
+    }
     
 }
 </script>
@@ -43,10 +55,6 @@ export default {
   .login-input {
     flex-direction: column;
 
-      .label-email, .label-password {
-        align-self: flex-start;
-      }
-
       .mandatory {
         color: red;
       }
@@ -65,10 +73,13 @@ export default {
   .btn-login {
     width: 100%;
     height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     background-color: black;
     color: white;
     cursor: pointer;
   }
+  
 
 }
 </style>

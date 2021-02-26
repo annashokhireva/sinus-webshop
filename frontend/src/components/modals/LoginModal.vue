@@ -72,7 +72,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.main-modal {
+
+	.login-modal {
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -102,7 +103,7 @@ export default {
 		align-content: center;
 	}
 
-	.inner-content {
+	.login-form {
 		width: 100%;
 		display: flex;
 		justify-content: center;
