@@ -1,17 +1,17 @@
 <template>
   <div>
-      <LoginModal />
+      <LoginForm />
   </div>
 </template>
 
 <script>
 
-import LoginModal from '../components/LoginModal'
+import LoginForm from '../components/LoginForm'
 
 export default {
 
     components: {
-        LoginModal
+        LoginForm
     }
 
 }
