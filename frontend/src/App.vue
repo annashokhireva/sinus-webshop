@@ -13,10 +13,10 @@ import MainFooter from './components/MainFooter.vue';
 export default {
 	components: { 
 		MainFooter,
-BaseModal,
+		BaseModal,
+		
 	},
 
-	
 }
 </script>
 
