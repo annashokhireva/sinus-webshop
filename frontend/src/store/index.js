@@ -1,26 +1,47 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { get, PRODUCTS_URL } from '../api/api.js';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
+		products: [],
+		shoppingCart: [],
 		modalVisible: false,
 		modalComponent: null,
 	},
 	getters: {
-		active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
+		// allProducts: (state) => state.products
+		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
 	},
 	mutations: {
-		showModal(state, componentName) {
+		SET_PRODUCTS(state, products) {
+			state.products = products;
+			console.log(products);
+		},
+
+		showModal(state, componentName, id) {
 			state.modalVisible = true;
 			state.modalComponent = componentName;
+			state.products[state.products._id] = id;
+			// state.productsproductId
 		},
 		hideModal(state) {
 			state.modalVisible = false;
+		},
+
+		addToCart(state, payload) {
+			return state.shoppingCart.push(payload);
 		}
 	},
 	actions: {
+		getProducts({ commit }) {
+			get(PRODUCTS_URL)
+			.then(response => {
+				commit('SET_PRODUCTS', response.data);
+			})
+		}
 	},
 	modules: {
 	}

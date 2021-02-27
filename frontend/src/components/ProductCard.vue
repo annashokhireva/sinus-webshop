@@ -1,12 +1,12 @@
 <template>
 	<div class="card">
-		<div class="product" @click="showModal('ProductModal')">
+		<div class="product" v-on="$listeners">
 			<img :src="`../assets/products/${img}`" alt="Product image">
 		</div>
 		<div class="info">
 			<div class="top-line">
 				<p>{{ title }}</p>
-				<span class="cart">
+				<span class="cart" @clcik="addToCart(product)">
 					<img src="../assets/icons/shopping-cart.svg" width="24" alt="shoppinng cart">
 				</span>
 			</div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+// import { mapMutations } from 'vuex';
 
 export default {
 	props: {
@@ -33,9 +33,15 @@ export default {
 		price: Number
 	},
 
+	// methods: {
+	// 	...mapMutations(['showModal'])
+	// },
+
 	methods: {
-		...mapMutations(['showModal']),
-	},
+		addToCart(product) {
+			this.$store.commit('addToCart', product);
+		}
+	}
 }
 </script>
 

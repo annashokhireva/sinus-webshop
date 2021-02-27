@@ -33,7 +33,14 @@
 			<product-slider header="Best selling skateboards">
 				<template v-slot:products>
 					<div class="products-view">
-						<product-card li v-for="(product, i) in products" :key="i" :img="product.imgFile" :title="product.title" :desc="product.shortDesc" :price="product.price"/>
+						<product-card 
+							li v-for="(product, i) in products" 
+							:key="i" :img="product.imgFile" 
+							:title="product.title" 
+							:desc="product.shortDesc" 
+							:price="product.price"
+							@click="showModal('ProductModal', product._id)"
+						/>
 					</div>	
 				</template>
 			</product-slider>
@@ -50,7 +57,6 @@
 			</div>
 
 		</div>
-	
 	</div>
 </template>
 
@@ -59,7 +65,8 @@ import MainHeader from '../components/MainHeader.vue';
 import MainNav from '../components/MainNav.vue';
 import ProductCard from '../components/ProductCard.vue';
 import ProductSlider from '../components/ProductSlider.vue';
-import { get, PRODUCTS_URL } from '../api/api.js';
+import { mapMutations } from 'vuex';
+// import { get, PRODUCTS_URL } from '../api/api.js';
 
 export default {
 	components: { 
@@ -69,22 +76,34 @@ export default {
 		ProductCard
 	},
 
-	data() {
-		return {
-			products: []
-		}
-	},
+	// data() {
+	// 	return {
+	// 		products: []
+	// 	}
+	// },
 
-	async created() {
-		const response = await get(PRODUCTS_URL);
-		this.products = response.data;
-		console.log(...this.products)
+	// async created() {
+	// 	const response = await get(PRODUCTS_URL);
+	// 	this.products = response.data;
+	// 	console.log(...this.products)
+	// },
+
+	computed: {
+		products() {
+			return this.$store.state.products
+		}
 	},
 
 	methods: {
 		goTo(path) {
 			return this.$router.push(path);
-		}
+		},
+
+		...mapMutations(['showModal'])
+	},
+
+	mounted() {
+		this.$store.dispatch("getProducts");
 	}
 }
 </script>
