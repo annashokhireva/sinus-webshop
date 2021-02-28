@@ -15,17 +15,20 @@
 				<h2 v-if="cartItemsCount.length <= 0" class="empty-bag">Your shopping bag is empty</h2>
 				<h2 v-else></h2>
 					<li>
+						
 						<div class="item-container">
-							<div class="product-image"></div>
-							<div class="product-info">
-								<h2>{{ title }}</h2>
+							<div class="product-image">
+							</div>
+								<div class="product-info">
+									v for product name
 								<div class="product-counter">
-									</div>
+							</div>
+						</div>			
+							<div class="product-price">v for price</div>
+								<div class="cart-bin">
+									<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
 								</div>
-							
-							<div class="product-price">{{price}}
-								<div class="cart-bin"></div>
-								</div>
+								<router-link to="/checkout"><button class="checkout-btn"><h1>CHECK OUT</h1></button></router-link>
 						
 						</div>
 					</li>
@@ -86,7 +89,7 @@ export default {
 			cursor: pointer;
 		}
 
-		
+	
 	}
 
 	.bag-view {	
@@ -101,7 +104,6 @@ export default {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		columns: 1fr 1fr 1fr;
 		justify-content: flex-start;
 		align-items: stretch;
 		padding: 0 10%;
@@ -116,11 +118,35 @@ export default {
 	}
 
 	.item-container {
-
 		display: flex;
-		columns: 1fr 1fr;
+		flex-direction: column;
+		grid-template-columns: 1fr 1fr 1fr;
 	}
 
+	.h2 {
+
+		font-size: 12px;
+	}
+
+	.product-image {
+	
+		max-height: 95px;
+		max-width: auto;
+		column: 1;
+	}
+	.bin {
+		
+		columns: 3;
+		justify-items: right;
+	}
+	.checkout-btn {
+		height: 38px;
+		width: 374px; 
+		color: black;
+	}
+	.checkout-btn h1 {
+		color: white;
+	}
 	button {
 		margin: 15% auto;
 	}

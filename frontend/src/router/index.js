@@ -49,7 +49,13 @@ const routes = [
 	path: '/register',
 	name: 'Register',
 	component: () => import('../views/RegisterPage.vue')
+},
+{
+	path: '/checkout',
+	name: 'Checkout',
+	component: () => import('../views/CheckOut.vue')
 }
+
 
 ]
 
