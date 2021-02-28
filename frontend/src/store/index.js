@@ -14,8 +14,16 @@ export default new Vuex.Store({
 		bagVisible: false,
 	},
 	getters: {
-		// allProducts: (state) => state.products
+		cart: (state) => state.shoppingCart,
+		products: (state) => state.products,
 		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
+		total: state => {
+			if(state.shoppingCart.length > 0) {
+				return state.shoppingCart.map(item => item.price).reduce((total, amount) => total + amount);
+			} else {
+				return 0;
+			}
+		}
 	},
 	mutations: {
 		SET_PRODUCTS(state, products) {
@@ -39,6 +47,13 @@ export default new Vuex.Store({
 		toggleBag(state) {
 
 			state.bagVisible = !state.bagVisible;
+		},
+		ADD_ITEM(state, id) {
+			return state.shoppingCart.push(id);
+		},
+
+		REMOVE_ITEM(state, index){
+			return state.shoppingCart.splice(index, 1);
 		}
 
 		
@@ -47,9 +62,17 @@ export default new Vuex.Store({
 		getProducts({ commit }) {
 			get(PRODUCTS_URL)
 			.then(response => {
-				commit('SET_PRODUCTS', response.data);
+				commit('SET_PRODUCTS', response.data)
 			})
-		}
+		},
+
+		addToCart(context, id) {
+			context.commit("ADD_Item", id);
+		},
+		
+		removeFromCart(context, index) {
+			context.commit("REMOVE_Item", index);
+		},
 	},
 	modules: {
 	}
