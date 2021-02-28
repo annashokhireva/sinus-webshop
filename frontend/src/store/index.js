@@ -4,12 +4,14 @@ import { get, PRODUCTS_URL } from '../api/api.js';
 
 Vue.use(Vuex)
 
+
 export default new Vuex.Store({
 	state: {
 		products: [],
 		shoppingCart: [],
 		modalVisible: false,
 		modalComponent: null,
+		bagVisible: false,
 	},
 	getters: {
 		// allProducts: (state) => state.products
@@ -33,7 +35,12 @@ export default new Vuex.Store({
 
 		addToCart(state, payload) {
 			return state.shoppingCart.push(payload);
+		},
+		toggleBag(state) {
+
+			state.bagVisible = !state.bagVisible;
 		}
+
 		
 	},
 	actions: {

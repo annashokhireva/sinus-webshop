@@ -10,15 +10,20 @@
 			<router-link to="/sale"><h5>Sale</h5></router-link>
 		</div>
 		<div class="icons">
-			<img src="../assets/icons/search.svg" alt="Search glass">
-			<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart" @click="toggleBag">
+		<!-- <img src="../assets/icons/search.svg" alt="Search glass">
+			<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart" @click="toggleBag"> -->
+			<shopping-bag />
 		</div>
 	</nav>
 </template>
 
 <script>
+import ShoppingBag from './ShoppingBag';
+
 export default {
-	
+	components: {
+		ShoppingBag
+	}
 }
 </script>
 

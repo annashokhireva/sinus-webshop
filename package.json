@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/annashokhireva/sinus-webshop/issues"
   },
-  "homepage": "https://github.com/annashokhireva/sinus-webshop#readme"
+  "homepage": "https://github.com/annashokhireva/sinus-webshop#readme",
+  "dependencies": {
+    "start": "^5.1.0"
+  }
 }

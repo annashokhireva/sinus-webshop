@@ -1,5 +1,6 @@
 <template>
 	<div class="shopping-bag" >
+
 		<div class="shadow"></div>
 		<div v-if="cartItemsCount.length > 0" class="circle">
 			{{ cartItemsCount.length }}
@@ -71,7 +72,7 @@ export default {
 		// 	return this.$store.state.bagItems;
 		// },
 		cartItemsCount: function() {
-			return this.$store.state.cart;
+			return this.$store.getters.cart;
 		},
 		...mapState({
 			visible: 'bagVisible',
