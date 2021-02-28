@@ -15,10 +15,9 @@
 			</div>
 
 			<div class="log-in">
-				<img src="../assets/icons/avatar.svg" alt="Avatar icon"
-				@click="goToLogin">
+				<img src="../assets/icons/avatar.svg" alt="Avatar icon" @click="showModal('LoginModal')">
 				<span class="option">
-					<p class="medium">Log in </p>
+					<p class="medium" @click="showModal('LoginModal')">Log in </p>
 					<!-- <span v-if="loginClosed">
 						<img src="../assets/icons/polygon_down.svg" alt="arrow down">
 					</span>
@@ -32,18 +31,15 @@
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex';
+
 export default {
-	data() {
-		return {
-			loginClosed: true
-		}
-	},
 
 	methods: {
-		goToLogin: function() {
-			this.$router.push('/login')
-		}
+		...mapMutations(['showModal']),
 	}
+
 }
 </script>
 

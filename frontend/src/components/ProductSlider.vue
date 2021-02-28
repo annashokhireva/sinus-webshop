@@ -2,10 +2,10 @@
 	<div class="slider">
 		<div class="headline">
 			<h3>{{header}}</h3>
-			<span class="buttons">
+			<!-- <span class="buttons">
 				<img src="../assets/icons/arrow-gray.svg" alt="arrow left" @click.prevent="slideLeft">
 				<img src="../assets/icons/arrow-black.svg" alt="arrow right" @click.prevent="slideRight">
-			</span>
+			</span> -->
 		</div>
 		
 		<slot name="products" class="slot" />
@@ -37,15 +37,15 @@ export default {
 			text-align: left;	
 		}
 
-		.buttons {
-			width: 5%;
-			display: flex;
-			justify-content: space-between;
+		// .buttons {
+		// 	width: 5%;
+		// 	display: flex;
+		// 	justify-content: space-between;
 
-			img {
-				cursor: pointer;
-			}
-		}
+		// 	img {
+		// 		cursor: pointer;
+		// 	}
+		// }
 	}
 
 	.slot::v-deep {

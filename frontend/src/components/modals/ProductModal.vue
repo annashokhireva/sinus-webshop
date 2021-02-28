@@ -1,12 +1,12 @@
 <template>
-	<div class="product-modal">
+	<div class="product-modal" >
 		<aside>
 
 		</aside>
-		<article class="product-info">
+		<article class="product-info" >
 			<div class="details">
-				<h3>Product.Name</h3>
-				<div class="colors">
+				<h3></h3>
+				<!-- <div class="colors">
 					<div class="color-box">
 						v-for=colors
 					</div>
@@ -15,7 +15,7 @@
 					<div class="size-box">
 						v-for=sizes
 					</div>
-				</div>
+				</div> -->
 				<div class="price">
 					<h3>500kr</h3>
 				</div>
@@ -43,12 +43,20 @@
 import { mapMutations } from 'vuex';
 
 export default {
+	name:'ProductModal',
+	// props: {
+	// 	productId: {
+	// 		type: String,
+	// 		required: true
+	// 	}
+	// },
+
 	methods: {
 		...mapMutations([
 		'hideModal',
 		]),
 
-		addToCard() {
+		addToCart() {
 			// add to cart function
 
 			this.hideModal();
