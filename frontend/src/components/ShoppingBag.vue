@@ -17,21 +17,28 @@
 					<li>
 						
 						<div class="item-container">
-							<div class="product-image">
+							<div class="product-image"> <img src="../assets/products/greta.png" class="thumbnail">
 							</div>
 								<div class="product-info">
-									v for product name
-								<div class="product-counter">
+									v for  product name
+									<li>color : { {kod }}
+									Size: { { kod} }</li>
+									
+								<div class="product-counter"> - 2 + 
 							</div>
-						</div>			
+							</div>			
 							<div class="product-price">v for price</div>
 								<div class="cart-bin">
 									<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
 								</div>
-								<router-link to="/checkout"><button class="checkout-btn"><h1>CHECK OUT</h1></button></router-link>
+								
 						
 						</div>
+						
 					</li>
+					<router-link to="/checkout">
+						<button class="checkout-btn"><h1>CHECK OUT</h1></button>
+					</router-link>
 			</ul>
 			
 
@@ -94,55 +101,73 @@ export default {
 
 	.bag-view {	
 		position: absolute;
-		top: 60%;
+		
 		right: -15%;
 		width: 390px;
 		height: 618px;
 		border: none;
-		margin: 10px 30px 0 0;
 		background-color: white;
 		list-style: none;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: stretch;
-		padding: 0 10%;
 		box-sizing: border-box;
 		text-align: left;
-		overflow: scroll;
+		
 		cursor: default;
 
 		// .empty-bag {
-		
+			
 		// }
+		
+
+
 	}
 
 	.item-container {
-		display: flex;
+		display: grid;
 		flex-direction: column;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 33% 33% 34%;
+		grid-template: 1fr;
 	}
 
 	.h2 {
-
+		
 		font-size: 12px;
 	}
 
 	.product-image {
-	
-		max-height: 95px;
-		max-width: auto;
-		column: 1;
-	}
-	.bin {
+		grid-column: 1;
 		
-		columns: 3;
-		justify-items: right;
 	}
+	.thumbnail {
+		max-height: 80px;
+		padding-left: 20px;
+	}
+	.product-info {
+		grid-column: 2;
+		
+	}
+
+	.product-price {
+		grid-column: 3;
+		margin-left: 80px;
+	}
+	.cart-bin {
+		justify-content: right;
+		grid-column: 3;
+		margin-left: 80px
+	}
+
 	.checkout-btn {
+		color: black;
 		height: 38px;
 		width: 374px; 
-		color: black;
+		border-radius: 0%;
+		border-style: none;
+		
+		
 	}
 	.checkout-btn h1 {
 		color: white;
@@ -151,11 +176,6 @@ export default {
 		margin: 15% auto;
 	}
 
-	.fade-enter-active, .fade-leave-active {
-		transition: opacity .5s;
-	}
-	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-		opacity: 0;
-	}
+	
 
 </style>
