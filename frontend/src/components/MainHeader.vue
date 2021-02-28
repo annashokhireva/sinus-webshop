@@ -2,16 +2,41 @@
 	<header>
 		<top-nav />
 		<slot name="nav"/>
+		<shopping-bag v-if="showBag"/>
+			<main-nav v-if="visible" class="nav"/>
 	</header>
 </template>
 
 <script>
 import TopNav from './TopNav.vue';
+import ShoppingBag from './ShoppingBag.vue';
+import { mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
 	components: { 
-		TopNav
-	}
+		TopNav,
+		ShoppingBag
+	},
+
+	props: {
+		showBag: {
+			type: Boolean,
+			default: false
+		}
+	},
+
+	computed: {
+		...mapState({
+			visible: 'navVisible',
+		}),
+	},
+
+	methods: {
+		...mapMutations([
+			'showNav',
+		]),
+	},
 }
 </script>
 

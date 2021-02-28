@@ -46,6 +46,7 @@ export default new Vuex.Store({
 		REMOVE_ITEM(state, index){
 			return state.shoppingCart.splice(index, 1);
 		}
+		
 	},
 	actions: {
 		getProducts({ commit }) {
