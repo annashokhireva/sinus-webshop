@@ -6,7 +6,7 @@
 		<div class="info">
 			<div class="top-line">
 				<p>{{ title }}</p>
-				<span class="cart" @clcik="addToCart(product)">
+				<span class="cart" @clcik="addToCart(id)">
 					<img src="../assets/icons/shopping-cart.svg" width="24" alt="shoppinng cart">
 				</span>
 			</div>
@@ -30,7 +30,8 @@ export default {
 		img: String,
 		title: String,
 		desc: String,
-		price: Number
+		price: Number,
+		id: String
 	},
 
 	// methods: {
@@ -38,8 +39,8 @@ export default {
 	// },
 
 	methods: {
-		addToCart(product) {
-			this.$store.commit('addToCart', product);
+		addToCart(id) {
+			this.$store.dispatch("addToCart", id);
 		}
 	}
 }
