@@ -11,7 +11,7 @@
 		</div>
 		<div class="icons">
 			<img src="../assets/icons/search.svg" alt="Search glass">
-			<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart">
+			<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart" @click="toggleBag">
 		</div>
 	</nav>
 </template>
