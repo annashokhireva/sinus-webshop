@@ -35,17 +35,20 @@
     </div>
     <div>
       <h2>All products</h2>
+        <div v-for="product in filteredProducts" :key="product._id">
+          <h4>{{ product.title }}</h4>
+          <p>{{ product._id }}</p>
+          <img :src="`../assets/products/${product.imgFile}`" :alt="product.title">
+        </div>
     </div>
-    <!-- <FilterCategory /> -->
-    ALL PRODUCT LIST
-
-  </div>
+</div>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import MainHeader from "../components/MainHeader";
 import MainNav from "../components/MainNav";
-// import FilterCategory from "@/components/FilterCategory";
+
 
 export default {
   components: {
@@ -53,13 +56,81 @@ export default {
     MainNav,
  },
 
+ data () {
+   return {
+     filters: {
+       category: '',
+       sort: '',
+       search: ''
+     },
+     categories: [
+       'board',
+       'wheel'
+     ]
+   }
+ },
+
+ mounted() {
+   this.getProducts();
+
+   setTimeout(() => {
+
+     this.$set(this.filters, 'sort', 'lower price')
+   }, 1000)
+ },
+
+ computed: {
+   ...mapState({
+    products: state => state.products
+   }),
+
+   filteredProducts () {
+     let products = this.products;
+
+      if (this.filters.search.length) {
+        products = products.filter(product => product.title.indexOf(this.filters.search) !== -1 );
+     }
+
+     if (this.filters.category.length) {
+        products = products.filter(product => product.category === this.filters.category);
+     }
+     
+     if (this.filters.sort.length) {
+       switch (this.filters.sort) {
+         case 'lower price': {
+           products = products.sort((a, b) => {
+             if (a.price > b.price) {
+               return -1;
+             }
+             return 1;
+           });
+           break;
+         }
+       }
+        
+     }
+
+     return products;
+   }
+ },
+
   methods: {
+    ...mapActions(['getProducts']),
+
     goTo(path) {
       return this.$router.push(path);
     },
+
+    onChangeCategory (category) {
+      this.$set(this.filters, 'category', category);
+    }
   },
 };
 </script>
+
+
+
+
 
 <style lang="scss" scoped>
 .general-grid {

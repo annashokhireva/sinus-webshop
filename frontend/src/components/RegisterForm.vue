@@ -1,6 +1,6 @@
 <template>
   <div class="register-container">
-    <form class="register-form">
+    <form class="register-form" @submit.prevent="onSubmit">
         <div class="container">
             <h1>Register</h1>
             <p>Please fill in this form to create an account.</p>
@@ -19,7 +19,7 @@
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-                <button type="submit" class="btn-register">REGISTER</button>
+                <button type="submit" class="btn-register" @click="onClick">REGISTER</button>
             </div>
         
         <div>
@@ -33,7 +33,23 @@
 <script>
 export default {
 
-    name: 'Register'
+    name: 'Register',
+
+    methods: {
+        
+        onSubmit: function() {
+
+        },
+
+        onClick: function() {
+            const user = {
+                email: '',
+                password: ''
+            }
+
+            this.$store.dispatch('registerUser', user);
+        }
+    }
 
 }
 </script>

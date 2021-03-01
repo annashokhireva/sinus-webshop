@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { get, PRODUCTS_URL } from '../api/api.js';
-
+import { get, post, PRODUCTS_URL, REGISTER_URL } from '../api/api.js';
 Vue.use(Vuex)
 
 
@@ -71,6 +70,14 @@ export default new Vuex.Store({
 		removeFromCart(context, index) {
 			context.commit("REMOVE_ITEM", index);
 		},
+
+		async registerUser(context, payload) {
+
+			const response = await post(REGISTER_URL, payload)
+			console.log(response)
+
+			console.log(context)
+		}
 	},
 	modules: {
 	}
