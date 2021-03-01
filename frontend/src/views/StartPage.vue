@@ -59,10 +59,6 @@
 				</button>
 			</div>
 
-			<cart-test />
-			<!-- <ul>
-				<li v-for="(pr, i) in cart" :key="i"></li>
-			</ul> -->
 		</div>
 	</div>
 </template>
@@ -73,7 +69,6 @@ import MainNav from '../components/MainNav.vue';
 import ProductCard from '../components/ProductCard.vue';
 import ProductSlider from '../components/ProductSlider.vue';
 import { mapMutations } from 'vuex';
-import CartTest from '../components/CartTest.vue';
 // import { get, PRODUCTS_URL } from '../api/api.js';
 
 export default {
@@ -81,8 +76,7 @@ export default {
 		MainHeader,
 		MainNav,
 		ProductSlider,
-		ProductCard,
-		CartTest
+		ProductCard
 	},
 
 	// data() {

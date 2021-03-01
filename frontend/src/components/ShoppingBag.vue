@@ -1,43 +1,52 @@
 <template>
 	<div class="shopping-bag" >
-
-		<div class="shadow"></div>
-		<div v-if="cartItemsCount.length > 0" class="circle">
-			{{ cartItemsCount.length }}
+		<div @click="toggleBag" class="icon">
+			<div v-if="cart.length > 0" class="circle">
+			{{ cart.length }}
+			</div>
+			
+			<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart">
 		</div>
 		
-
-		<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart" @click="toggleBag">
-	
 		<transition name="fade">
 			<ul v-if="visible" class="bag-view">
-				<h1>YOUR CART ({{cartItemsCount.length}})</h1>
-				<h2 v-if="cartItemsCount.length <= 0" class="empty-bag">Your shopping bag is empty</h2>
-				<h2 v-else></h2>
-					<li>
+				<h1>YOUR CART ({{cart.length}})</h1>
+				<h2 v-if="cart.length <= 0" class="empty-bag">Your shopping bag is empty</h2>
+				<!-- <h2 v-else></h2> -->
+					<li v-for="(item, i) in cart" :key="i">
 						
 						<div class="item-container">
-							<div class="product-image"> <img src="../assets/products/greta.png" class="thumbnail">
+							<div class="product-image"> 
+								<img :src="`/products/${item.imgFile}`" width="50px" alt="Product image">
 							</div>
-								<div class="product-info">
-									v for  product name
-									<li>color : { {kod }}
-									Size: { { kod} }</li>
-									
-								<div class="product-counter"> - 2 + 
+
+							<div class="product-info">
+								<h5>{{ item.title }}</h5>
+								<p>{{ item.shortDesc }}</p>
+					
 							</div>
-							</div>			
-							<div class="product-price">v for price</div>
-								<div class="cart-bin">
-									<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
-								</div>
+
+							<div class="product-price">
+								<p>{{ item.price }} kr</p>
+							</div>
+
+							<div class="product-counter">
+								<span>-</span>
+								2 
+								<span>+</span>
+							</div>
+
+							<div class="cart-bin">
+								<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
+							</div>
 								
-						
 						</div>
 						
 					</li>
+
+					<div class="totsl">Total: {{ totalAmount }} kr</div>
 					<router-link to="/checkout">
-						<button class="checkout-btn"><h1>CHECK OUT</h1></button>
+						<button class="btn-large dark"><h4>Check out</h4></button>
 					</router-link>
 			</ul>
 			
@@ -68,12 +77,18 @@ export default {
 	},
 
 	computed: {
-		// items: function() {
-		// 	return this.$store.state.bagItems;
-		// },
-		cartItemsCount: function() {
+		cart() {
 			return this.$store.getters.cart;
 		},
+
+		cartCount() {
+			return this.cart.length;
+		},
+
+		totalAmount () {
+			return this.$store.getters.total
+		},
+
 		...mapState({
 			visible: 'bagVisible',
 		}),
@@ -96,7 +111,18 @@ export default {
 			cursor: pointer;
 		}
 
-	
+		.circle {
+		background-color: $black;
+		color: white;
+		margin: 0;
+		border-radius: 50%;
+		width: 22px;
+		height: 22px;
+		text-align: center;
+		position: absolute;
+		top: 1%;
+		right: 25%;
+		}
 	}
 
 	.bag-view {	
@@ -117,19 +143,15 @@ export default {
 		
 		cursor: default;
 
-		// .empty-bag {
-			
-		// }
-		
-
 
 	}
 
 	.item-container {
 		display: grid;
 		flex-direction: column;
-		grid-template-columns: 33% 33% 34%;
+		grid-template-columns: 20% 50% 26%;
 		grid-template: 1fr;
+		column-gap: 2%;
 	}
 
 	.h2 {
@@ -139,43 +161,45 @@ export default {
 
 	.product-image {
 		grid-column: 1;
+		grid-row: 1 / span 2;
+		justify-self: center;
+		align-self: center;
 		
 	}
+
 	.thumbnail {
 		max-height: 80px;
-		padding-left: 20px;
 	}
+
 	.product-info {
 		grid-column: 2;
-		
+		justify-self: left;
+		align-self: start;
+	}
+
+	.product-counter {
+		grid-column: 2;
+		grid-row: 2;
+		justify-self: left;
+		align-self: center;
 	}
 
 	.product-price {
 		grid-column: 3;
-		margin-left: 80px;
+		justify-self: right;
+		align-self: start;
 	}
+
 	.cart-bin {
 		justify-content: right;
 		grid-column: 3;
-		margin-left: 80px
+		justify-self: right;
+		align-self: center;
 	}
 
-	.checkout-btn {
-		color: black;
-		height: 38px;
-		width: 374px; 
-		border-radius: 0%;
-		border-style: none;
-		
-		
+	a {
+		margin: 10% auto;
 	}
-	.checkout-btn h1 {
-		color: white;
-	}
-	button {
-		margin: 15% auto;
-	}
-
 	
 
 </style>
