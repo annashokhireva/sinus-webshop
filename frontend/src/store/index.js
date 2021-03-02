@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 	state: {
 		products: [],
+		activeProductIndex: null,
 		shoppingCart: [],
 		modalVisible: false,
 		modalComponent: null,
@@ -15,7 +16,6 @@ export default new Vuex.Store({
 	getters: {
 		cart: (state) => state.shoppingCart,
 		products: (state) => state.products,
-		product: (state) => state.product[state.product],
 		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
 		total: state => {
 			if(state.shoppingCart.length > 0) {
@@ -31,10 +31,9 @@ export default new Vuex.Store({
 			console.log(products);
 		},
 
-		showModal(state, componentName, id) {
+		showModal(state, componentName) {
 			state.modalVisible = true;
 			state.modalComponent = componentName;
-			state.products[state.products._id] = id;
 		},
 		hideModal(state) {
 			state.modalVisible = false;
@@ -50,6 +49,10 @@ export default new Vuex.Store({
 
 		REMOVE_ITEM(state, index){
 			state.shoppingCart.splice(index, 1);
+		},
+
+		setActiveIndex(state, index) {
+			state.activeProductIndex = index;
 		}
 
 		
