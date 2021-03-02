@@ -6,25 +6,54 @@
 			<img src="../assets/icons/youtube.svg" alt="YouTube">
 		</div>
 
+<router-link to="/admin-products"><p class="medium">Admin Products</p></router-link>
+<router-link to="/orders"><p class="medium">Orders</p></router-link>
+
+
 		<div class="options">
 
 			<div class="menu">
 				<router-link to="/stores"><p class="medium">Stores</p></router-link>
 				<router-link to="/contact"><p class="medium">Contact</p></router-link>
-				<router-link to="newsletter"><p class="medium">Newsletter</p></router-link>
+				<router-link to="/newsletter"><p class="medium">Newsletter</p></router-link>
 			</div>
 
-			<div class="log-in">
-				<img src="../assets/icons/avatar.svg" alt="Avatar icon" @click="showModal('LoginModal')">
-				<span class="option">
-					<p class="medium" @click="showModal('LoginModal')">Log in </p>
-					<!-- <span v-if="loginClosed">
-						<img src="../assets/icons/polygon_down.svg" alt="arrow down">
-					</span>
-					<span v-else> 
-						<img src="../assets/icons/polygon_up.svg" alt="arrow up">
-					</span> -->
-				</span>
+			<div class="log-in" @click="showModal('LoginModal')">
+				<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
+				<div class="option">
+
+					<div class="account" v-if="logedIn" @click.stop="toggleDropdown">
+						<p class="medium">My account</p>
+						<span v-if="showDropdown">
+							<img src="../assets/icons/polygon_up.svg" alt="arrow up">
+						</span>
+						<span v-else> 
+							<img src="../assets/icons/polygon_down.svg" alt="arrow down">
+						</span>
+					</div>
+					
+					
+					<p v-else class="medium">Log in </p>
+				</div>
+			</div>
+
+			<div v-if="showDropdown" class="account-options">
+				<ul>
+					<li>
+						<p><b>Admin</b></p>
+					</li>
+					<li>
+						<p>View account</p>
+					</li>
+					<li v-for="(link, index) in links" :key="index">
+						<router-link :to="{name: link.page}">
+							<p>{{ link.name }}</p>
+						</router-link>
+					</li>
+					<li>
+						<p><i>Log out</i></p>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</nav>
@@ -36,8 +65,29 @@ import { mapMutations } from 'vuex';
 
 export default {
 
+	data() {
+		return {
+			logedIn: false,
+			showDropdown: false,
+			links: [
+				{
+					name: 'Admin Products',
+					page: 'AdminProducts'       
+				},
+				{
+					name: 'Orders',
+					page: 'Orders'       
+				}
+			]
+		}
+	},
+
 	methods: {
 		...mapMutations(['showModal']),
+
+		toggleDropdown() {
+			return this.showDropdown = !this.showDropdown;
+		},
 	}
 
 }
@@ -94,13 +144,52 @@ export default {
 
 		.log-in {
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-end;
 			align-items: center;
-			width: 75px;
+			width: 130px;
 			cursor: pointer;
+			position: relative;
 			
 			p {
-				margin: 0;
+				margin-left: $space/4;
+			}
+		}
+
+		.account {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.account-options {
+			position: absolute;
+			top: $top_nav_height;
+			right: $main_margin;
+			min-width: 130px;
+			height: fit-content;
+			background-color: white;
+			border: none;
+			box-shadow: 0px 5px 5px rgba(99, 99, 99, 0.247);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-end;
+			z-index: 2;
+
+			ul {
+				list-style: none;
+				padding: 0 $space/4 $space/4;
+				text-align: right;
+				
+				a {
+					text-decoration: none;
+					color: $black;
+				}
+
+				li {
+					margin: 20px 0;
+					cursor: pointer;
+				}
 			}
 		}
 	}

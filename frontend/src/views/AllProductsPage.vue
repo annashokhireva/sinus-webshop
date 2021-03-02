@@ -6,7 +6,7 @@
       </template>
     </main-header>
 
-    <div class="mainAllproducts">
+    <div class="main">
       <h1>This is an ALL PRODUCTS page</h1>
     </div>
 
@@ -133,37 +133,37 @@ export default {
 
 
 <style lang="scss" scoped>
-.general-grid {
-  margin: 10% 10% 10% 20%;
-  display: flex;
-  align-self: left;
-}
-.text-general-grid {
-  padding: 100px;
-  text-align: left;
-}
+  .general-grid {
+    margin: 10% 10% 10% 20%;
+    display: flex;
+    align-self: left;
+  }
+  .text-general-grid {
+    padding: 100px;
+    text-align: left;
+  }
 
-h3 {
-  text-decoration: underline;
-}
+  h3 {
+    text-decoration: underline;
+  }
 
-h3 span {
-  color: red;
-  text-decoration: underline;
-  text-decoration-color: red;
-}
+  h3 span {
+    color: red;
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
 
-.buy-now {
-  text-decoration: underline;
-  border: none;
-  padding: 15px 15px;
-  font-size: 16px;
-  text-align: center;
-  padding-bottom: 15px;
-  background-color: white;
-  text-align: center;
-  // .icon {
-  // padding: 0px;
-  // }
-}
+  .buy-now {
+    text-decoration: underline;
+    border: none;
+    padding: 15px 15px;
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 15px;
+    background-color: white;
+    text-align: center;
+    // .icon {
+    // padding: 0px;
+    // }
+  }
 </style>

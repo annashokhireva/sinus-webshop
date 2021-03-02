@@ -54,8 +54,17 @@ const routes = [
 	path: '/checkout',
 	name: 'Checkout',
 	component: () => import('../views/CheckOut.vue')
+},
+{
+	path: '/admin-products',
+	name: 'AdminProducts',
+	component: () => import('../views/AdminProducts.vue')
+},
+{
+	path: '/orders',
+	name: 'Orders',
+	component: () => import('../views/AdminOrders.vue')
 }
-
 
 ]
 

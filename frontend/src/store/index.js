@@ -43,6 +43,7 @@ export default new Vuex.Store({
 
 			state.bagVisible = !state.bagVisible;
 		},
+		
 		ADD_ITEM(state, product) {
 			state.shoppingCart.push(product);
 		},
