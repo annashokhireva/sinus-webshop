@@ -133,7 +133,7 @@ export default {
 		align-items: stretch;
 		box-sizing: border-box;
 		text-align: left;
-		
+		overflow:auto;
 		cursor: default;
 
 

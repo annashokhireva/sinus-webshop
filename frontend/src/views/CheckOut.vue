@@ -53,17 +53,8 @@
                         <div class="payment-method">
                             <h2>CHOOSE PAYMENT METHODS</h2>
                                 <ul class="payment-options">
-                                    <input type="radio" id="one" value="One" v-model="picked">
-                                    
-                                    <br>
-                                    <input type="radio" id="two" value="Two" v-model="picked">
-                                    
-                                    <br>
-                                    <input type="radio" id="one" value="One" v-model="picked">
-                                    
-                                    <br>
-                                    <input type="radio" id="two" value="Two" v-model="picked">
-                                    
+                                   
+                                
                                     <br>
                                 </ul>
                             </div>
@@ -217,7 +208,7 @@ export default {
 
 
 .deliverydetails-container {
-  margin: 50px;  
+  margin: 70px;  
   
 }
 
@@ -240,16 +231,17 @@ ul{
    margin-top: 30px;
     display: flex;
     flex-direction:column;
+    padding-right:30px;
     width: 300px;
     height: 774px;
     background-color: #F5F4F0;
     border-color: black;
-    overflow: scroll;
+    overflow: auto;
     text-align: left;
     border-color: black;
     border-style: solid;
     border-width: 0.5px;
-    
+    margin-right: 40px;
     
 }
 .empty {
