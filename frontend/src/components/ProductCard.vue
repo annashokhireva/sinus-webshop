@@ -1,12 +1,12 @@
 <template>
-	<div class="card">
-		<div class="product" v-on="$listeners">
-			<img :src="`../assets/products/${img}`" alt="Product image">
+	<div class="product" @click="$emit('showModal', $event)">
+		<div class="product-img">
+			<img :src="`/products/${img}`"  alt="Product image">
 		</div>
 		<div class="info">
 			<div class="top-line">
 				<p>{{ title }}</p>
-				<span class="cart" @clcik="addToCart(id)">
+				<span class="cart" @click.stop="$emit('addToCart', $event)">
 					<img src="../assets/icons/shopping-cart.svg" width="24" alt="shoppinng cart">
 				</span>
 			</div>
@@ -32,23 +32,13 @@ export default {
 		desc: String,
 		price: Number,
 		id: String
-	},
-
-	// methods: {
-	// 	...mapMutations(['showModal'])
-	// },
-
-	methods: {
-		addToCart(id) {
-			this.$store.dispatch("addToCart", id);
-		}
 	}
 }
 </script>
 
 <style lang="scss" scoped>
 
-	.card {
+	.product {
 		height: 456px;
 		min-width: 242px;
 		margin-right: 2%;
@@ -61,10 +51,17 @@ export default {
 			margin-right: $main_margin;
 		}
 
-		.product {
+		.product-img {
 			background-color: $bkg_gray;
 			height: 70%;
 			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+
+			img {
+				max-width: 90%;
+			}
 		}
 	}
 

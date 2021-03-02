@@ -64,7 +64,7 @@ export default {
 		}
 
 		.lists {
-			width: 50%;
+			width: 40%;
 			display: flex;
 			justify-content: space-between;
 		}

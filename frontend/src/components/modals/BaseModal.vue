@@ -10,17 +10,22 @@
 			</button>
 			
 			<div class="inner-content">
-				<component :is="component" />
+				<component :is="modalComponent" />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Vue from 'vue';
+// import Vue from 'vue';
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+	components: {
+		LoginModal: () => import(`@/components/modals/LoginModal`),
+		ProductModal: () => import(`@/components/modals/ProductModal`)
+	},
+
 	data() {
 		return {
 			component: null,
@@ -34,15 +39,15 @@ export default {
 		}),
 	},
 
-	watch: {
-		modalComponent(componentName) {
-			if (!componentName) return;
+	// watch: {
+	// 	modalComponent(componentName) {
+	// 		if (!componentName) return;
 
-			Vue.component(componentName, () => import(`@/components/modals/${componentName}`));
+	// 		Vue.component(componentName, () => import(`@/components/modals/${componentName}`));
 
-			this.component = componentName;
-		},
-	},
+	// 		this.component = componentName;
+	// 	},
+	// },
 
 	created() {
 		const escapeHandler = (e) => {

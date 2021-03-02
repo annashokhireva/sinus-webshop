@@ -30,16 +30,18 @@
 
 			</div>
 
-			<product-slider header="Best selling skateboards">
+			<product-slider header="New arrivals">
 				<template v-slot:products>
 					<div class="products-view">
 						<product-card 
-							li v-for="(product, i) in products" 
-							:key="i" :img="product.imgFile" 
+							v-for="(product, i) in products"
+							:key="i" 
+							:img="product.imgFile" 
 							:title="product.title" 
 							:desc="product.shortDesc" 
 							:price="product.price"
-							@click="showModal('ProductModal', product._id)"
+							@showModal="showModal('ProductModal', product._id)"
+							@addToCart="addToCart(product)"
 							:id="product._id"
 						/>
 					</div>	
@@ -57,10 +59,6 @@
 				</button>
 			</div>
 
-			<cart-test />
-			<!-- <ul>
-				<li v-for="(pr, i) in cart" :key="i"></li>
-			</ul> -->
 		</div>
 	</div>
 </template>
@@ -71,7 +69,6 @@ import MainNav from '../components/MainNav.vue';
 import ProductCard from '../components/ProductCard.vue';
 import ProductSlider from '../components/ProductSlider.vue';
 import { mapMutations } from 'vuex';
-import CartTest from '../components/CartTest.vue';
 // import { get, PRODUCTS_URL } from '../api/api.js';
 
 export default {
@@ -79,8 +76,7 @@ export default {
 		MainHeader,
 		MainNav,
 		ProductSlider,
-		ProductCard,
-		CartTest
+		ProductCard
 	},
 
 	// data() {
@@ -97,7 +93,7 @@ export default {
 
 	computed: {
 		products() {
-			return this.$store.state.products;
+			return this.$store.getters.products;
 		}
 	},
 
@@ -106,7 +102,11 @@ export default {
 			return this.$router.push(path);
 		},
 
-		...mapMutations(['showModal'])
+		...mapMutations(['showModal']),
+
+		addToCart(id) {
+			this.$store.dispatch("addToCart", id);
+		}
 	},
 
 	mounted() {
@@ -130,8 +130,9 @@ export default {
 		align-self: center;
 
 		img {
-			max-width: 100%; 
-			height: auto
+			object-fit: cover;
+			width: 100%;
+			max-height: 100%;
 		}
 	}
 
@@ -141,8 +142,9 @@ export default {
 		align-self: center;
 
 		img {
+			object-fit: cover;
 			width: 100%;
-			height: auto;
+			max-height: 100%;
 		}	
 	}
 
@@ -152,8 +154,9 @@ export default {
 		align-self: center;
 
 		img {
+			object-fit: cover;
 			width: 100%;
-			height: auto;
+			max-height: 100%;
 		}
 	}
 
@@ -162,8 +165,9 @@ export default {
 		grid-row: 2;
 
 		img {
+			object-fit: cover;
 			width: 100%;
-			height: auto;
+			max-height: 100%;
 		}
 	}
 
@@ -174,8 +178,9 @@ export default {
 		cursor: pointer;
 		
 		img {
+			object-fit: cover;
 			width: 100%;
-			height: auto;
+			max-height: 100%;
 		}
 	}
 

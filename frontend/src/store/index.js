@@ -15,6 +15,7 @@ export default new Vuex.Store({
 	getters: {
 		cart: (state) => state.shoppingCart,
 		products: (state) => state.products,
+		product: (state) => state.product[state.product],
 		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
 		total: state => {
 			if(state.shoppingCart.length > 0) {
@@ -40,19 +41,16 @@ export default new Vuex.Store({
 			state.modalVisible = false;
 		},
 
-		addToCart(state, payload) {
-			return state.shoppingCart.push(payload);
-		},
 		toggleBag(state) {
 
 			state.bagVisible = !state.bagVisible;
 		},
-		ADD_ITEM(state, id) {
-			return state.shoppingCart.push(id);
+		ADD_ITEM(state, product) {
+			state.shoppingCart.push(product);
 		},
 
 		REMOVE_ITEM(state, index){
-			return state.shoppingCart.splice(index, 1);
+			state.shoppingCart.splice(index, 1);
 		}
 
 		
@@ -65,12 +63,12 @@ export default new Vuex.Store({
 			})
 		},
 
-		addToCart(context, id) {
-			context.commit("ADD_Item", id);
+		addToCart(context, product) {
+			context.commit("ADD_ITEM", product);
 		},
 		
 		removeFromCart(context, index) {
-			context.commit("REMOVE_Item", index);
+			context.commit("REMOVE_ITEM", index);
 		},
 
 		async registerUser(context, payload) {

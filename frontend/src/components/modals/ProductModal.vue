@@ -43,13 +43,6 @@
 import { mapMutations } from 'vuex';
 
 export default {
-	name:'ProductModal',
-	// props: {
-	// 	productId: {
-	// 		type: String,
-	// 		required: true
-	// 	}
-	// },
 
 	methods: {
 		...mapMutations([
