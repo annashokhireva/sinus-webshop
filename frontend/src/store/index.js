@@ -78,6 +78,7 @@ export default new Vuex.Store({
 
 			console.log(context)
 		}
+		
 	},
 	modules: {
 	}
