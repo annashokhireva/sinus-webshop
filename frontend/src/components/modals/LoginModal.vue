@@ -1,112 +1,96 @@
 <template>
-	<div class="login-modal" 
-		v-if="visible"
-		@keydown.esc="hideModal"
-		@click.self="hideModal"
-	>
-		<div class="modal-content">
-			<button class="cross" @click="hideModal">
-				<img src="../../assets/icons/cross.svg" width="24" alt="X">
-			</button>
-			
-			<div class="login-form">
-				<!-- <component :is="component" /> -->
-                <LoginForm />
-			</div>
-		</div>
-	</div>
+    <div class="modal">
+        <form class="login-form">
+
+          <h3 class="title">Login</h3>
+
+          <div class="login-input">
+                <label class="email required"><b>Email</b></label>
+                <input type="email" placeholder="Enter Email" name="email" id="email" required>
+
+                <label class="psw required"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+          </div>       
+
+          <button class="btn-login">LOGIN</button>
+
+        </form>
+        <div class="register">
+          <p>Not a member yet?</p>
+          <p @click="goToRegister">Register here.</p>
+        </div>
+    </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import { mapState, mapMutations } from 'vuex';
-import LoginForm from '../LoginForm'
+import { mapMutations } from 'vuex';
 
 export default {
-	data() {
-		return {
-			component: null,
-		};
-	},
-
-    components: {
-        LoginForm
-    },
-
-	computed: {
-		...mapState({
-			visible: 'modalVisible',
-			modalComponent: 'modalComponent',
-		}),
-	},
-
-	watch: {
-		modalComponent(componentName) {
-			if (!componentName) return;
-
-			Vue.component(componentName, () => import(`@/components/modals/${componentName}`));
-
-			this.component = componentName;
-		},
-	},
-
-	created() {
-		const escapeHandler = (e) => {
-		if (e.key === 'Escape' && this.visible) {
-			this.hideModal();
-		}
-	};
-
-		document.addEventListener('keydown', escapeHandler);
-		this.$once('hook:destroyed', () => {
-		document.removeEventListener('keydown', escapeHandler);
-		});
-	},
 
 	methods: {
 		...mapMutations([
 		'hideModal',
 		]),
+
+		goToRegister: function() {
+        this.$router.push("/register")
+		this.hideModal();
+      }
 	},
+
+
+    
 }
 </script>
 
 <style lang="scss" scoped>
 
-	.login-modal {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		background-color: rgba(0, 0, 0, 0.5);
-		backdrop-filter: blur(3px);
-		padding: 10% 15%;
-		z-index: 2;
-	}
+.login-form {
+  width: 282px;
+  display: flex;
+  flex-direction: column;
 
-	.cross {
-		position: fixed;
-		right: 15%;
-		z-index: 3;
-	}
+  h3 {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
 
-	.modal-content {
-		width: 100%;
-		height: 100%;
-		background-color: $bkg_gray;
-		display: flex;
-		justify-content: center;
-		align-content: center;
-	}
+  .login-input {
+    flex-direction: column;
 
-	.login-form {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-content: center;
-	}
+      label {
+        display: block;
+        text-align: left;
+      }    
+
+      input {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    
+  }
+
+  .btn-login {
+    width: 100%;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+  
+
+}
+
+div label.required:after
+{
+    color: red;
+    content: " *";
+}  
+
 </style>
