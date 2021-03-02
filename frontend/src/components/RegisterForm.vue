@@ -1,6 +1,6 @@
 <template>
   <div class="register-container">
-    <form class="register-form" @submit.prevent="onSubmit">
+    <form class="register-form" @submit.prevent="onSubmit" v-show="unSubmitted">
         <div class="container">
             <h1>Register</h1>
             <p>Please fill in this form to create an account.</p>
@@ -29,10 +29,16 @@
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-                <button type="submit" class="btn-register">REGISTER</button>
+                <button type="submit" class="btn-register" @click="unSubmitted = !unSubmitted">REGISTER</button>
+                
+                
             </div>
         </div>
     </form>
+      <div v-show="!unSubmitted">
+        <h1>Thank you for registering at Sinus Skateboards!</h1>
+        <h3>We'll send you an e-mail confirmation shortly.</h3>
+      </div>
   </div>
 </template>
 
@@ -41,10 +47,11 @@ export default {
 
   name: 'Register',
 
-  userSubmitted: false,
-
   data() {
     return {
+
+      unSubmitted: true,
+
       user: {
           name: '',
           email: '',
@@ -64,8 +71,6 @@ export default {
     onSubmit: function() {
 
         this.$store.dispatch('registerUser', this.user);
-        this.userSubmitted = true;
-
 
     }
 
