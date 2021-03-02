@@ -15,33 +15,31 @@
             <div class="deliverydetails-container">
             <form class="register-form" @submit.prevent="onSubmit">
                 <div class="container">
-                    <div class="delivery-input">
                         <ul>
-                        <label class="firstname required">First Name</label><br>
-                        <input v-model="firstName" type="firstname" name="firstname" id="firstname" required>
-                        <br>
-                        <label class="email required">Email Adress</label><br>
-                        <input v-model="eMail"  name="email" id="email" required>
-                        <br>
-                         <label class="c/o">C/O</label><br>
-                        <input v-model="co"  name="c/o" id="c/o" >
-                        <br>
-                        <label class="postalcode required">Postal Code</label><br>
-                        <input v-model="postalCode"  name="postalcode" id="postalcode" required>
-                        <br>
-                        <label class="lastname required">Last Name</label><br>
-                        <input v-model="lastName"  name="lastname" id="lastname" required>
-                        <br>
-                        <label class="phone">Phone Number</label><br>
-                        <input v-model="phoneNumber" name="phone" id="phone" >
-                        <br>
-                        <label class="adress required">Adress</label><br>
-                        <input v-model="yourAdress"  name="adress" id="adress" required>
-                        <br>
-                        <label class="city required">City</label><br>
-                        <input v-model="yourCity"  name="city" id="city" required>
+                            <label class="firstname required">First Name</label><br>
+                            <input v-model="firstName" type="firstname" name="firstname" id="firstname" required>
+                            <br>
+                            <label class="email required">Email Adress</label><br>
+                            <input v-model="eMail"  name="email" id="email" required>
+                            <br>
+                            <label class="c/o">C/O</label><br>
+                            <input v-model="co"  name="c/o" id="c/o" >
+                            <br>
+                            <label class="postalcode required">Postal Code</label><br>
+                            <input v-model="postalCode"  name="postalcode" id="postalcode" required>
+                            <br>
+                            <label class="lastname required">Last Name</label><br>
+                            <input v-model="lastName"  name="lastname" id="lastname" required>
+                            <br>
+                            <label class="phone">Phone Number</label><br>
+                            <input v-model="phoneNumber" name="phone" id="phone" >
+                            <br>
+                            <label class="adress required">Adress</label><br>
+                            <input v-model="yourAdress"  name="adress" id="adress" required>
+                            <br>
+                            <label class="city required">City</label><br>
+                            <input v-model="yourCity"  name="city" id="city" required>
                         </ul>        
-                    </div>
                 </div>
              </form>
               </div>
@@ -49,14 +47,8 @@
             <div class="payment-method">
                 <h2>CHOOSE PAYMENT METHODS</h2>
                     <ul class="payment-options">
-                        <input type="radio">Klarna
-                        <br>
-                        <input type="radio">Paypal
-                        <br>
-                        <input type="radio">Card Payment
-                        <br>
-                        <input type="radio">Gift voucher
-                        <br>
+                        
+                        
                     </ul>
                 </div>
             </div>
@@ -166,53 +158,9 @@ export default {
 }
 
 
-.register-container {
-  max-width: 200px;
-  margin: auto;  
-
-
-.register-form {
-  width: 282px;
-  display: flex;
-  flex-direction: column;
-
-  h1 {
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  .delivery-input {
-
-      label {
-        display: block;
-        text-align: left;
-      }  
-
-      input {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        align-items: left;
-    }
-    
-  }
-
-  .btn-register {
-    width: 100%;
-    height: 35px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-  }
-
-
+.deliverydetails-container {
+  margin: 50px;  
   
-}
 }
 
 div label.required:after
