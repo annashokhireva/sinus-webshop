@@ -6,6 +6,9 @@
             <p>Please fill in this form to create an account.</p>
 
             <div class="register-input">
+                <label class="name required"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                
                 <label class="email required"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="email" id="email" required>
 
@@ -15,9 +18,12 @@
                 <label class="psw-repeat required"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
+                <label class="Address required"><b>Address</b></label>
+                <input type="text" placeholder="Enter Address" name="address" id="address" required>                
+
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-                <button type="submit" class="btn-register" @click="onClick">REGISTER</button>
+                <button type="submit" class="btn-register">REGISTER</button>
             </div>
         </div>
     </form>
@@ -34,8 +40,10 @@ export default {
         onSubmit: function() {
 
             const user = {
+                name: '',
                 email: '',
-                password: ''
+                password: '',
+                address: ''
             }
 
             this.$store.dispatch('registerUser', user);
