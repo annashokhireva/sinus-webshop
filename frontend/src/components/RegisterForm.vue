@@ -7,19 +7,25 @@
 
             <div class="register-input">
                 <label class="name required"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                <input type="text" placeholder="Enter Name" name="name" id="name" v-model="user.name" required>
                 
                 <label class="email required"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email" id="email" required>
+                <input type="email" placeholder="Enter Email" name="email" id="email" v-model="user.email" required>
 
                 <label class="psw required"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw" id="psw" v-model="user.password" required>
 
                 <label class="psw-repeat required"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
-                <label class="Address required"><b>Address</b></label>
-                <input type="text" placeholder="Enter Address" name="address" id="address" required>                
+                <label class="street required"><b>Street</b></label>
+                <input type="text" placeholder="Enter Street" name="street" id="street" v-model="user.address.street" required>
+
+                <label class="zip required"><b>Zip Code</b></label>
+                <input type="text" placeholder="Enter Zip Code" name="street" id="street" v-model="user.address.zip" required>
+
+                <label class="city required"><b>City</b></label>
+                <input type="text" placeholder="Enter City" v-model="user.address.city" required>                
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
@@ -33,24 +39,37 @@
 <script>
 export default {
 
-    name: 'Register',
+  name: 'Register',
 
-    methods: {
-        
-        onSubmit: function() {
+  userSubmitted: false,
 
-            const user = {
-                name: '',
-                email: '',
-                password: '',
-                address: ''
+  data() {
+    return {
+      user: {
+          name: '',
+          email: '',
+          password: '',
+            
+          address: {
+                  street: '',
+                  zip: '',
+                  city: ''
+                    }
             }
+      }
+  },
 
-            this.$store.dispatch('registerUser', user);
+  methods: {
+        
+    onSubmit: function() {
 
-        }
+        this.$store.dispatch('registerUser', this.user);
+        this.userSubmitted = true;
+
 
     }
+
+  }
 
 }
 </script>
@@ -64,8 +83,6 @@ export default {
 
 .register-form {
   width: 282px;
-  display: flex;
-  flex-direction: column;
 
   h1 {
     padding: 10px;
@@ -94,7 +111,7 @@ export default {
     width: 100%;
     height: 35px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     background-color: black;
     color: white;
     cursor: pointer;
