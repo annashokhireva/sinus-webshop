@@ -3,9 +3,9 @@
 		<aside>
 
 		</aside>
-		<article class="product-info" >
+		<article class="product-info">
 			<div class="details">
-				<h3></h3>
+				<h3> </h3>
 				<!-- <div class="colors">
 					<div class="color-box">
 						v-for=colors
@@ -43,6 +43,12 @@
 import { mapMutations } from 'vuex';
 
 export default {
+	
+	computed: {
+		cart() {
+			return this.$store.getters.cart;
+		}
+	},
 
 	methods: {
 		...mapMutations([

@@ -2,21 +2,21 @@
 	<header>
 		<top-nav />
 		<slot name="nav"/>
-		<shopping-bag v-if="showBag"/>
+		<shopping-cart v-if="showBag"/>
 			<main-nav v-if="visible" class="nav"/>
 	</header>
 </template>
 
 <script>
 import TopNav from './TopNav.vue';
-import ShoppingBag from './ShoppingBag.vue';
+import ShoppingCart from './ShoppingCart.vue';
 import { mapMutations } from 'vuex';
 import { mapState } from 'vuex';
 
 export default {
 	components: { 
 		TopNav,
-		ShoppingBag
+		ShoppingCart
 	},
 
 	props: {

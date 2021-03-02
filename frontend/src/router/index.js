@@ -13,37 +13,37 @@ const routes = [
 {
 	path: '/all-products',
 	name: 'All Products',
-	component: () => import(/* webpackChunkName: "about" */ '../views/AllProductsPage.vue')
+	component: () => import('../views/AllProductsPage.vue')
 },
 {
 	path: '/skateboards',
 	name: 'Skateboards',
-	component: () => import(/* webpackChunkName: "about" */ '../views/SkateboardsPage.vue')
+	component: () => import('../views/SkateboardsPage.vue')
 },
 {
 	path: '/clothing',
 	name: 'Clothing',
-	component: () => import(/* webpackChunkName: "about" */ '../views/ClothingPage.vue')
+	component: () => import('../views/ClothingPage.vue')
 },
 {
 	path: '/sale',
 	name: 'Sale',
-	component: () => import(/* webpackChunkName: "about" */ '../views/SalePage.vue')
+	component: () => import('../views/SalePage.vue')
 },
 {
 	path: '/stores',
 	name: 'Stores',
-	component: () => import(/* webpackChunkName: "about" */ '../views/StoresPage.vue')
+	component: () => import('../views/StoresPage.vue')
 },
 {
 	path: '/contact',
 	name: 'Contact',
-	component: () => import(/* webpackChunkName: "about" */ '../views/ContactPage.vue')
+	component: () => import('../views/ContactPage.vue')
 },
 {
 	path: '/newsletter',
 	name: 'Newsletter',
-	component: () => import(/* webpackChunkName: "about" */ '../views/NewsletterPage.vue')
+	component: () => import('../views/NewsletterPage.vue')
 },
 {
 	path: '/register',
