@@ -1,5 +1,5 @@
 <template>
-	<div class="product" @click="$emit('showModal', $event)">
+	<div class="product" @click="showModal">
 		<div class="product-img">
 			<img :src="`/products/${img}`"  alt="Product image">
 		</div>
@@ -23,15 +23,24 @@
 </template>
 
 <script>
-// import { mapMutations } from 'vuex';
 
 export default {
 	props: {
+		product: Object,
 		img: String,
 		title: String,
 		desc: String,
 		price: Number,
 		id: String
+	},
+
+	methods: {
+
+		showModal(){
+			const index = this.$store.getters.products.indexOf(this.product)
+			this.$store.commit('setActiveIndex', index);
+			this.$store.commit('showModal', 'ProductModal');
+		}
 	}
 }
 </script>
