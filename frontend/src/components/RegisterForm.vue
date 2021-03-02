@@ -6,25 +6,19 @@
             <p>Please fill in this form to create an account.</p>
 
             <div class="register-input">
-                <label for="email"><b>Email</b></label>
-                <label class="mandatory">*</label>
+                <label class="email required"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="email" id="email" required>
 
-                <label for="psw"><b>Password</b></label>
-                <label class="mandatory">*</label>
+                <label class="psw required"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-                <label for="psw-repeat"><b>Repeat Password</b></label><label class="mandatory">*</label>
+                <label class="psw-repeat required"><b>Repeat Password</b></label>
                 <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
                 <button type="submit" class="btn-register" @click="onClick">REGISTER</button>
             </div>
-        
-        <div>
-            <p>Already have an account? <a href="#">Sign in</a>.</p>
-        </div>
         </div>
     </form>
   </div>
@@ -39,16 +33,15 @@ export default {
         
         onSubmit: function() {
 
-        },
-
-        onClick: function() {
             const user = {
                 email: '',
                 password: ''
             }
 
             this.$store.dispatch('registerUser', user);
+
         }
+
     }
 
 }
@@ -72,12 +65,11 @@ export default {
   }
 
   .register-input {
-    flex-direction: column;
-    margin-top: 10px;
 
-      .mandatory {
-        color: red;
-      }
+      label {
+        display: block;
+        text-align: left;
+      }  
 
       input {
         width: 100%;
@@ -106,6 +98,12 @@ export default {
   }
   
 }
+}
+
+div label.required:after
+{
+    color: red;
+    content: " *";
 }
 
 </style>
