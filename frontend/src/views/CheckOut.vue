@@ -18,60 +18,68 @@
                     <div class="delivery-input">
                         <ul>
                         <label class="firstname required">First Name</label><br>
-                        <input type="firstname" name="firstname" id="firstname" required>
-                        <br>
-                        <label class="lastname required">Last Name</label><br>
-                        <input type="lastname"  name="lastname" id="lastname" required>
+                        <input v-model="firstName" type="firstname" name="firstname" id="firstname" required>
                         <br>
                         <label class="email required">Email Adress</label><br>
-                        <input type="email"  name="email" id="email" required>
+                        <input v-model="eMail"  name="email" id="email" required>
                         <br>
-                        <label class="phone">Phone Number</label><br>
-                        <input type="phone" name="phone" id="phone" >
-                        <br>
-                        <label class="c/o">C/O</label><br>
-                        <input type="c/o"  name="c/o" id="c/o" >
-                        <br>
-                        <label class="adress required">Adress</label><br>
-                        <input type="adress"  name="adress" id="adress" required>
+                         <label class="c/o">C/O</label><br>
+                        <input v-model="co"  name="c/o" id="c/o" >
                         <br>
                         <label class="postalcode required">Postal Code</label><br>
-                        <input type="postalcode"  name="postalcode" id="postalcode" required>
+                        <input v-model="postalCode"  name="postalcode" id="postalcode" required>
+                        <br>
+                        <label class="lastname required">Last Name</label><br>
+                        <input v-model="lastName"  name="lastname" id="lastname" required>
+                        <br>
+                        <label class="phone">Phone Number</label><br>
+                        <input v-model="phoneNumber" name="phone" id="phone" >
+                        <br>
+                        <label class="adress required">Adress</label><br>
+                        <input v-model="yourAdress"  name="adress" id="adress" required>
                         <br>
                         <label class="city required">City</label><br>
-                        <input type="city"  name="city" id="city" required>
+                        <input v-model="yourCity"  name="city" id="city" required>
                         </ul>        
                     </div>
                 </div>
              </form>
               </div>
 
-                <div class="payment-method">
+            <div class="payment-method">
                 <h2>CHOOSE PAYMENT METHODS</h2>
-                <ul class="payment-options">
-                <input type="checkbox" name="check" onclick="onlyOne(this)">Klarna
-                <br>
-                <input type="checkbox" name="check" onclick="onlyOne(this)">Paypal
-                <br>
-                <input type="checkbox" name="check" onclick="onlyOne(this)">Card Payment
-                <br>
-                <input type="checkbox" name="check" onclick="onlyOne(this)">Gift voucher
-                <br>
-                </ul>
+                    <ul class="payment-options">
+                        <input type="radio">Klarna
+                        <br>
+                        <input type="radio">Paypal
+                        <br>
+                        <input type="radio">Card Payment
+                        <br>
+                        <input type="radio">Gift voucher
+                        <br>
+                    </ul>
                 </div>
             </div>
 
             <div class="your-order">
              <div class="order-container">
-                <h2>YOUR ORDER</h2>
-                <shopping-cart />
-             </div>
+                    <h2>YOUR ORDER</h2>
+                        <ul>
+                            <li v-for="(product, i) in cart" :key="i">
+                                {{product.imgFile}}
+                                <strong>{{product.title}}</strong>
+                                {{product.category}}
+                                <br>
+                                {{product.price}}
+                            </li>
+                        </ul>
+                </div>
             </div>
-           
+
         </div>
     </div>
     <div class="totsl">Total: {{ totalAmount }} kr</div>
-    <button type="submit" class="btn-register" @click="onClick"><img src="../assets/icons/BUYNOW.svg"></button>	
+    <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	
         <!-- <button><img src="../assets/icons/BUYNOW.svg"></button> -->
 	</div>
 </template>
@@ -80,15 +88,33 @@
 import GoBackNav from '../components/GoBackNav.vue';
 import MainHeader from '../components/MainHeader.vue';
 
+
 export default {
+    
 	components: { 
 		MainHeader,
 		GoBackNav,
         
 	},
+
+    data: function(){
+
+        return {
+            firstName: '',
+            lastName: '',
+            co: '',
+            eMail: '',
+            phoneNumber: '',
+            yourAdress: '',
+            postalCode: '',
+            yourCity: ''
+        }
+    },
     
     computed: {
 		cart() {
+
+
 			return this.$store.getters.cart;
 		},
 
@@ -103,7 +129,21 @@ export default {
 		
 	},
     
+    methods: {
+        onSubmit: function(){
 
+            // this.firstName
+            this.firstName,
+            this.lastName,
+            this.co,
+            this.eMail,
+            this.phoneNumber,
+            this.yourAdress,
+            this.postalCode,
+            this.yourCity
+           
+        }
+    }
 }
         
 
@@ -112,11 +152,13 @@ export default {
 
 <style>
 .main{
-    max-height: 12px;
+   
 }
 .order-summary{
-    display: grid;
-    grid-template-columns: 65% 35%;
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    
 }
 .details-title{
     
@@ -195,6 +237,9 @@ ul{
     background-color: lightgray;
     border-color: black;
     overflow: scroll;
+    display: flex;
+    flex-direction:column;
 }
+
 
 </style>
