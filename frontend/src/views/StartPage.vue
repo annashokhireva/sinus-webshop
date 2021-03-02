@@ -36,11 +36,11 @@
 						<product-card 
 							v-for="(product, i) in products"
 							:key="i" 
+							:product="product"
 							:img="product.imgFile" 
 							:title="product.title" 
 							:desc="product.shortDesc" 
 							:price="product.price"
-							@showModal="showModal('ProductModal', product._id)"
 							@addToCart="addToCart(product)"
 							:id="product._id"
 						/>
@@ -68,8 +68,6 @@ import MainHeader from '../components/MainHeader.vue';
 import MainNav from '../components/MainNav.vue';
 import ProductCard from '../components/ProductCard.vue';
 import ProductSlider from '../components/ProductSlider.vue';
-import { mapMutations } from 'vuex';
-// import { get, PRODUCTS_URL } from '../api/api.js';
 
 export default {
 	components: { 
@@ -78,18 +76,6 @@ export default {
 		ProductSlider,
 		ProductCard
 	},
-
-	// data() {
-	// 	return {
-	// 		products: []
-	// 	}
-	// },
-
-	// async created() {
-	// 	const response = await get(PRODUCTS_URL);
-	// 	this.products = response.data;
-	// 	console.log(...this.products)
-	// },
 
 	computed: {
 		products() {
@@ -101,8 +87,6 @@ export default {
 		goTo(path) {
 			return this.$router.push(path);
 		},
-
-		...mapMutations(['showModal']),
 
 		addToCart(id) {
 			this.$store.dispatch("addToCart", id);

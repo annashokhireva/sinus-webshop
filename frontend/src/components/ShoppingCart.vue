@@ -1,5 +1,5 @@
 <template>
-	<div class="shopping-bag" >
+	<div class="shopping-cart" >
 		<div @click="toggleBag" class="icon">
 			<div v-if="cart.length > 0" class="circle">
 			{{ cart.length }}
@@ -30,13 +30,13 @@
 								<p>{{ item.price }} kr</p>
 							</div>
 
-							<div class="product-counter">
+							<!-- <div class="product-counter">
 								<span>-</span>
-								2 
+								2 ganska svårt function. lägger till om vi hinner
 								<span>+</span>
-							</div>
+							</div> -->
 
-							<div class="cart-bin">
+							<div class="cart-bin" @click="removeFromCart(item)">
 								<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
 							</div>
 								
@@ -63,19 +63,6 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
 
-
-	props: {
-		showAmount: {
-			type: Boolean,
-			default: false,
-			img: String,
-			title: String,
-			desc: String,
-			price: Number,
-			id: String
-		}
-	},
-
 	computed: {
 		cart() {
 			return this.$store.getters.cart;
@@ -91,20 +78,26 @@ export default {
 
 		...mapState({
 			visible: 'bagVisible',
-		}),
+		})
 	},
 
 	methods: {
 		...mapMutations([
 			'toggleBag' 
-		])
+		]),
+
+		removeFromCart(item) {
+			const index = this.cart.indexOf(item)
+			this.$store.dispatch("removeFromCart", index);
+			console.log(index)
+		}
 	}
 
 }
 </script>
 
 <style lang="scss" scoped>
-	.shopping-bag {
+	.shopping-cart {
 		position: relative;
 
 		.icon {
@@ -140,7 +133,7 @@ export default {
 		align-items: stretch;
 		box-sizing: border-box;
 		text-align: left;
-		
+		overflow:auto;
 		cursor: default;
 
 

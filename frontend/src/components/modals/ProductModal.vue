@@ -1,35 +1,17 @@
 <template>
 	<div class="product-modal" >
 		<aside>
-
+			<img :src="`/products/${activeProduct.imgFile}`"  alt="Product image">
 		</aside>
-		<article class="product-info" >
-			<div class="details">
-				<h3></h3>
-				<!-- <div class="colors">
-					<div class="color-box">
-						v-for=colors
-					</div>
-				</div>
-				<div class="sizes">
-					<div class="size-box">
-						v-for=sizes
-					</div>
-				</div> -->
+		<article class="product-info">
+			<div class="details" >
+				<h3> {{ activeProduct.title }}</h3>
+
 				<div class="price">
-					<h3>500kr</h3>
+					<h3>{{ activeProduct.price }} kr</h3>
 				</div>
 				<div class="specifications">
-					<h5>Product info</h5>
-					<ul>
-						<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-						<li>Vivamus a pellentesque mauris.</li>
-						<li>Nam placerat orci vel orci placerat.</li>
-						<li>Phasellus mattis quam a ultricies vehicula.</li>
-						<li>Etiam quis malesuada justo.</li>
-						<li>Nam placerat orci vel orci placerat.</li>
-						<li>Phasellus mattis quam a ultricies vehicula.</li>
-					</ul>
+					<p>{{ activeProduct.longDesc }}</p>
 				</div>
 			</div>
 			
@@ -40,21 +22,27 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+// import { mapMutations } from 'vuex';
 
 export default {
 
-	methods: {
-		...mapMutations([
-		'hideModal',
-		]),
-
-		addToCart() {
-			// add to cart function
-
-			this.hideModal();
+	computed: {
+		activeProduct() {
+			return this.$store.getters.products[this.$store.state.activeProductIndex];
 		}
 	},
+
+	methods: {
+		// ...mapMutations([
+		// 'hideModal',
+		// ]),
+
+		addToCart() {
+			this.$store.dispatch('addToCart', this.activeProduct);
+
+			// this.hideModal();
+		}
+	}
 }
 </script>
 
@@ -68,6 +56,13 @@ export default {
 	aside {
 		width: 50%;
 		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		img {
+			max-width: 100%;
+		}
 	}
 
 	.product-info {
@@ -95,7 +90,7 @@ export default {
 
 	.specifications {
 		text-align: left;
-		margin: 0 $space/4 $space/2;
+		margin: $space/2 0;
 		height: 40%;
 		overflow: scroll;
 

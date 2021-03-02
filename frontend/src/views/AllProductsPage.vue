@@ -5,7 +5,8 @@
         <main-nav />
       </template>
     </main-header>
-    <div class="mainAllproducts">
+
+    <div class="main">
       <h1>This is an ALL PRODUCTS page</h1>
     </div>
     <div class="general-grid">
