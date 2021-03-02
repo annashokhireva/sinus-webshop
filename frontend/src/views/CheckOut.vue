@@ -14,64 +14,87 @@
           
             <div class="deliverydetails-container">
             <form class="register-form" @submit.prevent="onSubmit">
-                <div class="container">
-                        <ul>
-                            <label class="firstname required">First Name</label><br>
-                            <input v-model="firstName" type="firstname" name="firstname" id="firstname" required>
-                            <br>
-                            <label class="email required">Email Adress</label><br>
-                            <input v-model="eMail"  name="email" id="email" required>
-                            <br>
-                            <label class="c/o">C/O</label><br>
-                            <input v-model="co"  name="c/o" id="c/o" >
-                            <br>
-                            <label class="postalcode required">Postal Code</label><br>
-                            <input v-model="postalCode"  name="postalcode" id="postalcode" required>
-                            <br>
-                            <label class="lastname required">Last Name</label><br>
-                            <input v-model="lastName"  name="lastname" id="lastname" required>
-                            <br>
-                            <label class="phone">Phone Number</label><br>
-                            <input v-model="phoneNumber" name="phone" id="phone" >
-                            <br>
-                            <label class="adress required">Adress</label><br>
-                            <input v-model="yourAdress"  name="adress" id="adress" required>
-                            <br>
-                            <label class="city required">City</label><br>
-                            <input v-model="yourCity"  name="city" id="city" required>
-                        </ul>        
-                </div>
+                 <ul>
+                    <label class="firstname required">First Name</label><br>
+                    <input v-model="firstName" type="firstname" class="input-field" name="firstname" id="firstname" required>
+                    <br>
+                    <label class="email required">Email Adress</label><br>
+                    <input v-model="eMail"  name="email" class="input-field" id="email" required>
+                    <br>
+                    <label class="c/o">C/O</label><br>
+                    <input v-model="co"  name="c/o" class="input-field" id="c/o" >
+                    <br>
+                    <label class="postalcode required">Postal Code</label><br>
+                    <input v-model="postalCode"  name="postalcode" class="input-field" id="postalcode" required>
+                    <br>
+                    <label class="lastname required">Last Name</label><br>
+                    <input v-model="lastName"  name="lastname" class="input-field" id="lastname" required>
+                    <br>
+                    <label class="phone">Phone Number</label><br>
+                    <input v-model="phoneNumber" name="phone" class="input-field" id="phone" >
+                    <br>
+                    <label class="adress required">Adress</label><br>
+                    <input v-model="yourAdress"  name="adress" class="input-field" id="adress" required>
+                    <br>
+                    <label class="city required">City</label><br>
+                    <input v-model="yourCity"  name="city" class="input-field" id="city" required>
+                </ul>        
+                
              </form>
               </div>
 
             <div class="payment-method">
                 <h2>CHOOSE PAYMENT METHODS</h2>
                     <ul class="payment-options">
+                        <input type="radio" id="one" value="One" v-model="picked">
                         
+                        <br>
+                        <input type="radio" id="two" value="Two" v-model="picked">
                         
+                        <br>
+                        <input type="radio" id="one" value="One" v-model="picked">
+                        
+                        <br>
+                        <input type="radio" id="two" value="Two" v-model="picked">
+                        
+                        <br>
                     </ul>
                 </div>
+                 <div class="totsl">Total: {{ totalAmount }} kr</div>
+                <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	
             </div>
 
-            <div class="your-order">
-             <div class="order-container">
-                    <h2>YOUR ORDER</h2>
-                        <ul>
-                            <li v-for="(product, i) in cart" :key="i">
-                                {{product.imgFile}}
-                                <strong>{{product.title}}</strong>
-                                {{product.category}}
-                                <br>
-                                {{product.price}}
-                            </li>
-                        </ul>
-                </div>
+            
+            <div class="order-container">
+            <h2>YOUR ORDER</h2>
+            <h2 v-if="cart.length <= 0" class="empty">Your shopping bag is empty</h2>
+				<h2 v-else> 
+                    <p>Subtotal {{totalAmount}}</p>
+                    <p>Delivery 49kr</p>
+                </h2>
+                        <li v-for="(product, i) in cart" :key="i" class="item-summary">
+                            <div class="product-image"> 
+                                <img :src="`/products/${product.imgFile}`" width="50px" alt="Product image">
+                            </div>
+
+                            <div class="product-information">
+                            <strong>{{product.title}}</strong>
+                            <br>
+                            {{product.category}} 
+                            <br>
+                            {{product.price}} kr
+                            </div>
+                         </li>
+                         <br>
+                   
+            <div class="total-order">Total: {{ totalAmount }} kr</div>
             </div>
+            
 
         </div>
+           
     </div>
-    <div class="totsl">Total: {{ totalAmount }} kr</div>
-    <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	
+
         <!-- <button><img src="../assets/icons/BUYNOW.svg"></button> -->
 	</div>
 </template>
@@ -146,6 +169,14 @@ export default {
 .main{
    
 }
+.register-form{
+
+    text-align: left;
+}
+.input-field {
+    width: 280px;
+    height: 45px;
+}
 .order-summary{
     display: flex;
     padding: 30px;
@@ -154,7 +185,7 @@ export default {
 }
 .details-title{
     
-    font-size: 15px;
+    font-size: 20px;
 }
 
 
@@ -179,15 +210,32 @@ ul{
 
 
 .order-container {
-
-    max-width: 295px;
-    height: 500px;
+    display: flex;
+    flex-direction:column;
+    width: 300px;
+    height: 600px;
     background-color: lightgray;
     border-color: black;
     overflow: scroll;
-    display: flex;
-    flex-direction:column;
+    text-align: left;
+}
+.empty {
+    font-size: 14px;
 }
 
+.payment-options {
+    display: flex;
+    flex-direction: column;
 
+}
+.payment-method {
+    text-align: left;
+    padding-left: 50px;
+}
+
+.item-summary {
+display: flex;
+flex-direction: row;
+padding-bottom: 30px;
+}
 </style>
