@@ -20,11 +20,11 @@
 
 <script>
 export default {
-props: {
-products: {
-	type: Array,
-}
-},
+  props: {
+    products: {
+      type: Array,
+    },
+  },
 
   data() {
     return {
@@ -38,12 +38,12 @@ products: {
     };
   },
   watch: {
-filters: {
-	deep:true,
-	handler(){
-		this.filteredProducts()
-	}
-}
+    filters: {
+      deep: true,
+      handler() {
+        this.filteredProducts();
+      },
+    },
   },
   methods: {
     filteredProducts() {
@@ -80,7 +80,7 @@ filters: {
           }
         }
       }
-		this.$emit("filtering-products", products)
+      this.$emit("filtering-products", products);
     },
   },
 };
