@@ -14,7 +14,7 @@
       <div class="mikolaj-img">
         <img
           src="../assets/img/mikolaj-felinski-RH_QLQGu0ts-unsplash 1.png"
-          alt="Greta"
+          alt="Mikolaj"
         />
       </div>
       <div class="text-general-grid">
