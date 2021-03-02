@@ -9,20 +9,18 @@
 			<router-link to="/clothing"><h5>Clothing</h5></router-link>
 			<router-link to="/sale"><h5>Sale</h5></router-link>
 		</div>
-		<div class="icons">
-		<!-- <img src="../assets/icons/search.svg" alt="Search glass">
-			<img src="../assets/icons/shopping-cart.svg" alt="Shopping cart" @click="toggleBag"> -->
-			<shopping-bag />
+		<div class="cart">
+			<shopping-cart />
 		</div>
 	</nav>
 </template>
 
 <script>
-import ShoppingBag from './ShoppingBag';
+import ShoppingCart from './ShoppingCart';
 
 export default {
 	components: {
-		ShoppingBag
+		ShoppingCart
 	}
 }
 </script>
@@ -54,11 +52,10 @@ export default {
 		}
 	}
 
-	.icons {
+	.cart {
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
 		align-items: center;
-		width: 10%;
 
 		img {
 			cursor: pointer;

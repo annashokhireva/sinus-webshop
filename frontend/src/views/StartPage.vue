@@ -36,11 +36,12 @@
 						<product-card 
 							v-for="(product, i) in products"
 							:key="i" 
+							:product="product"
 							:img="product.imgFile" 
 							:title="product.title" 
 							:desc="product.shortDesc" 
 							:price="product.price"
-							@showModal="showModal('ProductModal', product._id)"
+							@showModal="showModal('ProductModal', product)"
 							@addToCart="addToCart(product)"
 							:id="product._id"
 						/>
