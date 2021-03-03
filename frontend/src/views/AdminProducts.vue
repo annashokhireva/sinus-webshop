@@ -216,15 +216,16 @@ export default {
 	}
 
 	.all-cards {
-		display: flex;
-		flex-flow: wrap;
-		flex-direction: row;
-		justify-content: stretch;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: minmax(400px, auto);
+		gap: 1.5rem;
 		margin: 0 $main_margin $space;
 
 		.add-card-box {
-			height: 456px;
-			min-width: 242px;
+			object-fit: cover;
+			width: 100%;
+			max-height: 100%;
 			border: 1px solid $details_gray;
 			display: flex;
 			justify-content: center;

@@ -49,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 
 	.product {
-		height: 456px;
+		height: 425px;
 		min-width: 242px;
 		margin-right: 2%;
 

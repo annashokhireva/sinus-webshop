@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 	.slider {
-		height: $slider_height;
+		max-height: $slider_height;
 		width: 100vw;
 		margin: $space 0;
 	}
