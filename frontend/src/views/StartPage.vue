@@ -173,6 +173,15 @@ export default {
 		justify-content: space-between;
 		align-items: center;
 		overflow: scroll;
+
+		.product:first-of-type {
+			margin-left: $main_margin;
+		}
+
+		.product:last-child {
+			padding-right: $main_margin;
+			box-sizing: content-box;
+		}
 	}
 
 	.ad-window {

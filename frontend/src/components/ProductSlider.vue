@@ -36,7 +36,7 @@ export default {
 		h3 {
 			text-align: left;	
 		}
-		
+
 	}
 
 </style>

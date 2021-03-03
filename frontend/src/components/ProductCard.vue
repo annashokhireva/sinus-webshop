@@ -25,6 +25,7 @@
 <script>
 
 export default {
+
 	props: {
 		product: Object,
 		img: String,
@@ -52,14 +53,14 @@ export default {
 		min-width: 242px;
 		margin-right: 2%;
 
-		&:first-of-type {
-			margin-left: $main_margin;
-		}
+		// &:first-of-type {
+		// 	margin-left: $main_margin;
+		// }
 
-		&:last-child {
-			padding-right: $main_margin;
-			box-sizing: content-box;
-		}
+		// &:last-child {
+		// 	padding-right: $main_margin;
+		// 	box-sizing: content-box;
+		// }
 
 		.product-img {
 			background-color: $bkg_gray;
