@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {get, post, PRODUCTS_URL, REGISTER_URL } from '../api/api.js';
+import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL } from '../api/api.js';
 Vue.use(Vuex)
 
 
@@ -87,6 +87,8 @@ export default new Vuex.Store({
 
 			const response = await post(AUTH_URL, payload)
 			console.log(response)
+
+			setToken(response.data.token);
 
 			console.log(context)
 		}

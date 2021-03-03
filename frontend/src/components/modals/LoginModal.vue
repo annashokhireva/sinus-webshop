@@ -43,7 +43,7 @@ export default {
 		goToRegister: function() {
         this.$router.push("/register")
 		this.hideModal();
-      	},
+		},
 
 		onSubmit: function() {
 		console.log(this.email, this.password);
