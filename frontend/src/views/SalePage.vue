@@ -8,12 +8,12 @@
     <div class="mainSale">
       <div class="text-general-grid">
         <h1>SALE</h1>
+
       </div>
     </div>
     <div>
-      <h2>All products</h2>
+      <h2>We don't have any SALE yet</h2>
     </div>
-    ALL PRODUCT LIST
   </div>
 </template>
 
@@ -45,5 +45,8 @@ export default {
 }
 h1 {
 	margin-top: 10%;
+}
+h2 {
+  margin-bottom: 200px;
 }
 </style>

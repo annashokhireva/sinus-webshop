@@ -32,6 +32,7 @@ export default {
 		desc: String,
 		price: Number,
 		id: String
+		
 	},
 
 	methods: {
