@@ -81,6 +81,14 @@ export default new Vuex.Store({
 			console.log(response)
 
 			console.log(context)
+		},
+
+		async authenticateUser(context, payload) {
+
+			const response = await post(AUTH_URL, payload)
+			console.log(response)
+
+			console.log(context)
 		}
 
 	},

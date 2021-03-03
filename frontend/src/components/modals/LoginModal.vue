@@ -1,18 +1,18 @@
 <template>
     <div class="modal">
-        <form class="login-form">
+        <form class="login-form" @submit.prevent="onSubmit">
 
           <h3 class="title">Login</h3>
 
           <div class="login-input">
                 <label class="email required"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email" id="email" required>
+                <input type="email" placeholder="Enter Email" name="email" id="email" v-model="email" required>
 
                 <label class="psw required"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw" id="psw" v-model="password" required>
           </div>       
 
-          <button class="btn-login">LOGIN</button>
+          <button type="submit" class="btn-login">LOGIN</button>
 
         </form>
         <div class="register">
@@ -27,6 +27,14 @@ import { mapMutations } from 'vuex';
 
 export default {
 
+	data() {
+		return {
+			
+			email: null,
+			password: null
+		}
+	},
+
 	methods: {
 		...mapMutations([
 		'hideModal',
@@ -35,7 +43,21 @@ export default {
 		goToRegister: function() {
         this.$router.push("/register")
 		this.hideModal();
-      }
+      	},
+
+		onSubmit: function() {
+		console.log(this.email, this.password);
+
+		const obj = {
+
+			email: this.email,
+			password: this.password
+
+		}
+
+		this.$store.dispatch('authenticateUser', obj);
+
+		}  
 	},
 
 
