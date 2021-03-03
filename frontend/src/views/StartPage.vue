@@ -30,7 +30,18 @@
 
 			</div>
 
-			<product-slider header="New arrivals">
+			<div class="ad-window">
+				<img src="../assets/img/clothes-ad.png" alt="Jumping man">
+				<button class="btn-medium dark" @click="goTo('/clothing')">
+					<span>
+						<p>Discover latest collection</p>
+						<img class="icon" src="../assets/icons/arrow_right_light.svg" alt="arrow">
+					</span>
+					
+				</button>
+			</div>
+
+			<product-slider header="Our products">
 				<template v-slot:products>
 					<div class="products-view">
 						<product-card 
@@ -47,17 +58,6 @@
 					</div>	
 				</template>
 			</product-slider>
-
-			<div class="ad-window">
-				<img src="../assets/img/clothes-ad.png" alt="Jumping man">
-				<button class="btn-medium dark" @click="goTo('/clothing')">
-					<span>
-						<p>Discover latest collection</p>
-						<img class="icon" src="../assets/icons/arrow_right_light.svg" alt="arrow">
-					</span>
-					
-				</button>
-			</div>
 
 		</div>
 	</div>

@@ -8,7 +8,7 @@
 			</span> -->
 		</div>
 		
-		<slot name="products" class="slot" />
+		<slot name="products" />
 	</div>
 </template>
 
@@ -36,25 +36,7 @@ export default {
 		h3 {
 			text-align: left;	
 		}
-
-		// .buttons {
-		// 	width: 5%;
-		// 	display: flex;
-		// 	justify-content: space-between;
-
-		// 	img {
-		// 		cursor: pointer;
-		// 	}
-		// }
-	}
-
-	.slot::v-deep {
-
-		.products-view {
-			display: flex;
-			align-items: center;
-			margin-top: $space/2;
-		}
 		
 	}
+
 </style>

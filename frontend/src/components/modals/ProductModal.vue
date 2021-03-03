@@ -22,10 +22,8 @@
 </template>
 
 <script>
-// import { mapMutations } from 'vuex';
 
 export default {
-
 	computed: {
 		activeProduct() {
 			return this.$store.getters.products[this.$store.state.activeProductIndex];
@@ -33,10 +31,6 @@ export default {
 	},
 
 	methods: {
-		// ...mapMutations([
-		// 'hideModal',
-		// ]),
-
 		addToCart() {
 			this.$store.dispatch('addToCart', this.activeProduct);
 
@@ -62,6 +56,7 @@ export default {
 
 		img {
 			max-width: 100%;
+			max-height: 100%;
 		}
 	}
 

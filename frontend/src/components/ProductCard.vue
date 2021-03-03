@@ -56,8 +56,9 @@ export default {
 			margin-left: $main_margin;
 		}
 
-		&:last-of-type {
-			margin-right: $main_margin;
+		&:last-child {
+			padding-right: $main_margin;
+			box-sizing: content-box;
 		}
 
 		.product-img {
