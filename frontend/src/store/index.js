@@ -60,10 +60,10 @@ export default new Vuex.Store({
 	},
 	actions: {
 		getProducts({ commit }) {
-			get(PRODUCTS_URL)
-				.then(response => {
-					commit('SET_PRODUCTS', response.data)
-				})
+			return get(PRODUCTS_URL)
+			.then(response => {
+				commit('SET_PRODUCTS', response.data)
+			})
 		},
 
 		addToCart(context, product) {
