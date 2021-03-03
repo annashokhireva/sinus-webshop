@@ -1,11 +1,14 @@
 <template>
   <div>
-    <select v-model="filters.category" title="Category">Category
+    <select v-model="filters.category" title="Category">
+      Category
+      <option value>All Products</option>
       <option v-for="(category, i) in categories" :key="i" :value="category">
         {{ category }}
       </option>
     </select>
     <select v-model="filters.sort">
+       <option value>All Pice</option>
       <option
         v-for="(sortOption, i) in sortOptions"
         :key="i"
@@ -14,7 +17,7 @@
         {{ sortOption }}
       </option>
     </select>
-    <input v-model="filters.search" type="search" />
+    <input v-model="filters.search" type="search" placeholder="Search" />
   </div>
 </template>
 
