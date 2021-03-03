@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="register-container">
     <form class="register-form" @submit.prevent="onSubmit" v-show="unSubmitted">
         <div class="container">
@@ -29,17 +30,17 @@
 
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-                <button type="submit" class="btn-register" @click="unSubmitted = !unSubmitted">REGISTER</button>
-                
-                
+                <button type="submit" class="btn-register" @click="unSubmitted = !unSubmitted">REGISTER</button>  
             </div>
         </div>
     </form>
-      <div v-show="!unSubmitted">
-        <h1>Thank you for registering at Sinus Skateboards!</h1>
-        <h3>We'll send you an e-mail confirmation shortly.</h3>
-      </div>
   </div>
+    <div class="registered" v-show="!unSubmitted">
+      <h1>Thank you for becoming a member at Sinus Skateboards!</h1>
+      <h3>You'll recieve an e-mail confirmation shortly.</h3>
+      <button class="btn-gostart" @click="goToStart">GO BACK TO SHOPPING</button>
+    </div>
+ </div> 
 </template>
 
 <script>
@@ -72,6 +73,11 @@ export default {
 
         this.$store.dispatch('registerUser', this.user);
 
+    },
+
+    goToStart: function() {
+
+      this.$router.push('/');
     }
 
   }
@@ -112,7 +118,15 @@ export default {
     
   }
 
-  .btn-register {
+  p {
+      margin-top: 20px;
+      margin-bottom: 20px;
+  }
+  
+}
+}
+
+button {
     width: 100%;
     height: 35px;
     margin-top: 10px;
@@ -122,13 +136,10 @@ export default {
     cursor: pointer;
   }
 
-  p {
-      margin-top: 20px;
-      margin-bottom: 20px;
-  }
-  
-}
-}
+.registered {
+  max-width: 600px;
+  margin: auto;
+}  
 
 div label.required:after
 {
