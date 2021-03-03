@@ -25,7 +25,6 @@
 <script>
 
 export default {
-
 	props: {
 		product: Object,
 		img: String,
@@ -72,6 +71,7 @@ export default {
 
 			img {
 				max-width: 90%;
+				max-height: 100%;
 			}
 		}
 	}

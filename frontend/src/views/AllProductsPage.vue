@@ -26,7 +26,7 @@
           faucibus odio. Duis fringilla libero est, vel lacinia felis feugiat
           ut. Etiam odio metus, ultrices eu ullamcorper ac, molestie in libero.
         </p>
-        <button class="buy-now" @click="goTo('/skateboards')">
+        <button class="buy-now" @click="showModal" >
           Buy Now
           <img class="icon" src="../assets/icons/arrow_right.svg" alt="arrow" />
         </button>
@@ -43,11 +43,11 @@
         <product-card
           v-for="(product, i) in filteredProducts"
           :key="i"
+          :product="product"
           :img="product.imgFile"
           :title="product.title"
           :desc="product.shortDesc"
           :price="product.price"
-          @showModal="showModal('ProductModal', product._id)"
           @addToCart="addToCart(product)"
           :id="product._id"
         />
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from "vuex";
+import { mapActions, mapState } from "vuex";
 import MainHeader from "../components/MainHeader";
 import MainNav from "../components/MainNav";
 import ProductCard from "../components/ProductCard";
@@ -71,9 +71,16 @@ export default {
     FilteredProducts,
   },
 
+  props: {
+    product: Object
+  },
+
   data() {
     return {
       localProducts: [],
+      adProduct: {
+        _id: 'wafVodPl07dinNpy'
+      }
     };
   },
 
@@ -89,13 +96,11 @@ export default {
 
     filteredProducts() {
       return this.localProducts;
-    },
+    }
   },
 
   methods: {
     ...mapActions(["getProducts"]),
-
-    ...mapMutations(["showModal"]),
 
     setNewProducts(arrayProducts) {
       this.localProducts = [...arrayProducts];
@@ -112,6 +117,14 @@ export default {
     onChangeCategory(category) {
       this.$set(this.filters, "category", category);
     },
+
+    showModal(id){
+      id = this.adProduct._id;
+      let product = this.$store.getters.productById(id)
+      const index = this.$store.getters.products.indexOf(product)
+			this.$store.commit('setActiveIndex', index);
+			this.$store.commit('showModal', 'ProductModal');
+		}
   },
 };
 </script>

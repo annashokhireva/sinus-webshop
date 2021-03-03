@@ -16,6 +16,9 @@ export default new Vuex.Store({
 	getters: {
 		cart: (state) => state.shoppingCart,
 		products: (state) => state.products,
+		productById: (state) => (id) => {
+			return state.products.find(product => product._id === id)
+		},
 		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
 		total: state => {
 			if (state.shoppingCart.length > 0) {
@@ -56,7 +59,6 @@ export default new Vuex.Store({
 			state.activeProductIndex = index;
 		}
 
-
 	},
 	actions: {
 		getProducts({ commit }) {
@@ -72,7 +74,6 @@ export default new Vuex.Store({
 
 		removeFromCart(context, index) {
 			context.commit("REMOVE_ITEM", index);
-			console.log(index)
 		},
 
 		async registerUser(context, payload) {
