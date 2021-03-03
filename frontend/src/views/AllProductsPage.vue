@@ -6,8 +6,8 @@
       </template>
     </main-header>
 
-    <div class="main">
-      <h1>This is an ALL PRODUCTS page</h1>
+    <div class="mainSkatebords">
+      <h1>This is an All Products page</h1>
     </div>
     <div class="general-grid">
       <div class="greta-img">
@@ -26,14 +26,14 @@
           faucibus odio. Duis fringilla libero est, vel lacinia felis feugiat
           ut. Etiam odio metus, ultrices eu ullamcorper ac, molestie in libero.
         </p>
-        <button class="buy-now" @click="goTo('/skateboards')">
+        <button class="buy-now" @click="showModal('id')">
           Buy Now
           <img class="icon" src="../assets/icons/arrow_right.svg" alt="arrow" />
         </button>
       </div>
     </div>
-    <div>
-      <h2>All products</h2>
+    <div class="category-name">
+      <h2 class="category-name">All products</h2>
       <FilteredProducts
         :products="products"
         @filtering-products="setNewProducts"
@@ -51,7 +51,7 @@
           @addToCart="addToCart(product)"
           :id="product._id"
         />
-      </div>    
+      </div>
     </div>
   </div>
 </template>
@@ -69,6 +69,10 @@ export default {
     MainNav,
     ProductCard,
     FilteredProducts,
+  },
+
+  props: {
+    product: Object,
   },
 
   data() {
@@ -109,6 +113,12 @@ export default {
       this.$store.dispatch("addToCart", id);
     },
 
+    showModal(id) {
+      // const index = this.$store.getters.products(this.product._id);
+      this.$store.commit("setActiveIndex", id);
+      this.$store.commit("showModal", "ProductModal");
+    },
+
     onChangeCategory(category) {
       this.$set(this.filters, "category", category);
     },
@@ -117,8 +127,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .general-grid {
-  margin: 10% 10% 10% 20%;
+  margin: 10% 10% 2% 20%;
   display: flex;
   align-self: left;
 }
@@ -126,6 +137,10 @@ export default {
   padding: 100px;
   text-align: left;
 }
+.category-name {
+  align-self: start;
+}
+
 
 h3 {
   text-decoration: underline;

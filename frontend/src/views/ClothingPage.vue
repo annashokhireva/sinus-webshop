@@ -31,26 +31,102 @@
     <div>
       <h3>Clothing</h3>
     </div>
-    <!-- <FilterCategory /> -->
-    ALL PRODUCT LIST
+    <div>
+        <FilteredProducts
+        :products="products"
+        @filtering-products="setNewProducts"
+      />
+
+      <div class="product-cards">
+        <product-card
+          v-for="(product, i) in filteredProducts"
+          :key="i"
+          :img="product.imgFile"
+          :title="product.title"
+          :desc="product.shortDesc"
+          :price="product.price"
+          @showModal="showModal('ProductModal', product._id)"
+          @addToCart="addToCart(product)"
+          :id="product._id"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState, mapMutations } from "vuex";
 import MainHeader from "../components/MainHeader";
-import MainNav from "../components/MainNav.vue";
+import MainNav from "../components/MainNav";
+import ProductCard from "../components/ProductCard";
+import FilteredProducts from "../components/FilterProduct";
 
 export default {
   components: {
     MainHeader,
     MainNav,
+    ProductCard,
+    FilteredProducts,
+  },
+
+  props: {
+    product: Object,
+  },
+
+  data() {
+    return {
+      localProducts: [],
+    };
+  },
+
+  async mounted() {
+    await this.getProducts();
+    this.localProducts = this.products;
+  },
+
+  computed: {
+    ...mapState({
+      products: (state) => state.products,
+    }),
+
+    filteredProducts() {
+      return this.localProducts;
+    },
+  },
+
+  methods: {
+    ...mapActions(["getProducts"]),
+
+    ...mapMutations(["showModal"]),
+
+    setNewProducts(arrayProducts) {
+      this.localProducts = [...arrayProducts];
+    },
+
+    goTo(path) {
+      return this.$router.push(path);
+    },
+
+    addToCart(id) {
+      this.$store.dispatch("addToCart", id);
+    },
+
+    showModal(id) {
+      // const index = this.$store.getters.products(this.product._id);
+      this.$store.commit("setActiveIndex", id);
+      this.$store.commit("showModal", "ProductModal");
+    },
+
+    onChangeCategory(category) {
+      this.$set(this.filters, "category", category);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .clothing-grid {
-  margin: 10% 10% 10% 20%;
+  margin: 10% 10% 2% 20%;
   display: flex;
   align-self: left;
 }
@@ -67,5 +143,18 @@ h3 span {
   color: #22703A;
   text-decoration: underline;
   text-decoration-color: #22703A;
+}
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  width: auto;
+  padding: 0 20px;
+  // & /deep/ .product {
+  // margin: 0;
+  // min-width: 20%;
+  // width: auto;
+// }
 }
 </style>

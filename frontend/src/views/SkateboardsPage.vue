@@ -1,10 +1,10 @@
 <template>
-	<div>
-		<main-header>
-			<template v-slot:nav>
-				<main-nav/>
-			</template>
-		</main-header>
+  <div>
+    <main-header>
+      <template v-slot:nav>
+        <main-nav />
+      </template>
+    </main-header>
 
     <div class="mainSkatebords">
       <h1>This is an Skateboards page</h1>
@@ -23,36 +23,115 @@
         <h3>Made with extremely hard Canadian maple wood</h3>
         <br />
         <p>
-         Maecenas eget erat interdum, auctor magna nec, pretium nibh. Pellentesque eu aliquet augue. Donec consequat nisl nulla, nec malesuada sem laoreet quis. Sed leo urna, sagittis eget magna sed, <br>
-         <br>
-         Suspendisse porta felis eu turpis varius, quis ultrices ante accumsan. Integer consectetur tempor nulla quis pellentesque.
+          Maecenas eget erat interdum, auctor magna nec, pretium nibh.
+          Pellentesque eu aliquet augue. Donec consequat nisl nulla, nec
+          malesuada sem laoreet quis. Sed leo urna, sagittis eget magna sed,
+          <br />
+          <br />
+          Suspendisse porta felis eu turpis varius, quis ultrices ante accumsan.
+          Integer consectetur tempor nulla quis pellentesque.
         </p>
       </div>
     </div>
     <div>
       <h3>Skateboards</h3>
     </div>
-    <!-- <FilterCategory /> -->
-    ALL PRODUCT LIST
-	</div>
+    <div>
+      <FilteredProducts
+        :products="products"
+        @filtering-products="setNewProducts"
+      />
 
+      <div class="product-cards">
+        <product-card
+          v-for="(product, i) in filteredProducts"
+          :key="i"
+          :img="product.imgFile"
+          :title="product.title"
+          :desc="product.shortDesc"
+          :price="product.price"
+          @showModal="showModal('ProductModal', product._id)"
+          @addToCart="addToCart(product)"
+          :id="product._id"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import MainHeader from '../components/MainHeader';
-import MainNav from '../components/MainNav.vue';
+import { mapActions, mapState, mapMutations } from "vuex";
+import MainHeader from "../components/MainHeader";
+import MainNav from "../components/MainNav.vue";
+import ProductCard from "../components/ProductCard";
+import FilteredProducts from "../components/FilterProduct";
 
 export default {
-	components: {
-		MainHeader,
-		MainNav,
-	}
-}
+  components: {
+    MainHeader,
+    MainNav,
+    ProductCard,
+    FilteredProducts,
+  },
+
+  props: {
+    product: Object,
+  },
+
+  data() {
+    return {
+      localProducts: [],
+    };
+  },
+
+  async mounted() {
+    await this.getProducts();
+    this.localProducts = this.products;
+  },
+
+  computed: {
+    ...mapState({
+      products: (state) => state.products,
+    }),
+
+    filteredProducts() {
+      return this.localProducts;
+    },
+  },
+
+  methods: {
+    ...mapActions(["getProducts"]),
+
+    ...mapMutations(["showModal"]),
+
+    setNewProducts(arrayProducts) {
+      this.localProducts = [...arrayProducts];
+    },
+
+    goTo(path) {
+      return this.$router.push(path);
+    },
+
+    addToCart(id) {
+      this.$store.dispatch("addToCart", id);
+    },
+
+    showModal(id) {
+      // const index = this.$store.getters.products(this.product._id);
+      this.$store.commit("setActiveIndex", id);
+      this.$store.commit("showModal", "ProductModal");
+    },
+
+    onChangeCategory(category) {
+      this.$set(this.filters, "category", category);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .skateboard-grid {
-  margin: 10% 10% 10% 20%;
+  margin: 10% 10% 2% 20%;
   display: flex;
   align-self: left;
 }
@@ -64,5 +143,17 @@ export default {
 h3 {
   text-decoration: underline;
 }
-
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  width: auto;
+  padding: 0 20px;
+  // & /deep/ .product {
+  // margin: 0;
+  // min-width: 20%;
+  // width: auto;
+  // }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="filters.category">
+    <select v-model="filters.category" title="Category">Category
       <option v-for="(category, i) in categories" :key="i" :value="category">
         {{ category }}
       </option>
@@ -34,7 +34,7 @@ export default {
         search: "",
       },
       categories: ["board", "wheels", "clothes", "t-shirt", "caps"],
-      sortOptions: ["lowers price", "highers price"],
+      sortOptions: ["lower price", "higher price"],
     };
   },
   watch: {
