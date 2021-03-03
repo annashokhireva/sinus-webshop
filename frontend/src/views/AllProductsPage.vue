@@ -26,11 +26,7 @@
           faucibus odio. Duis fringilla libero est, vel lacinia felis feugiat
           ut. Etiam odio metus, ultrices eu ullamcorper ac, molestie in libero.
         </p>
-<<<<<<< HEAD
         <button class="buy-now" @click="showModal" >
-=======
-        <button class="buy-now" @click="showModal('id')">
->>>>>>> be30e6d36233888e28f658671be4af97d4d0bf99
           Buy Now
           <img class="icon" src="../assets/icons/arrow_right.svg" alt="arrow" />
         </button>
@@ -116,12 +112,6 @@ export default {
 
     addToCart(id) {
       this.$store.dispatch("addToCart", id);
-    },
-
-    showModal(id) {
-      // const index = this.$store.getters.products(this.product._id);
-      this.$store.commit("setActiveIndex", id);
-      this.$store.commit("showModal", "ProductModal");
     },
 
     onChangeCategory(category) {
