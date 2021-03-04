@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL } from '../api/api.js';
 Vue.use(Vuex)
 
+
 export default new Vuex.Store({ 
 	state: {
 			products: [],
@@ -10,7 +11,8 @@ export default new Vuex.Store({
 			shoppingCart: [],
 			modalVisible: false,
 			modalComponent: null,
-			bagVisible: false
+			bagVisible: false,
+			agreedToPrivacy: false
 		},
 	getters: {
 		cart: (state) => state.shoppingCart,
@@ -60,7 +62,35 @@ export default new Vuex.Store({
 
 		setActiveIndex(state, index) {
 			state.activeProductIndex = index;
-		}
+		},
+
+		agreePrivacyPolicy(state) {
+			localStorage.setItem('agreedToPrivacy', true);
+			state.agreedToPrivacy = true;
+		},
+
+		initialiseStore(state) {
+				//add admin login function
+			
+			// if (localStorage.getItem('agreedToPrivacy')) {
+			// 	state.agreedToPrivacy = true;
+			// }
+
+			if (localStorage.getItem('cartProducts')){
+				this.replaceState(
+					Object.assign(state, JSON.parse(localStorage.getItem('cartProducts')))
+				);
+			}
+		},
+
+		// shoppingCartStore(state) {
+		// 	if (localStorage) {
+		// 		let shoppingCart = localStorage.getItem('cartProducts');
+		// 		if (shoppingCart) {
+		// 			state.shoppingCart = JSON.parse(shoppingCart);
+		// 		}
+		// 	}
+		// }
 
 	},
 	actions: {
@@ -73,6 +103,7 @@ export default new Vuex.Store({
 
 		addToCart(context, product) {
 			context.commit("addItem", product);
+			localStorage.setItem('cartProducts', JSON.stringify(this.state.shoppingCart));
 		},
 
 		addNewProduct(context, product) {
@@ -99,7 +130,15 @@ export default new Vuex.Store({
 			setToken(response.data.token);
 
 			console.log(context)
-		}
+		},
+
+		// async createOrder({ commit }) {
+
+		// 	return post(CREATE_ORDER, payload)
+		// 	.then(response => {
+		// 		commit('setProducts', response.data)
+		// 	})
+		// }
 
 	},
 	modules: {}

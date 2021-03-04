@@ -4,6 +4,7 @@ const BASE_URL = "http://localhost:5000/api/";
 const PRODUCTS_URL = `${BASE_URL}products`;
 const REGISTER_URL = `${BASE_URL}register`;
 const AUTH_URL = `${BASE_URL}auth`;
+const CREATE_ORDER = `${BASE_URL}orders`;
 
 const get = async(url) => {
 	try {
@@ -27,4 +28,4 @@ const setToken = (token) => {
 	axios.default.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
-export { AUTH_URL, REGISTER_URL, PRODUCTS_URL, get, post, setToken}
+export { CREATE_ORDER, AUTH_URL, REGISTER_URL, PRODUCTS_URL, get, post, setToken}
