@@ -65,7 +65,6 @@ const routes = [
 	name: 'Orders',
 	component: () => import('../views/AdminOrders.vue')
 }
-
 ]
 
 const router = new VueRouter({

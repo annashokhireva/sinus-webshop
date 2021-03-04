@@ -120,7 +120,6 @@ export default {
 
 	.bag-view {	
 		position: absolute;
-		
 		right: -15%;
 		width: 390px;
 		height: 618px;
