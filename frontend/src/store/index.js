@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL } from '../api/api.js';
 Vue.use(Vuex)
 
-
 export default new Vuex.Store({ 
 	state: {
 			products: [],
@@ -11,7 +10,7 @@ export default new Vuex.Store({
 			shoppingCart: [],
 			modalVisible: false,
 			modalComponent: null,
-			bagVisible: false,
+			bagVisible: false
 		},
 	getters: {
 		cart: (state) => state.shoppingCart,
@@ -29,7 +28,7 @@ export default new Vuex.Store({
 		}
 	},
 	mutations: {
-		SET_PRODUCTS(state, products) {
+		setProducts(state, products) {
 			state.products = products;
 			console.log(products);
 		},
@@ -47,11 +46,15 @@ export default new Vuex.Store({
 			state.bagVisible = !state.bagVisible;
 		},
 
-		ADD_ITEM(state, product) {
+		addItem(state, product) {
 			state.shoppingCart.push(product);
 		},
 
-		REMOVE_ITEM(state, index) {
+		addNewProduct(state, product){
+			state.products.push(product);
+		},
+
+		removeItem(state, index) {
 			state.shoppingCart.splice(index, 1);
 		},
 
@@ -64,16 +67,20 @@ export default new Vuex.Store({
 		getProducts({ commit }) {
 			return get(PRODUCTS_URL)
 			.then(response => {
-				commit('SET_PRODUCTS', response.data)
+				commit('setProducts', response.data)
 			})
 		},
 
 		addToCart(context, product) {
-			context.commit("ADD_ITEM", product);
+			context.commit("addItem", product);
+		},
+
+		addNewProduct(context, product) {
+			context.commit("addNewProduct", product);
 		},
 
 		removeFromCart(context, index) {
-			context.commit("REMOVE_ITEM", index);
+			context.commit("removeItem", index);
 		},
 
 		async registerUser(context, payload) {

@@ -13,51 +13,74 @@
 				<span class="line"></span>
 			</div>
 			
-			<section class="add-edit-form" v-if="cardPressed">
+			<form class="add-edit-form" v-if="cardPressed" @submit.prevent="submitProduct">
 				<div class="product-img">
-					<!-- <div class="img-box"> -->
-						<label for="image" class="label"><p class="label-txt">Product Image</p></label>
-						<input type="file" name="image" class="inputfile">
-					<!-- </div> -->
-
+					<label :for="product.imgFile" class="label"><p class="label-txt">Product Image</p></label>
+					<input 
+						type="file" 
+						:id="product.imgFile"
+						class="inputfile"
+						value="product.imgFile"
+					>
 				</div>
 
-				<form class="product-form">
-					<label for="product-name">Product Name</label>
-					<input type="text" name="product-name">
+				<div class="product-form">
+					<label :for="product.title">Product Name</label>
+					<input 
+						type="text" 
+						:id="product.title"
+						v-model="product.title"
+					>
 
-					<label for="product-short-desc">Product Short Description</label>
-					<input type="text" name="product-short-desc">
+					<label :for="product.shortDesc">Product Short Description</label>
+					<input 
+						type="text" 
+						name="product-short-desc"
+						:id="product.shortDesc"
+						v-model="product.shortDesc"
+					>
 
-					<label for="product-price">Product Price</label>
-					<input type="text" name="product-price">
+					<label :for="product.price">Product Price</label>
+					<input 
+						type="text" 
+						name="product-price"
+						:id="product.price"
+						v-model="product.price"
+					>
 
-					<label for="product-serial">Product Serial</label>
-					<input type="text" name="product-serial">
-				</form>
+					<label :for="product.serial">Product Serial</label>
+					<input 
+						type="text" 
+						name="product-serial"
+						:id="product._id"
+						v-model="product._id"
+					>
+				</div>
 
 				<div class="product-desc">
-					<label for="product-desc">Product Description</label>
-					<textarea type="message" name="product-desc"> </textarea>
+					<label :for="product.longDesc">Product Description</label>
+					<textarea 
+						type="message" 
+						name="product-desc"
+						:id="product.longDesc"
+						v-model="product.longDesc"
+					/>
 				</div>
-			</section>
+
+				<div class="error-box" v-if="errors.length">
+					<ul>
+						<li class="error-message" v-for="(error, index) in errors" :key="index">{{ error }}</li>
+					</ul>
+				</div>
+				<button class="btn-small light" type="submit">
+					<h5>add product</h5>
+				</button>
+
+			</form>
 
 			<section class="all-cards">
-				<div class="add-card-box">
-					<img src="../assets/icons/plus.svg" alt="" class="plus">
-				</div>
-
-
-				<div class="add-card-box">
-					<img src="../assets/icons/plus.svg" alt="" class="plus">
-				</div>
-				<div class="add-card-box">
-					<img src="../assets/icons/plus.svg" alt="" class="plus">
-				</div>
-				<div class="add-card-box">
-					<img src="../assets/icons/plus.svg" alt="" class="plus">
-				</div>
-				<div class="add-card-box">
+				<product-card v-for="product in adminProducts" :key="product._id" :product="adminProducts" />
+				<div class="add-card-box" @click.stop="showForm">
 					<img src="../assets/icons/plus.svg" alt="" class="plus">
 				</div>
 				
@@ -70,18 +93,86 @@
 <script>
 import MainHeader from '../components/MainHeader.vue';
 import MainNav from '../components/MainNav.vue';
+import ProductCard from '../components/ProductCard.vue';
 
 export default {
 	data () {
 		return {
-			cardPressed: true
+			cardPressed: false,
+			product: this.productDefinition(),
+			errors: []
 		}
+	},
+
+	props: {
+		products: Array
 	},
 
 	components: {
 		MainHeader,
-		MainNav
+		MainNav,
+		ProductCard
 	},
+
+	computed: {
+		adminProducts() {
+			return this.$store.getters.products
+		}
+	},
+
+	methods: {
+		productDefinition() {
+			return {
+				_id: '', // generated serverside
+				title: '',
+				price: 0,
+				shortDesc: '',
+				longDesc: '',
+				imgFile: '' 
+			};
+		},
+
+		showForm() {
+			this.cardPressed = true;
+
+			//do not forget to hide form when product is submited
+		},
+
+		submitProduct() {
+			if (this.checkForm()){
+				this.addProduct();
+			}
+		},
+
+		checkForm() {
+			this.errors = [];
+
+			if (!this.product.title) {
+				this.errors.push('Title required.');
+			}
+			if (!this.product.shortDesc) {
+				this.errors.push('Short description required.');
+			} 
+			if (!this.product.price) {
+				this.errors.push('Price required.');
+			} 
+			if (!this.product._id) {
+				this.errors.push('Serial required.');
+			} 
+			if (!this.errors.length) {
+				return true;
+			}
+
+			return false;
+		},
+
+		addProduct() {
+			console.log(this.product);
+
+			this.$store.dispatch('addNewProduct', this.product);
+			this.product = this.productDefinition();
+		},
+	}
 
 }
 </script>
@@ -93,7 +184,7 @@ export default {
 	}
 
 	.sub-header {
-		margin: 0 $main_margin;
+		margin: 0 $main_margin $space;
 		display: flex;
 		justify-content: space-between;
 		justify-content: center;
@@ -117,9 +208,15 @@ export default {
 		background-color: $bkg_gray;
 		box-shadow: inset 0 0 5px $details_gray;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-around;
 		align-items: stretch;
 		padding: $space/2;
+
+		button {
+			margin: $space/2 0 $space/4;
+			border-radius: 5px;
+		}
 	}
 
 	label {
@@ -218,7 +315,7 @@ export default {
 	.all-cards {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-auto-rows: minmax(400px, auto);
+		grid-auto-rows: minmax(500px, auto);
 		gap: 1.5rem;
 		margin: 0 $main_margin $space;
 
