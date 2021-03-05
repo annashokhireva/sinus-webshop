@@ -6,10 +6,6 @@
 			<img src="../assets/icons/youtube.svg" alt="YouTube">
 		</div>
 
-<router-link to="/admin-products"><p class="medium">Admin Products</p></router-link>
-<router-link to="/orders"><p class="medium">Orders</p></router-link>
-
-
 		<div class="options">
 
 			<div class="menu">
@@ -39,9 +35,9 @@
 
 			<div v-if="showDropdown" class="account-options">
 				<ul>
-					<li>
+					<!-- <li>
 						<p><b>Admin</b></p>
-					</li>
+					</li> -->
 					<li>
 						<p>View account</p>
 					</li>
@@ -51,7 +47,7 @@
 						</router-link>
 					</li>
 					<li>
-						<p><i>Log out</i></p>
+						<p @click="logOut"><i>Log out</i></p>
 					</li>
 				</ul>
 			</div>
@@ -97,7 +93,8 @@ export default {
 
 	methods: {
 		...mapMutations([
-			'showModal'
+			'showModal',
+			'logOut'
 		]),
 
 		toggleDropdown() {
