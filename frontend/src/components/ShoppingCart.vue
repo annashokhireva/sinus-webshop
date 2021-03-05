@@ -11,46 +11,47 @@
 		<transition name="fade">
 			<div v-if="visible" class="bag-view">
 				<h3>YOUR CART ({{cart.length}})</h3>
-				<ul>
-				<h5 v-if="cart.length <= 0" class="empty-bag">Your shopping bag is empty</h5>
+				<div class="content-view">
+					<h5 v-if="cart.length <= 0" class="empty-bag">Your shopping bag is empty</h5>
 				<!-- <h2 v-else></h2> -->
-					<li v-for="(item, i) in cart" :key="i">
+					<ul>
+						<li v-for="(item, i) in cart" :key="i">
+							
+							<div class="item-container">
+								<div class="product-image"> 
+									<img :src="`/products/${item.imgFile}`" width="50px" alt="Product image">
+								</div>
+
+								<div class="product-info">
+									<h5>{{ item.title }}</h5>
+									<p>{{ item.shortDesc }}</p>
 						
-						<div class="item-container">
-							<div class="product-image"> 
-								<img :src="`/products/${item.imgFile}`" width="50px" alt="Product image">
-							</div>
+								</div>
 
-							<div class="product-info">
-								<h5>{{ item.title }}</h5>
-								<p>{{ item.shortDesc }}</p>
-					
-							</div>
+								<div class="product-price">
+									<p>{{ item.price }} kr</p>
+								</div>
 
-							<div class="product-price">
-								<p>{{ item.price }} kr</p>
-							</div>
+								<!-- <div class="product-counter">
+									<span>-</span>
+									{{ item.quantity}}
+									<span>+</span>
+								</div> -->
 
-							<!-- <div class="product-counter">
-								<span>-</span>
-								{{ item.quantity}}
-								<span>+</span>
-							</div> -->
-
-							<div class="cart-bin" @click="removeFromCart(item)">
-								<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
+								<div class="cart-bin" @click="removeFromCart(item)">
+									<img src="../assets/icons/bin.svg" alt="Discard" class="bin">
+								</div>
+									
 							</div>
-								
-						</div>
-						
-					</li>
-					
-				</ul>
+							
+						</li>	
+					</ul>
+				</div>
+				
 				<div class="total"><h3>Total:</h3> <h3>{{ totalAmount }} kr</h3> </div>
 				
-				<router-link to="/checkout">
-					<button class="btn-large dark"><h4>Check out</h4></button>
-				</router-link>
+				<button class="btn-large dark" @click="goToCheckout"><h4>Check out</h4></button>
+				
 			</div>
 		
 		</transition>
@@ -84,12 +85,21 @@ export default {
 
 	methods: {
 		...mapMutations([
-			'toggleBag' 
+			'toggleBag'
+		]),
+
+		...mapMutations([
+			'hideBag' 
 		]),
 
 		removeFromCart(item) {
 			const index = this.cart.indexOf(item);
 			this.$store.dispatch("removeFromCart", index);
+		},
+
+		goToCheckout() {
+			this.$router.push("/checkout");
+			this.hideBag();
 		}
 	}
 }
@@ -135,13 +145,18 @@ export default {
 		cursor: default;
 		padding: $space/4;
 		box-shadow: 0px 5px 5px rgba(99, 99, 99, 0.247);
+	}
+
+	.content-view {
+		flex: 1;
+		overflow: scroll;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: 0 $space/2;
 
 		ul {
-			height: 50vh;
-			overflow: scroll;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
+			list-style: none;
 		}
 	}
 
@@ -194,14 +209,14 @@ export default {
 		justify-self: right;
 		align-self: center;
 	}
-
-	a {
-		margin: 10% auto;
-	}
 	
 	.total {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	button {
+		margin: 10% auto;;
 	}
 
 </style>

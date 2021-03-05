@@ -14,6 +14,7 @@ Vue.use(Vuex);
 const userDefault = {
 	name: '',
 	email: '',
+	role: '',
 
 	address: {
 		street: '',
@@ -75,6 +76,10 @@ export default new Vuex.Store({
 			state.bagVisible = !state.bagVisible;
 		},
 
+		hideBag(state){
+			state.bagVisible = false;
+		},
+
 		addItem(state, product) {
 			state.shoppingCart.push(product);
 		},
@@ -96,6 +101,7 @@ export default new Vuex.Store({
 		},
 
 		logOut(state) {
+			state.logedIn = false;
 			state.user = userDefault;
 		},
 
@@ -111,7 +117,7 @@ export default new Vuex.Store({
 		// 	state.agreedToPrivacy = true;
 		// }
 
-		if (localStorage.getItem("cartProducts")) {
+		if (localStorage.getItem("cartProducts") !== null) {
 			this.replaceState(
 			Object.assign(state, JSON.parse(localStorage.getItem("cartProducts")))
 			);
