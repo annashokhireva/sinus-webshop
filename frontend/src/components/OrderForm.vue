@@ -54,7 +54,7 @@
                 
                 <div class="total"> <h4>{{ totalAmount }} kr</h4></div>
                     <!-- <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	-->
-                <button type="order" class="btn-large dark" @click="onSubmit"><h3>Buy now</h3></button>
+                <button type="order" class="btn-large dark" @click.stop="$emit('placeOrder', $event)"><h3>Buy now</h3></button>
             </form>
     </div>
                     
@@ -73,6 +73,9 @@ export default {
         }
     },
 
+    // props: {
+    //     items: Array
+    // },
     // data: function(){
         
     //     return {
@@ -108,14 +111,25 @@ export default {
 	},
     
     methods: {
-        onSubmit: function(){
-            const self= this
-            // this.$store.dispatch('registerUser', this.user);
-          this.$store.dispatch('SEND_ORDER', {
-              items: self.cart,
-              user: self.user,
+        userDefinition() {
+			return {
+				user: {
+                    name: '',
+                    email: '',
 
-          });
+                    address: {
+                        street: '',
+                        zip: '',
+                        city: '',
+                    }
+                }
+            };
+        },
+
+        onSubmit: function(){
+            console.log(this.user);
+          
+            this.user = this.userDefinition;
         },
         unSubmitted: function(){
 

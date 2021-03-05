@@ -1,7 +1,7 @@
 <template>
 <main>
-  <div class="order-container">
-       <div class="text-order">
+    <div class="order-container">
+        <div class="text-order">
         <h2>YOUR ORDER</h2>
             <h2 v-if="cart.length <= 0" class="empty">Your shopping bag is empty</h2>
             <h2 v-else> 
@@ -9,13 +9,11 @@
                 <p>Delivery 49kr</p>
                 <br>
             </h2>
-                <div class="total-order"><strong>Total    {{ totalAmount }} kr</strong></div>
 
         </div>
         <div class="each-item">
-            <li v-for="(product, i) in cart" :key="i" class="item-summary">
-                <p>Details</p>
-
+            <li v-for="(product, i) in cart" :key="i" class="item-summary" :items="cart">
+            
                 <div class="product-image"> 
                     <img :src="`/products/${product.imgFile}`" width="70px" alt="Product image">
                 </div>                                         
@@ -26,10 +24,10 @@
                     <br>
                     Price: {{product.price}} kr
                 </div>
-                         
+                            
             </li>
         </div>
-             
+        <div class="total-order"><strong>Total    {{ totalAmount }} kr</strong></div>        
     </div>
 </main>
 </template>

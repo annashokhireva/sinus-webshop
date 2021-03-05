@@ -9,9 +9,10 @@
 		</div>
 		
 		<transition name="fade">
-			<ul v-if="visible" class="bag-view">
-				<h1>YOUR CART ({{cart.length}})</h1>
-				<h2 v-if="cart.length <= 0" class="empty-bag">Your shopping bag is empty</h2>
+			<div v-if="visible" class="bag-view">
+				<h3>YOUR CART ({{cart.length}})</h3>
+				<ul>
+				<h5 v-if="cart.length <= 0" class="empty-bag">Your shopping bag is empty</h5>
 				<!-- <h2 v-else></h2> -->
 					<li v-for="(item, i) in cart" :key="i">
 						
@@ -43,15 +44,15 @@
 						</div>
 						
 					</li>
-
-					<div class="totsl">Total: {{ totalAmount }} kr</div>
-					<router-link to="/checkout">
-						<button class="btn-large dark"><h4>Check out</h4></button>
-					</router-link>
-			</ul>
-			
-
-			
+					
+				</ul>
+				<div class="total"><h3>Total:</h3> <h3>{{ totalAmount }} kr</h3> </div>
+				
+				<router-link to="/checkout">
+					<button class="btn-large dark"><h4>Check out</h4></button>
+				</router-link>
+			</div>
+		
 		</transition>
 	</div>
 	
@@ -118,22 +119,30 @@ export default {
 
 	.bag-view {	
 		position: absolute;
+		top: 72px;
 		right: -15%;
 		width: 390px;
-		height: 618px;
+		height: 70vh;
 		border: none;
 		background-color: white;
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items: stretch;
 		box-sizing: border-box;
 		text-align: left;
-		overflow:auto;
 		cursor: default;
+		padding: $space/4;
+		box-shadow: 0px 5px 5px rgba(99, 99, 99, 0.247);
 
-
+		ul {
+			height: 50vh;
+			overflow: scroll;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
 	}
 
 	.item-container {
@@ -142,11 +151,10 @@ export default {
 		grid-template-columns: 20% 50% 26%;
 		grid-template: 1fr;
 		column-gap: 2%;
-	}
 
-	.h2 {
-		
-		font-size: 12px;
+		.h2 {
+			font-size: 12px;
+		}
 	}
 
 	.product-image {
@@ -191,5 +199,9 @@ export default {
 		margin: 10% auto;
 	}
 	
+	.total {
+		display: flex;
+		justify-content: space-between;
+	}
 
 </style>

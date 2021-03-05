@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL, ORDER_URL } from '../api/api.js';
+import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL, ORDERS_URL } from '../api/api.js';
 Vue.use(Vuex)
 
 
 export default new Vuex.Store({
     state: {
-        products: [],
+		products: [],
+		orders: [],
         activeProductIndex: null,
         shoppingCart: [],
         modalVisible: false,
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     },
     getters: {
         cart: (state) => state.shoppingCart,
-        products: (state) => state.products,
+		products: (state) => state.products,
+		orders: (state) => state.orders,
         productById: (state) => (id) => {
             return state.products.find(product => product._id === id)
         },
@@ -31,7 +33,11 @@ export default new Vuex.Store({
     mutations: {
         setProducts(state, products) {
             state.products = products;
-            console.log(products);
+		},
+		
+		setOrders(state, orders) {
+            state.orders = orders;
+            console.log(orders);
         },
 
         showModal(state, componentName) {
@@ -61,7 +67,26 @@ export default new Vuex.Store({
 
         setActiveIndex(state, index) {
             state.activeProductIndex = index;
-        }
+		},
+		
+		agreePrivacyPolicy(state) {
+			localStorage.setItem('agreedToPrivacy', true);
+			state.agreedToPrivacy = true;
+		},
+
+		initialiseStore(state) {
+				//add admin login function
+			
+			// if (localStorage.getItem('agreedToPrivacy')) {
+			// 	state.agreedToPrivacy = true;
+			// }
+
+			if (localStorage.getItem('cartProducts')){
+				this.replaceState(
+					Object.assign(state, JSON.parse(localStorage.getItem('cartProducts')))
+				);
+			}
+		},
 
     },
     actions: {
@@ -70,10 +95,18 @@ export default new Vuex.Store({
                 .then(response => {
                     commit('setProducts', response.data)
                 })
+		},
+		
+		async getOrders({ commit }) {
+			const response = await get(ORDERS_URL)
+                // (response => {
+				commit('setOrders', response.data)
+				console.log(response.data)
         },
 
         addToCart(context, product) {
-            context.commit("addItem", product);
+			context.commit("addItem", product);
+			localStorage.setItem('cartProducts', JSON.stringify(this.state.shoppingCart));
         },
 
         addNewProduct(context, product) {
@@ -82,26 +115,24 @@ export default new Vuex.Store({
 
         removeFromCart(context, index) {
             context.commit("removeItem", index);
-        },
-        async SEND_ORDER(context, payload) {
-            try {
-                await post(ORDER_URL, {
-                    body: {
-                        items: payload.items
-                    },
-                    user: payload.user
-                })
-            } catch (error) {
-                throw new Error(error)
-            }
+		},
+		
+        async sendOrder(context, payload) {
+			const response = await post(ORDERS_URL, payload);
+				console.log(response);
+				console.log(context)
+				// body: {
+				// 	items: payload.items
+				// },
+				// user: payload.user
         },
 
         async registerUser(context, payload) {
 
-            const response = await post(REGISTER_URL, payload)
-            console.log(response)
+			const response = await post(REGISTER_URL, payload);
+			setToken(response.data.token);
 
-            console.log(context)
+            console.log(context);
         },
 
         async authenticateUser(context, payload) {

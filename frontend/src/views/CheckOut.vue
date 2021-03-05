@@ -10,9 +10,11 @@
         <h2>COMPLETE YOUR PURCHASE</h2>
         <div class="order-container"> 
 
-        <OrderForm />
+        <order-form
+            @placeOrder="placeOrder(cart)"
+        />
 
-        <OrderCartitems />
+        <OrderCartitems :cart="cart"/>
         
         </div>
     </div>
@@ -37,34 +39,33 @@ export default {
         OrderForm,
         OrderCartitems
         
-	},
-
-    data: function(){
-        
-        return {
-            user:{
-            lastname: '',
-            firstname: '',
-
-            address: {
-                street: '',
-                zip: '',
-                city: '',
-            },
-
-                contact: {
-                    email:'',
-                    phone: '',
-                }
-            }
-        }
-    
     },
+    
+    
+    // data: function(){
+        
+    //     return {
+    //         user:{
+    //         lastname: '',
+    //         firstname: '',
+
+    //         address: {
+    //             street: '',
+    //             zip: '',
+    //             city: '',
+    //         },
+
+    //             contact: {
+    //                 email:'',
+    //                 phone: '',
+    //             }
+    //         }
+    //     }
+    
+    // },
 
     computed: {
 		cart() {
-
-
 			return this.$store.getters.cart;
 		},
 
@@ -81,18 +82,12 @@ export default {
 	},
   
     methods: {
-        onSubmit: function(){
-
-        
-            // this.$store.dispatch('registerUser', this.user);
-          this.$store.dispatch('SEND_ORDER', this.user);
+        placeOrder(){
+            this.$store.dispatch('sendOrder', {items: this.cart.map(item => item._id)});
         },
        
     },
-    getters: {
-
-        
-}
+   
 }
         
 
