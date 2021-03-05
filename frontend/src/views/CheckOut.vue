@@ -47,6 +47,7 @@ import OrderCartitems from '../components/OrderCartitems';
 
 
 export default {
+    
     name: 'Checkout',
     
 	components: { 
@@ -76,6 +77,8 @@ export default {
                 }
             }
         }
+
+        
     
     },
 

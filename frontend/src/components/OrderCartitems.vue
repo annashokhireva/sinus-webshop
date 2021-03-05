@@ -13,8 +13,9 @@
 
         </div>
         <div class="each-item">
+        
             <li v-for="(product, i) in cart" :key="i" class="item-summary">
-                <p>Details</p>
+                
 
                 <div class="product-image"> 
                     <img :src="`/products/${product.imgFile}`" width="70px" alt="Product image">
