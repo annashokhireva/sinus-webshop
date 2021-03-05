@@ -4,7 +4,7 @@
 			<li v-for="(item, z) in order.items" :key="z">
 			<img :src="`/products/${item.imgFile}`" width="70px" alt="Product image">
 				<strong>{{ item.title }} </strong>
-				
+
 				{{ item.price }} kr
 				
 			</li>
