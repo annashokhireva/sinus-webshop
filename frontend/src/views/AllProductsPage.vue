@@ -79,7 +79,7 @@ export default {
     return {
       localProducts: [],
       adProduct: {
-        _id: 'wafVodPl07dinNpy'
+        _id: 'Q5svfwtSF2qwFsxz'
       }
     };
   },
