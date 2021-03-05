@@ -4,6 +4,8 @@
             <h1>THANK YOU</h1>
             <h2>for your order</h2>
     </div>
+
+    
     
     <button class="btn-goback" @click="goToStart"> SPEND MORE MONEY</button>
   </main>
@@ -15,6 +17,7 @@ export default {
         goToStart() {
 			this.$router.push("/");
     }
+    
 }
 }
 </script>
