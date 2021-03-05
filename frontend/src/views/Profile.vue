@@ -8,8 +8,12 @@
 
 		<div class="main">
             <div class="container-1">
-                My account
+                My profile
                 <div class="account-info">
+                <ul>
+                {{user.name}}
+                </ul>
+                
                </div>
             </div>
 <br>
@@ -40,6 +44,12 @@ export default {
         OrderList
 	},
 
+data: function() {
+  return { user: {} }
+
+
+
+}
 }
 </script>
 
@@ -52,7 +62,9 @@ export default {
     justify-content: center;
     width: 80%;
 }
-
+ul {
+    align-items: left;
+}
 .container-1 {
     width: 300px;
     height: 400px;
