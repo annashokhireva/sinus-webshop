@@ -12,7 +12,7 @@
     <div class="general-grid">
       <div class="greta-img">
         <img
-          src="../assets/img/sinus-skateboard-gretasfury 1 (1).png"
+          src="../assets/img/sinus-skateboard-gretasfury 1 (2).png"
           alt="Greta"
         />
       </div>
@@ -130,9 +130,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.greta-img {
-  margin-top: 100px;
-}
+// .greta-img {
+//   margin-top: 100px;
+// }
 .general-grid {
   margin: $header_height 10% 2% 20%;
   display: flex;
