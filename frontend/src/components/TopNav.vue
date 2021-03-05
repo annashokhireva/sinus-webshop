@@ -14,7 +14,7 @@
 				<router-link to="/newsletter"><p class="medium">Newsletter</p></router-link>
 			</div>
 
-			<div class="log-in" @click="showModal('LoginModal')">
+			<div class="log-in" @click.stop="showModal('LoginModal')">
 				<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
 				<div class="option">
 
@@ -47,7 +47,7 @@
 						</router-link>
 					</li>
 					<li>
-						<p @click="logOut"><i>Log out</i></p>
+						<p @click.stop="logOut"><i>Log out</i></p>
 					</li>
 				</ul>
 			</div>
@@ -93,13 +93,18 @@ export default {
 
 	methods: {
 		...mapMutations([
-			'showModal',
-			'logOut'
+			'showModal'
 		]),
 
 		toggleDropdown() {
 			return this.showDropdown = !this.showDropdown;
 		},
+
+		logOut() {
+			this.$store.commit('logOut');
+			this.showDropdown = false;
+			this.$store.commit('clearLocalstorage');
+		}
 	}
 
 }
