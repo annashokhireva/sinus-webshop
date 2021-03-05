@@ -15,6 +15,7 @@
 			</div>
 
 			<div class="log-in" @click.stop="showModal('LoginModal')">
+<<<<<<< HEAD
 				<div class="option">
 
 					<div class="account" v-if="visible" @click.stop="toggleDropdown">
@@ -22,6 +23,14 @@
 						<p v-if="admin" class="medium">Admin</p>
 						<p v-else class="medium">My account</p>
 						
+=======
+				<img src="../assets/icons/avatar.svg" alt="Avatar icon" v-if="!visible">
+				<div class="option">
+
+					<div class="account" v-if="visible" @click.stop="toggleDropdown">
+						<img src="../assets/icons/avatar.svg" alt="Avatar icon">
+						<p class="medium">My account</p>
+>>>>>>> 8beaed375239759b38412df8d7a9a3ecf6a218b1
 						<span v-if="showDropdown">
 							<img src="../assets/icons/polygon_up.svg" alt="arrow up">
 						</span>

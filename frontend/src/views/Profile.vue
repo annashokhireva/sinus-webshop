@@ -8,13 +8,17 @@
 
 		<div class="main">
             <div class="container-1">
-                My account
+                My profile
                 <div class="account-info">
+                <ul>
+                {{user.name}}
+                </ul>
+                
                </div>
             </div>
 <br>
             <div class="container-2">
-            previous orders
+            Previous orders
                 <div class="previous-orders">
                     <ul>
                     <OrderList />
@@ -40,6 +44,12 @@ export default {
         OrderList
 	},
 
+data: function() {
+  return { user: {} }
+
+
+
+}
 }
 </script>
 
@@ -52,19 +62,21 @@ export default {
     justify-content: center;
     width: 80%;
 }
-
+ul {
+    align-items: left;
+}
 .container-1 {
     width: 300px;
     height: 400px;
     background-color: #F5F4F0;
     padding-right: 20px;;
 }
-.container-2 {
-    width: 300px;
-    height: 400px;
-    background-color: #F5F4F0;
-    margin-left: 200px;
-}
+// .container-2 {
+//     width: 300px;
+//     height: 400px;
+//     background-color: #F5F4F0;
+//     margin-left: 200px;
+// }
 .row {
   margin:0 -150px;
 }
