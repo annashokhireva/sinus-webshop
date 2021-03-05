@@ -17,9 +17,11 @@ export default new Vuex.Store({
     orders: [],
     activeProductIndex: null,
     shoppingCart: [],
-    modalVisible: false,
+	modalVisible: false,
+	navVisible: false,
     modalComponent: null,
-    bagVisible: false,
+	bagVisible: false,
+	logedIn: false
   },
   getters: {
     cart: (state) => state.shoppingCart,
@@ -75,12 +77,16 @@ export default new Vuex.Store({
 
     setActiveIndex(state, index) {
       state.activeProductIndex = index;
-    },
+	},
+	
+	showUser(state) {
+		state.logedIn = true;
+	},
 
-    agreePrivacyPolicy(state) {
-      localStorage.setItem("agreedToPrivacy", true);
-      state.agreedToPrivacy = true;
-    },
+    // agreePrivacyPolicy(state) {
+    //   localStorage.setItem("agreedToPrivacy", true);
+    //   state.agreedToPrivacy = true;
+    // },
 
     initialiseStore(state) {
       //add admin login function
@@ -155,8 +161,8 @@ export default new Vuex.Store({
 		console.log(commit);
 		localStorage.setItem("token", response.data.token);
 		
-		context.commit("hideModal");
-		context.commit("showUser");
+		commit("hideModal");
+		commit("showUser");
 	},
   },
   modules: {},
