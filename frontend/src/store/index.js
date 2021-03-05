@@ -14,6 +14,7 @@ Vue.use(Vuex);
 const userDefault = {
 	name: '',
 	email: '',
+	role: '',
 
 	address: {
 		street: '',
@@ -115,7 +116,7 @@ export default new Vuex.Store({
 		// 	state.agreedToPrivacy = true;
 		// }
 
-		if (localStorage.getItem("cartProducts")) {
+		if (localStorage.getItem("cartProducts") !== null) {
 			this.replaceState(
 			Object.assign(state, JSON.parse(localStorage.getItem("cartProducts")))
 			);

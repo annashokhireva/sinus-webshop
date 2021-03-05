@@ -72,14 +72,23 @@
 						<li class="error-message" v-for="(error, index) in errors" :key="index">{{ error }}</li>
 					</ul>
 				</div>
-				<button class="btn-small light" type="submit">
+				<button class="btn-small light" type="submit" @click="getProducts">
 					<h5>add product</h5>
 				</button>
 
 			</form>
 
 			<section class="all-cards">
-				<product-card v-for="product in adminProducts" :key="product._id" :product="adminProducts" />
+				<product-card 
+					v-for="(product, i) in adminProducts" 
+					:key="i" 
+					:product="product" 
+					:price="product.price"
+					:desc="product.shortDesc"
+					:title="product.title"
+					:longDesc="product.longDesc" 
+					:id="id"
+				/>
 				<div class="add-card-box" @click.stop="showForm">
 					<img src="../assets/icons/plus.svg" alt="" class="plus">
 				</div>
@@ -100,13 +109,14 @@ export default {
 		return {
 			cardPressed: false,
 			product: this.productDefinition(),
-			errors: []
+			errors: [],
+			adminProducts: []
 		}
 	},
 
-	props: {
-		products: Array
-	},
+	// props: {
+	// 	products: Array
+	// },
 
 	components: {
 		MainHeader,
@@ -115,9 +125,9 @@ export default {
 	},
 
 	computed: {
-		adminProducts() {
-			return this.$store.getters.products
-		}
+		// adminProducts() {
+		// 	return this.$store.getters.products
+		// }
 	},
 
 	methods: {
@@ -130,6 +140,10 @@ export default {
 				longDesc: '',
 				imgFile: '' 
 			};
+		},
+
+		getProducts() {
+			this.adminProducts.push(this.product);
 		},
 
 		showForm() {
