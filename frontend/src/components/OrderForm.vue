@@ -84,8 +84,6 @@ export default {
 
     computed: {
 		cart() {
-
-
 			return this.$store.getters.cart;
 		},
 
@@ -103,10 +101,13 @@ export default {
     
     methods: {
         onSubmit: function(){
+            const self= this
+            // this.$store.dispatch('registerUser', this.user);
+          this.$store.dispatch('SEND_ORDER', {
+              items: self.cart,
+              user: self.user,
 
-        
-            this.$store.dispatch('registerUser', this.user);
-          
+          });
         },
         unSubmitted: function(){
 

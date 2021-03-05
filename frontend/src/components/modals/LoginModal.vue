@@ -56,7 +56,7 @@ export default {
 		}
 
 		this.$store.dispatch('authenticateUser', obj);
-
+this.hideModal()
 		}  
 	},
 

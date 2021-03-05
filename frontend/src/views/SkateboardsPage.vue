@@ -33,12 +33,13 @@
         </p>
       </div>
     </div>
-    <div>
+    <div class="category-name">
       <h3>Skateboards</h3>
     </div>
     <div>
       <FilteredProducts
-        :products="products"
+      :config="filterConfig"
+        :products="localProducts"
         @filtering-products="setNewProducts"
       />
 
@@ -81,12 +82,20 @@ export default {
   data() {
     return {
       localProducts: [],
+      localFilteredProducts: [],
+      filterConfig: {
+        category: false,
+        sort: true,
+        search: true,
+      },
+
     };
   },
 
   async mounted() {
     await this.getProducts();
-    this.localProducts = this.products;
+    this.localProducts = this.products.filter((product) => product.category === "board");
+    this.localFilteredProducts = [...this.localProducts];
   },
 
   computed: {
@@ -95,7 +104,7 @@ export default {
     }),
 
     filteredProducts() {
-      return this.localProducts;
+      return this.localFilteredProducts;
     },
   },
 
@@ -105,7 +114,7 @@ export default {
     ...mapMutations(["showModal"]),
 
     setNewProducts(arrayProducts) {
-      this.localProducts = [...arrayProducts];
+      this.localFilteredProducts = [...arrayProducts];
     },
 
     goTo(path) {
@@ -130,30 +139,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.skateboard-grid {
-  margin: 10% 10% 2% 20%;
-  display: flex;
-  align-self: left;
-}
-.text-general-grid {
-  padding: 2% 5% 5% 10%;
-  text-align: left;
-}
-
-h3 {
-  text-decoration: underline;
-}
-.product-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  grid-gap: 20px;
-  width: auto;
-  padding: 0 20px;
-  // & /deep/ .product {
-  // margin: 0;
-  // min-width: 20%;
-  // width: auto;
-  // }
-}
+// .skateboard-grid {
+//   margin: 10% 10% 2% 20%;
+//   display: flex;
+//   align-self: left;
+// }
+// .text-general-grid {
+//   padding: 2% 5% 5% 10%;
+//   text-align: left;
+// }
+// h1 {
+//   align-items: left;
+// }
+// h3 {
+//   text-decoration: underline;
+// }
+// .product-cards {
+//   display: grid;
+//   grid-template-columns: repeat(4, 1fr);
+//   grid-template-rows: auto;
+//   grid-gap: 20px;
+//   width: auto;
+//   padding: 0 20px;
+//   // & /deep/ .product {
+//   // margin: 0;
+//   // min-width: 20%;
+//   // width: auto;
+//   // }
+// }
 </style>

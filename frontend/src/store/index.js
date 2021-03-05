@@ -1,106 +1,120 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL } from '../api/api.js';
+import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL, ORDER_URL } from '../api/api.js';
 Vue.use(Vuex)
 
-export default new Vuex.Store({ 
-	state: {
-			products: [],
-			activeProductIndex: null,
-			shoppingCart: [],
-			modalVisible: false,
-			modalComponent: null,
-			bagVisible: false
-		},
-	getters: {
-		cart: (state) => state.shoppingCart,
-		products: (state) => state.products,
-		productById: (state) => (id) => {
-			return state.products.find(product => product._id === id)
-		},
-		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
-		total: state => {
-			if (state.shoppingCart.length > 0) {
-				return state.shoppingCart.map(item => item.price).reduce((total, amount) => total + amount);
-			} else {
-				return 0;
-			}
-		}
-	},
-	mutations: {
-		setProducts(state, products) {
-			state.products = products;
-			console.log(products);
-		},
 
-		showModal(state, componentName) {
-			state.modalVisible = true;
-			state.modalComponent = componentName;
-		},
-		hideModal(state) {
-			state.modalVisible = false;
-		},
+export default new Vuex.Store({
+    state: {
+        products: [],
+        activeProductIndex: null,
+        shoppingCart: [],
+        modalVisible: false,
+        modalComponent: null,
+        bagVisible: false
+    },
+    getters: {
+        cart: (state) => state.shoppingCart,
+        products: (state) => state.products,
+        productById: (state) => (id) => {
+            return state.products.find(product => product._id === id)
+        },
+        // active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
+        total: state => {
+            if (state.shoppingCart.length > 0) {
+                return state.shoppingCart.map(item => item.price).reduce((total, amount) => total + amount);
+            } else {
+                return 0;
+            }
+        }
+    },
+    mutations: {
+        setProducts(state, products) {
+            state.products = products;
+            console.log(products);
+        },
 
-		toggleBag(state) {
+        showModal(state, componentName) {
+            state.modalVisible = true;
+            state.modalComponent = componentName;
+        },
+        hideModal(state) {
+            state.modalVisible = false;
+        },
 
-			state.bagVisible = !state.bagVisible;
-		},
+        toggleBag(state) {
 
-		addItem(state, product) {
-			state.shoppingCart.push(product);
-		},
+            state.bagVisible = !state.bagVisible;
+        },
 
-		addNewProduct(state, product){
-			state.products.push(product);
-		},
+        addItem(state, product) {
+            state.shoppingCart.push(product);
+        },
 
-		removeItem(state, index) {
-			state.shoppingCart.splice(index, 1);
-		},
+        addNewProduct(state, product) {
+            state.products.push(product);
+        },
 
-		setActiveIndex(state, index) {
-			state.activeProductIndex = index;
-		}
+        removeItem(state, index) {
+            state.shoppingCart.splice(index, 1);
+        },
 
-	},
-	actions: {
-		getProducts({ commit }) {
-			return get(PRODUCTS_URL)
-			.then(response => {
-				commit('setProducts', response.data)
-			})
-		},
+        setActiveIndex(state, index) {
+            state.activeProductIndex = index;
+        }
 
-		addToCart(context, product) {
-			context.commit("addItem", product);
-		},
+    },
+    actions: {
+        getProducts({ commit }) {
+            return get(PRODUCTS_URL)
+                .then(response => {
+                    commit('setProducts', response.data)
+                })
+        },
 
-		addNewProduct(context, product) {
-			context.commit("addNewProduct", product);
-		},
+        addToCart(context, product) {
+            context.commit("addItem", product);
+        },
 
-		removeFromCart(context, index) {
-			context.commit("removeItem", index);
-		},
+        addNewProduct(context, product) {
+            context.commit("addNewProduct", product);
+        },
 
-		async registerUser(context, payload) {
+        removeFromCart(context, index) {
+            context.commit("removeItem", index);
+        },
+        async SEND_ORDER(context, payload) {
+            try {
+                await post(ORDER_URL, {
+                    body: {
+                        items: payload.items
+                    },
+                    user: payload.user
+                })
+            } catch (error) {
+                throw new Error(error)
+            }
+        },
 
-			const response = await post(REGISTER_URL, payload)
-			console.log(response)
+        async registerUser(context, payload) {
 
-			console.log(context)
-		},
+            const response = await post(REGISTER_URL, payload)
+            console.log(response)
 
-		async authenticateUser(context, payload) {
+            console.log(context)
+        },
 
-			const response = await post(AUTH_URL, payload)
-			console.log(response)
+        async authenticateUser(context, payload) {
 
-			setToken(response.data.token);
+            const response = await post(AUTH_URL, payload)
+            console.log(response)
 
-			console.log(context)
-		}
+            setToken(response.data.token);
+            context.commit("hideModal")
 
-	},
-	modules: {}
-}) 
+            console.log(context)
+        }
+
+    },
+    modules: {}
+})

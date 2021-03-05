@@ -1,14 +1,19 @@
 <template>
   <div>
-    <select v-model="filters.category" title="Category">
+    <select
+      v-if="config.category"
+      class="filter-style"
+      v-model="filters.category"
+      title="Category"
+    >
       Category
       <option value>All Products</option>
       <option v-for="(category, i) in categories" :key="i" :value="category">
         {{ category }}
       </option>
     </select>
-    <select v-model="filters.sort">
-       <option value>All Pice</option>
+    <select v-if="config.sort" class="filter-style" v-model="filters.sort">
+      <option value>All Price</option>
       <option
         v-for="(sortOption, i) in sortOptions"
         :key="i"
@@ -17,7 +22,13 @@
         {{ sortOption }}
       </option>
     </select>
-    <input v-model="filters.search" type="search" placeholder="Search" />
+    <input
+      v-if="config.search"
+      class="search-style"
+      v-model="filters.search"
+      type="search"
+      placeholder="Search"
+    />
   </div>
 </template>
 
@@ -26,6 +37,16 @@ export default {
   props: {
     products: {
       type: Array,
+    },
+    config: {
+      type: Object,
+      default() {
+        return {
+          category: true,
+          sort: true,
+          search: true,
+        };
+      },
     },
   },
 
@@ -53,7 +74,11 @@ export default {
       let products = this.products;
       if (this.filters.search.length) {
         products = products.filter(
-          (product) => product.title.indexOf(this.filters.search) !== -1
+          (product) => {
+            if (product.title.indexOf(this.filters.search) !== -1 || product.shortDesc.indexOf(this.filters.search) !== -1 ) {
+              return true;
+            }
+          }
         );
       }
       if (this.filters.category.length) {

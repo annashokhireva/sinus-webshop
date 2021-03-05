@@ -1,52 +1,50 @@
 @import '../essentials/variables.scss';
-
 button {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .btn-large {
-	width: 335px;
-	height: 47px;
+    width: 335px;
+    height: 47px;
 }
 
 .btn-medium {
-	width: 287px;
-	height: 38px;
+    width: 287px;
+    height: 38px;
 }
 
 .btn-small {
-	width: 232px;
-	height: 34px;
+    width: 232px;
+    height: 34px;
 }
 
 .btn-mini {
-	width: 184px;
-	height: 23px;
+    width: 184px;
+    height: 23px;
 }
 
-
 button[class$="dark"] {
-	background-color: $black;
-	border: none;
-	color: white;
+    background-color: $black;
+    border: none;
+    color: white;
 }
 
 button[class$="light"] {
-	background-color: $details_gray;
-	border: none;
-	color: $black
+    background-color: $details_gray;
+    border: none;
+    color: $black
 }
 
 button[class$="extra-light"] {
-	background-color: $bkg_gray;
-	border: 1px solid $black;
-	color: $black;
+    background-color: $bkg_gray;
+    border: 1px solid $black;
+    color: $black;
 }
 
 .cross {
-	border: none;
-	cursor: pointer;
-	float: right;
-	margin: $space/2;
-	background: transparent;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin: $space/2;
+    background: transparent;
 }

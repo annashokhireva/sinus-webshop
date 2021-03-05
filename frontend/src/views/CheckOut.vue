@@ -102,8 +102,8 @@ export default {
         onSubmit: function(){
 
         
-            this.$store.dispatch('registerUser', this.user);
-          
+            // this.$store.dispatch('registerUser', this.user);
+          this.$store.dispatch('SEND_ORDER', this.user);
         },
        
     },
