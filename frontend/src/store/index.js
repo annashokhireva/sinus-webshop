@@ -117,18 +117,22 @@ export default new Vuex.Store({
 		// 	state.agreedToPrivacy = true;
 		// }
 
-		if (localStorage.getItem("cartProducts") !== null) {
-			this.replaceState(
-			Object.assign(state, JSON.parse(localStorage.getItem("cartProducts")))
-			);
-		}
+			if (localStorage.getItem("cartProducts") !== null) {
+				this.replaceState(
+				Object.assign(state, JSON.parse(localStorage.getItem("cartProducts")))
+				);
+			}
 
-		const token = localStorage.getItem("token");
+			const token = localStorage.getItem("token");
 
-		if (token) {
-			setToken(token);
-			state.logedIn = true;
-		}
+			if (token) {
+				setToken(token);
+				state.logedIn = true;
+			}
+		},
+
+		clearLocalstorage() {
+			localStorage.removeItem('token');
 		},
 	},
 	actions: {
