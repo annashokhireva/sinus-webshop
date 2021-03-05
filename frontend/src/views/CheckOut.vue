@@ -95,12 +95,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.order-container {
+// .check-out {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     align-items: center;
+// }
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    .order-container {
+    width: 100%;
+    max-width: 800px;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    margin: $space $main-margin;
+    margin: $space 0;
 }
+}
+
 button {
     width: 370px;
     height: 47px;

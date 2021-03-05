@@ -8,6 +8,7 @@ import {
   REGISTER_URL,
   AUTH_URL,
   ORDERS_URL,
+  USER_URL
 } from "../api/api.js";
 Vue.use(Vuex);
 
@@ -100,15 +101,15 @@ export default new Vuex.Store({
 			state.logedIn = true;
 		},
 
+		getUser(state, user) {
+			state.user = user;
+			console.log(user);
+		},
+
 		logOut(state) {
 			state.logedIn = false;
 			state.user = userDefault;
 		},
-
-		// agreePrivacyPolicy(state) {
-		//   localStorage.setItem("agreedToPrivacy", true);
-		//   state.agreedToPrivacy = true;
-		// },
 
 		initialiseStore(state) {
 		//add admin login function
@@ -144,10 +145,16 @@ export default new Vuex.Store({
 
 		async getOrders({ commit }) {
 			const response = await get(ORDERS_URL);
-			// (response => {
 			commit("setOrders", response.data);
 			console.log(response.data);
 		},
+
+		async getUser({ commit }) {
+			const response = await get(USER_URL);
+			commit("getUser", response.data);
+			console.log(response.data);
+		},
+
 
 		addToCart(context, product) {
 			context.commit("addItem", product);

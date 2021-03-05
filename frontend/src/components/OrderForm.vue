@@ -7,9 +7,10 @@
                 <label :for="user.name" class="firstname required">First Name</label><br>
                 <input 
                     :id="user.name"
-                    v-model="user.firstName" 
+                    v-model="user.name" 
                     type="firstname" 
                     class="input-field" 
+                    value="user.name"
                     required
                 >
                 
@@ -66,12 +67,6 @@
 
 export default {
     name: 'Checkout',
-    
-	data() {
-        return {
-            user: this.userDefinition()
-        }
-    },
 
     // props: {
     //     items: Array
@@ -104,9 +99,11 @@ export default {
 
 		totalAmount () {
 			return this.$store.getters.total
-		},
-
+        },
         
+        user() {
+			return this.$store.state.user;
+		}
 		
 	},
     
@@ -134,7 +131,11 @@ export default {
         unSubmitted: function(){
 
         }
-    }
+    },
+
+    mounted() {
+		this.$store.dispatch("getUser");
+	}
 }
         
 
