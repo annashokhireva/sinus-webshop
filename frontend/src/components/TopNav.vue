@@ -22,7 +22,7 @@
 				<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
 				<div class="option">
 
-					<div class="account" v-if="logedIn" @click.stop="toggleDropdown">
+					<div class="account" v-if="visible" @click.stop="toggleDropdown">
 						<p class="medium">My account</p>
 						<span v-if="showDropdown">
 							<img src="../assets/icons/polygon_up.svg" alt="arrow up">
@@ -61,14 +61,14 @@
 
 <script>
 
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
 
 	data() {
 		return {
-			logedIn: false,
 			showDropdown: false,
+
 			links: [
 				{
 					name: 'Admin Products',
@@ -82,8 +82,23 @@ export default {
 		}
 	},
 
+	// props: {
+	// 	logedIn: {
+	// 		type: Boolean,
+	// 		default: false
+	// 	}
+	// },
+
+	computed: {
+		...mapState({
+			visible: 'logedIn',
+		}),
+	},
+
 	methods: {
-		...mapMutations(['showModal']),
+		...mapMutations([
+			'showModal'
+		]),
 
 		toggleDropdown() {
 			return this.showDropdown = !this.showDropdown;

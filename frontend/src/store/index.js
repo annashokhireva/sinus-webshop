@@ -12,7 +12,8 @@ export default new Vuex.Store({
         shoppingCart: [],
         modalVisible: false,
         modalComponent: null,
-        bagVisible: false
+		bagVisible: false,
+		logedIn: false,
     },
     getters: {
         cart: (state) => state.shoppingCart,
@@ -72,6 +73,10 @@ export default new Vuex.Store({
 		agreePrivacyPolicy(state) {
 			localStorage.setItem('agreedToPrivacy', true);
 			state.agreedToPrivacy = true;
+		},
+
+		showUser(state) {
+			state.logedIn = true;
 		},
 
 		initialiseStore(state) {
@@ -141,7 +146,8 @@ export default new Vuex.Store({
             console.log(response)
 
             setToken(response.data.token);
-            context.commit("hideModal")
+			context.commit("hideModal");
+			context.commit("showUser");
 
             console.log(context)
         }
