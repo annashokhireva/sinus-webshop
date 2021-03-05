@@ -55,7 +55,7 @@
                 
                 <div class="total"> <h4>{{ totalAmount }} kr</h4></div>
                     <!-- <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	-->
-                <button type="order" class="btn-large dark" @click.stop="$emit('placeOrder', $event)"><h3>Buy now</h3></button>
+                <button type="order" class="btn-large dark" @click.stop="$emit('placeOrder', $event)" @click="thankYou"><h3>Buy now</h3></button>
             </form>
     </div>
                     
@@ -130,7 +130,10 @@ export default {
         },
         unSubmitted: function(){
 
-        }
+        },
+        thankYou() {
+			this.$router.push("thankyou");
+        }    
     },
 
     mounted() {
