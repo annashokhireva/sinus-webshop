@@ -2,9 +2,9 @@
   <div>
     <select
       v-if="config.category"
-      class="filter-style"
       v-model="filters.category"
       title="Category"
+      class="filter-style"
     >
       Category
       <option value>All Products</option>
@@ -12,7 +12,11 @@
         {{ category }}
       </option>
     </select>
-    <select v-if="config.sort" class="filter-style" v-model="filters.sort">
+    <select 
+    v-if="config.sort"
+    v-model="filters.sort"
+    class="filter-style" 
+    >
       <option value>All Price</option>
       <option
         v-for="(sortOption, i) in sortOptions"
