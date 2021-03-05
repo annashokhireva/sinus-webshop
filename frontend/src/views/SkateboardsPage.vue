@@ -139,32 +139,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .skateboard-grid {
-//   margin: 10% 10% 2% 20%;
-//   display: flex;
-//   align-self: left;
-// }
-// .text-general-grid {
-//   padding: 2% 5% 5% 10%;
-//   text-align: left;
-// }
-// h1 {
-//   align-items: left;
-// }
-// h3 {
-//   text-decoration: underline;
-// }
-// .product-cards {
-//   display: grid;
-//   grid-template-columns: repeat(4, 1fr);
-//   grid-template-rows: auto;
-//   grid-gap: 20px;
-//   width: auto;
-//   padding: 0 20px;
-//   // & /deep/ .product {
-//   // margin: 0;
-//   // min-width: 20%;
-//   // width: auto;
-//   // }
-// }
+.skateboard-grid {
+  margin: 10% 10% 2% 20%;
+  display: flex;
+  align-self: left;
+}
+.text-general-grid {
+  padding: 2% 5% 5% 10%;
+  text-align: left;
+}
+h1 {
+  align-items: left;
+}
+h3 {
+  text-decoration: underline;
+}
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  width: auto;
+  padding: 0 20px;
+  // & /deep/ .product {
+  // margin: 0;
+  // min-width: 20%;
+  // width: auto;
+  // }
+}
 </style>
