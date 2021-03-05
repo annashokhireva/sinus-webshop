@@ -3,54 +3,58 @@
         <h5 class="details-title">DELIVERY DETAILS</h5>
 
             <form class="order-form" @submit.prevent="onSubmit">
-        
-                <label :for="user.name" class="firstname required">First Name</label><br>
-                <input 
-                    :id="user.name"
-                    v-model="user.name" 
-                    type="firstname" 
-                    class="input-field" 
-                    value="user.name"
-                    required
-                >
+                <span>
+                     <label :for="user.name" class="firstname required">First Name</label><br>
+                    <input 
+                        :id="user.name"
+                        v-model="user.name" 
+                        class="input-field" 
+                        value="user.name"
+                        required
+                    >
+                </span>
+               
+                <span>
+                    <label :for="user.email" class="email required">Email Adress</label><br>
+                    <input 
+                        :id="user.email"
+                        v-model="user.email"  
+                        class="input-field" 
+                        required
+                    >
+                </span>
                 
-                <label :for="user.email" class="email required">Email Adress</label><br>
-                <input 
-                    :id="user.email"
-                    v-model="user.email"  
-                    class="input-field" 
-                    required
-                >
+                <span>
+                    <label  :for="userStreet" class="postalcode required">Street Adress</label><br>
+                    <input 
+                        :id="userStreet"
+                        v-model="userStreet"  
+                        class="input-field" 
+                        required
+                    >
+                </span>
                 
-                <!-- <label :for="user.adress[user.street]" class="postalcode required">Street Adress</label><br>
-                <input 
-                    :id="user.adress[user.street]"
-                    v-model="user.adress[user.street]"  
-                    class="input-field" 
-                    required
-                > -->
-                
-                <!-- <div class="zip-city">
+                <div class="zip-city">
                     <span class="zip">
-                        <label :for="user.address.zip" class="required">Zip Code</label>
+                        <label :for="userZip" class="required">Zip Code</label>
                         <input 
-                            :id="user.address.zip"
-                            v-model="user.address.zip"  
+                            :id="userZip"
+                            v-model="userZip"  
                             class="input-field" 
                             required
                         >
                     </span> 
 
                     <span class="city">   
-                        <label :for="user.address.city" class="required">City</label>
+                        <label :for="userCity" class="required">City</label>
                         <input 
-                            :id="user.address.city"
-                            v-model="user.address.city" 
+                            :id="userCity"
+                            v-model="userCity" 
                             class="input-field" 
                             required
                         >
                     </span>
-                </div> -->
+                </div>
                 
                 
                 <div class="total"> <h4>{{ totalAmount }} kr</h4></div>
@@ -103,8 +107,23 @@ export default {
         
         user() {
 			return this.$store.state.user;
-		}
-		
+		},
+        
+        userAddress() {
+            return this.user.address;
+        },
+
+        userStreet() {
+            return this.userAddress.street;
+        },
+
+        userZip() {
+            return this.userAddress.zip;
+        },
+
+        userCity() {
+            return this.userAddress.city;
+        }
 	},
     
     methods: {
@@ -132,7 +151,7 @@ export default {
 
         },
         thankYou() {
-			this.$router.push("thankyou");
+			this.$router.push("/thankyou");
         }    
     },
 

@@ -30,6 +30,7 @@
 						type="text" 
 						:id="product.title"
 						v-model="product.title"
+						required
 					>
 
 					<label :for="product.shortDesc">Product Short Description</label>
@@ -38,6 +39,7 @@
 						name="product-short-desc"
 						:id="product.shortDesc"
 						v-model="product.shortDesc"
+						required
 					>
 
 					<label :for="product.price">Product Price</label>
@@ -46,6 +48,7 @@
 						name="product-price"
 						:id="product.price"
 						v-model="product.price"
+						required
 					>
 
 					<label :for="product.serial">Product Serial</label>
@@ -153,32 +156,32 @@ export default {
 		},
 
 		submitProduct() {
-			if (this.checkForm()){
+			// if (this.checkForm()){
 				this.addProduct();
-			}
+			// }
 		},
 
-		checkForm() {
-			this.errors = [];
+		// checkForm() {
+		// 	this.errors = [];
 
-			if (!this.product.title) {
-				this.errors.push('Title required.');
-			}
-			if (!this.product.shortDesc) {
-				this.errors.push('Short description required.');
-			} 
-			if (!this.product.price) {
-				this.errors.push('Price required.');
-			} 
-			if (!this.product._id) {
-				this.errors.push('Serial required.');
-			} 
-			if (!this.errors.length) {
-				return true;
-			}
+		// 	if (!this.product.title) {
+		// 		this.errors.push('Title required.');
+		// 	}
+		// 	if (!this.product.shortDesc) {
+		// 		this.errors.push('Short description required.');
+		// 	} 
+		// 	if (!this.product.price) {
+		// 		this.errors.push('Price required.');
+		// 	} 
+		// 	if (!this.product._id) {
+		// 		this.errors.push('Serial required.');
+		// 	} 
+		// 	if (!this.errors.length) {
+		// 		return true;
+		// 	}
 
-			return false;
-		},
+		// 	return false;
+		// },
 
 		addProduct() {
 			console.log(this.product);

@@ -132,7 +132,7 @@ export default {
 <style lang="scss" scoped>
 
 .general-grid {
-  margin: 5% 10% 2% 20%;
+  margin: $header_height 10% 2% 20%;
   display: flex;
   align-self: left;
 }
