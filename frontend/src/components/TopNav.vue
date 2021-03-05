@@ -15,10 +15,10 @@
 			</div>
 
 			<div class="log-in" @click.stop="showModal('LoginModal')">
-				<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
 				<div class="option">
 
 					<div class="account" v-if="visible" @click.stop="toggleDropdown">
+						<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
 						<p class="medium">My account</p>
 						<span v-if="showDropdown">
 							<img src="../assets/icons/polygon_up.svg" alt="arrow up">
@@ -28,8 +28,11 @@
 						</span>
 					</div>
 					
+					<div class="account" v-else>
+						<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
+						<p class="medium">Log in </p>
+					</div>
 					
-					<p v-else class="medium">Log in </p>
 				</div>
 			</div>
 
