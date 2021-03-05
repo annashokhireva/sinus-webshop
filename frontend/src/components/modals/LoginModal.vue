@@ -1,24 +1,26 @@
 <template>
     <div class="modal">
-        <form class="login-form" @submit.prevent="onSubmit">
+        <form class="login-form" @submit.prevent="loginUser">
 
           <h3 class="title">Login</h3>
 
           <div class="login-input">
                 <label class="email required"><b>Email</b></label>
-                <input type="email" placeholder="Enter Email" name="email" id="email" v-model="email" required>
+                <input type="email" placeholder="Enter Email" name="email" id="email" v-model="user.email" required>
 
                 <label class="psw required"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id="psw" v-model="password" required>
+                <input type="password" placeholder="Enter Password" name="psw" id="psw" v-model="user.password" required>
           </div>       
 
           <button type="submit" class="btn-login">LOGIN</button>
 
         </form>
+
         <div class="register">
           <p>Not a member yet?</p>
           <p @click="goToRegister">Register here.</p>
         </div>
+		
     </div>
 </template>
 
@@ -30,33 +32,29 @@ export default {
 	data() {
 		return {
 			
-			email: null,
-			password: null
+			user: {
+				email: null,
+				password: null
+			}
+			
 		}
 	},
 
 	methods: {
 		...mapMutations([
-		'hideModal',
+			'hideModal',
 		]),
 
 		goToRegister: function() {
-        this.$router.push("/register")
-		this.hideModal();
+			this.$router.push("/register")
+			this.hideModal();
 		},
 
-		onSubmit: function() {
-		console.log(this.email, this.password);
+		loginUser: function() {
+			console.log(this.user.email, this.user.password);
 
-		const obj = {
-
-			email: this.email,
-			password: this.password
-
-		}
-
-		this.$store.dispatch('authenticateUser', obj);
-
+			this.$store.dispatch('authenticateUser', this.user);
+			this.hideModal();
 		}  
 	},
 

@@ -127,7 +127,13 @@ export default new Vuex.Store({
 			const response = await post(AUTH_URL, payload)
 			console.log(response)
 
+			if(response.data.token) {
+				localStorage.setItem('user_token', response.data.token)
+			}
+
 			setToken(response.data.token);
+
+			window.location.replace('/');
 
 			console.log(context)
 		},
