@@ -75,6 +75,10 @@ export default new Vuex.Store({
 			state.bagVisible = !state.bagVisible;
 		},
 
+		hideBag(state){
+			state.bagVisible = false;
+		},
+
 		addItem(state, product) {
 			state.shoppingCart.push(product);
 		},

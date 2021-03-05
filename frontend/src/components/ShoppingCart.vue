@@ -48,9 +48,8 @@
 				</ul>
 				<div class="total"><h3>Total:</h3> <h3>{{ totalAmount }} kr</h3> </div>
 				
-				<router-link to="/checkout">
-					<button class="btn-large dark"><h4>Check out</h4></button>
-				</router-link>
+				<button class="btn-large dark" @click="goToCheckout"><h4>Check out</h4></button>
+				
 			</div>
 		
 		</transition>
@@ -84,12 +83,21 @@ export default {
 
 	methods: {
 		...mapMutations([
-			'toggleBag' 
+			'toggleBag'
+		]),
+
+		...mapMutations([
+			'hideBag' 
 		]),
 
 		removeFromCart(item) {
 			const index = this.cart.indexOf(item);
 			this.$store.dispatch("removeFromCart", index);
+		},
+
+		goToCheckout() {
+			this.$router.push("/checkout");
+			this.hideBag();
 		}
 	}
 }
@@ -194,14 +202,14 @@ export default {
 		justify-self: right;
 		align-self: center;
 	}
-
-	a {
-		margin: 10% auto;
-	}
 	
 	.total {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	button {
+		margin: 10% auto;;
 	}
 
 </style>
