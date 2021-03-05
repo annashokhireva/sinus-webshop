@@ -96,6 +96,7 @@ export default new Vuex.Store({
 		},
 
 		logOut(state) {
+			state.logedIn = false;
 			state.user = userDefault;
 		},
 
