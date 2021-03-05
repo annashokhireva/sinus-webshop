@@ -16,6 +16,9 @@
             <div class="container-2">
             previous orders
                 <div class="previous-orders">
+                    <ul>
+                    <OrderList />
+                    </ul>
                 </div>
             </div>
 
@@ -27,12 +30,14 @@
 <script>
 import MainHeader from '../components/MainHeader.vue';
 import MainNav from '../components/MainNav.vue';
+import OrderList from '../components/OrderList.vue';
 
 
 export default {
 	components: {
 		MainHeader,
-		MainNav
+		MainNav,
+        OrderList
 	},
 
 }

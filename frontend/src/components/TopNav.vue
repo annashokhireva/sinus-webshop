@@ -39,7 +39,7 @@
 						<p><b>Admin</b></p>
 					</li> -->
 					<li>
-						<router-link to="/profile"><p>;y Account</p></router-link>
+						<router-link to="/profile"><p>My Account</p></router-link>
 					</li>
 					<li v-for="(link, index) in links" :key="index">
 						<router-link :to="{name: link.page}">
