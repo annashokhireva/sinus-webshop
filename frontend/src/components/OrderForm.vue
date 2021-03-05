@@ -1,51 +1,63 @@
-<template>
-  
-                      
-        <div class="delivery-details">
-            <h2 class="details-title">DELIVERY DETAILS</h2>
-            <div class="deliverydetails-container">
-                    <form class="OrderForm" @submit.prevent="onSubmit">
-                <ul>
-                        <label class="firstname required">First Name</label><br>
-                        <input v-model="user.firstName" type="firstname" class="input-field" name="firstname" id="firstname" required>
-                        <br>
-                        <label class="email required">Email Adress</label><br>
-                        <input v-model="user.email"  name="email" class="input-field" id="email" required>
-                        <br>
-                        <br>
-                        <br>
-                        <label class="c/o">C/O</label><br>
-                        <input v-model="user.co"  name="c/o" class="input-field" id="c/o" >
-                        <br>
-                        <label class="postalcode required">Postal Code</label><br>
-                        <input v-model="user.postalCode"  name="postalcode" class="input-field" id="postalcode" required>
-                        <br>
-                        <label class="lastname required">Last Name</label><br>
-                        <input v-model="user.lastName"  name="lastname" class="input-field" id="lastname" required>
-                        <br>
-                        <label class="phone">Phone Number</label><br>
-                        <input v-model="user.phoneNumber" name="phone" class="input-field" id="phone" >
-                        <br>
-                        <br>
-                        <br>
-                        <label class="adress required">Adress</label><br>
-                        <input v-model="user.yourAdress"  name="adress" class="input-field" id="adress" required>
-                        <br>
-                        <label class="city required">City</label><br>
-                        <input v-model="user.yourCity"  name="city" class="input-field" id="city" required>
-                </ul>        
-                        <div class="totsl">Total: {{ totalAmount }} kr</div>
-                            <!-- <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	-->
-            <button type="order" class="btn-buy" @click="onSubmit">BUY NOW</button>
+<template>          
+    <div class="delivery-details">
+        <h5 class="details-title">DELIVERY DETAILS</h5>
+
+            <form class="order-form" @submit.prevent="onSubmit">
+        
+                <label :for="user.name" class="firstname required">First Name</label><br>
+                <input 
+                    :id="user.name"
+                    v-model="user.firstName" 
+                    type="firstname" 
+                    class="input-field" 
+                    required
+                >
+                
+                <label :for="user.email" class="email required">Email Adress</label><br>
+                <input 
+                    :id="user.email"
+                    v-model="user.email"  
+                    class="input-field" 
+                    required
+                >
+                
+                <!-- <label :for="user.adress[user.street]" class="postalcode required">Street Adress</label><br>
+                <input 
+                    :id="user.adress[user.street]"
+                    v-model="user.adress[user.street]"  
+                    class="input-field" 
+                    required
+                > -->
+                
+                <!-- <div class="zip-city">
+                    <span class="zip">
+                        <label :for="user.address.zip" class="required">Zip Code</label>
+                        <input 
+                            :id="user.address.zip"
+                            v-model="user.address.zip"  
+                            class="input-field" 
+                            required
+                        >
+                    </span> 
+
+                    <span class="city">   
+                        <label :for="user.address.city" class="required">City</label>
+                        <input 
+                            :id="user.address.city"
+                            v-model="user.address.city" 
+                            class="input-field" 
+                            required
+                        >
+                    </span>
+                </div> -->
+                
+                
+                <div class="total"> <h4>{{ totalAmount }} kr</h4></div>
+                    <!-- <button type="submit"><img src="../assets/icons/BUYNOW.svg"></button>	-->
+                <button type="order" class="btn-large dark" @click="onSubmit"><h3>Buy now</h3></button>
             </form>
-        </div>
     </div>
                     
-   
-            
-  
-
-
 </template>
 
 <script>
@@ -55,32 +67,28 @@
 export default {
     name: 'Checkout',
     
-	components: { 
-		
-        
-	},
-
-    data: function(){
-        
+	data() {
         return {
-            user:{
-            lastname: '',
-            firstname: '',
-
-            address: {
-                street: '',
-                zip: '',
-                city: '',
-            },
-
-                contact: {
-                    email:'',
-                    phone: '',
-                }
-            }
+            user: this.userDefinition()
         }
-    
     },
+
+    // data: function(){
+        
+    //     return {
+    //         user: {
+    //             name: '',
+    //             email: '',
+
+    //             address: {
+    //                 street: '',
+    //                 zip: '',
+    //                 city: '',
+    //             }
+    //         }
+    //     }
+    
+    // },
 
     computed: {
 		cart() {
@@ -121,22 +129,52 @@ export default {
 
 <style lang="scss" scoped>
 
+.delivery-details {
+    margin: $space/4 $space;
+}
 
-.register-form{
+.order-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    text-align: left;
 
-   text-align: left;
+    .zip-city {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .zip, 
+    .city {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            flex: 1;
+            padding: 4% 5%;
+        }
+    }
+
+    .zip {
+        margin-right: 5%;
+    }
+}
+
+label{
+    line-height: 1em;
 }
 .input-field {
-    width: 280px;
-    height: 45px;
+    font-size: 14px;
+	font-family: 'Raleway', sans-serif;
+    width: 100%;
+    padding: 4% 5%;
     margin-bottom: 20px;
 }
 
-
-
-
-.deliverydetails-container {
-  margin: 70px;  
+.total  {
+    margin: auto;
 }
 
 div label.required:after
@@ -144,32 +182,16 @@ div label.required:after
     color: red;
     content: " *";
 }
-ul{
-    list-style-type: disc;
-    -webkit-columns: 2;
-    -moz-columns: 2;
-    columns: 2;
-    list-style-position: inside;
-    
-}
 
 .item-summary {
-display: flex;
-flex-direction: row;
-padding-bottom: 30px;
-padding-left: 20px;
-justify-content: center;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    justify-content: center;
 }
 .product-information{
     padding-left: 30px;;
 }
-button {
-    width: 370px;
-    height: 47px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-  }
+
 </style>

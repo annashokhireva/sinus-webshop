@@ -125,7 +125,7 @@ export default {
 			this.$store.commit('setActiveIndex', index);
 			this.$store.commit('showModal', 'ProductModal');
 		}
-  },
+  }
 };
 </script>
 

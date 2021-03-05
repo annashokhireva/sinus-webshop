@@ -13,9 +13,12 @@ import MainFooter from './components/MainFooter.vue';
 export default {
 	components: { 
 		MainFooter,
-		BaseModal,
-		
+		BaseModal,	
 	},
+
+	beforeCreate() {
+		this.$store.commit('initialiseStore');
+	}
 
 }
 </script>

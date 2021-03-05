@@ -32,7 +32,7 @@
 
 							<!-- <div class="product-counter">
 								<span>-</span>
-								2 ganska svårt function. lägger till om vi hinner
+								{{ item.quantity}}
 								<span>+</span>
 							</div> -->
 
@@ -87,12 +87,10 @@ export default {
 		]),
 
 		removeFromCart(item) {
-			const index = this.cart.indexOf(item)
+			const index = this.cart.indexOf(item);
 			this.$store.dispatch("removeFromCart", index);
-			console.log(index)
 		}
 	}
-
 }
 </script>
 
