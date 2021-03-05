@@ -41,8 +41,6 @@ export default {
 
     computed: {
 		cart() {
-
-
 			return this.$store.getters.cart;
 		},
 
@@ -72,22 +70,19 @@ export default {
     
 }
 .order-container {
-    padding-top: 10px;
+    padding: 10px;
     display: flex;
     flex-direction:column;
     padding-right:30px;
     width: 300px;
-    height: 774px;
+    height: 100%;
     background-color: #F5F4F0;
     border-color: black;
-    overflow: auto;
+    overflow: scroll;
     text-align: left;
     border-color: black;
     border-style: solid;
     border-width: 0.5px;
-    margin-right: 40px;
-    
-    
 }
 
 .text-order{

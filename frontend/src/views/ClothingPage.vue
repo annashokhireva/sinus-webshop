@@ -28,15 +28,15 @@
         </p>
       </div>
     </div>
-    <div>
+    <div class="category-name">
       <h3>Clothing</h3>
     </div>
     <div>
-        <FilteredProducts
-        :products="products"
+         <FilteredProducts
+      :config="filterConfig"
+        :products="localProducts"
         @filtering-products="setNewProducts"
       />
-
       <div class="product-cards">
         <product-card
           v-for="(product, i) in filteredProducts"
@@ -73,16 +73,25 @@ export default {
     product: Object,
   },
 
-  data() {
+   data() {
     return {
       localProducts: [],
+      localFilteredProducts: [],
+      filterConfig: {
+        category: false,
+        sort: true,
+        search: true,
+      },
+
     };
   },
 
-  async mounted() {
+ async mounted() {
     await this.getProducts();
-    this.localProducts = this.products;
+    this.localProducts = this.products.filter((product) => product.category === "clothes");
+    this.localFilteredProducts = [...this.localProducts];
   },
+
 
   computed: {
     ...mapState({
@@ -90,7 +99,7 @@ export default {
     }),
 
     filteredProducts() {
-      return this.localProducts;
+      return this.localFilteredProducts;
     },
   },
 
@@ -99,9 +108,10 @@ export default {
 
     ...mapMutations(["showModal"]),
 
-    setNewProducts(arrayProducts) {
-      this.localProducts = [...arrayProducts];
+     setNewProducts(arrayProducts) {
+      this.localFilteredProducts = [...arrayProducts];
     },
+
 
     goTo(path) {
       return this.$router.push(path);

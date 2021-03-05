@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="category-name">
-      <h2 class="category-name">All products</h2>
+      <h1 class="category-name">All products</h1>
       <FilteredProducts
         :products="products"
         @filtering-products="setNewProducts"
@@ -132,7 +132,7 @@ export default {
 <style lang="scss" scoped>
 
 .general-grid {
-  margin: 10% 10% 2% 20%;
+  margin: 5% 10% 2% 20%;
   display: flex;
   align-self: left;
 }
@@ -141,10 +141,13 @@ export default {
   text-align: left;
 }
 .category-name {
-  align-self: start;
+  align-self: center;
+  padding-bottom: 20px;
 }
 
-
+h1{
+  text-decoration: underline;
+}
 h3 {
   text-decoration: underline;
 }

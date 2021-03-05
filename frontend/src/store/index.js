@@ -1,145 +1,120 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL } from '../api/api.js';
+import {get, post, setToken, PRODUCTS_URL, REGISTER_URL, AUTH_URL, ORDER_URL } from '../api/api.js';
 Vue.use(Vuex)
 
 
-export default new Vuex.Store({ 
-	state: {
-			products: [],
-			activeProductIndex: null,
-			shoppingCart: [],
-			modalVisible: false,
-			modalComponent: null,
-			bagVisible: false,
-			agreedToPrivacy: false
-		},
-	getters: {
-		cart: (state) => state.shoppingCart,
-		products: (state) => state.products,
-		productById: (state) => (id) => {
-			return state.products.find(product => product._id === id)
-		},
-		// active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
-		total: state => {
-			if (state.shoppingCart.length > 0) {
-				return state.shoppingCart.map(item => item.price).reduce((total, amount) => total + amount);
-			} else {
-				return 0;
-			}
-		}
-	},
-	mutations: {
-		setProducts(state, products) {
-			state.products = products;
-			console.log(products);
-		},
+export default new Vuex.Store({
+    state: {
+        products: [],
+        activeProductIndex: null,
+        shoppingCart: [],
+        modalVisible: false,
+        modalComponent: null,
+        bagVisible: false
+    },
+    getters: {
+        cart: (state) => state.shoppingCart,
+        products: (state) => state.products,
+        productById: (state) => (id) => {
+            return state.products.find(product => product._id === id)
+        },
+        // active: (state) => (state.open.lenght > 0 ? state.open[0] : null)
+        total: state => {
+            if (state.shoppingCart.length > 0) {
+                return state.shoppingCart.map(item => item.price).reduce((total, amount) => total + amount);
+            } else {
+                return 0;
+            }
+        }
+    },
+    mutations: {
+        setProducts(state, products) {
+            state.products = products;
+            console.log(products);
+        },
 
-		showModal(state, componentName) {
-			state.modalVisible = true;
-			state.modalComponent = componentName;
-		},
-		hideModal(state) {
-			state.modalVisible = false;
-		},
+        showModal(state, componentName) {
+            state.modalVisible = true;
+            state.modalComponent = componentName;
+        },
+        hideModal(state) {
+            state.modalVisible = false;
+        },
 
-		toggleBag(state) {
+        toggleBag(state) {
 
-			state.bagVisible = !state.bagVisible;
-		},
+            state.bagVisible = !state.bagVisible;
+        },
 
-		addItem(state, product) {
-			state.shoppingCart.push(product);
-		},
+        addItem(state, product) {
+            state.shoppingCart.push(product);
+        },
 
-		addNewProduct(state, product){
-			state.products.push(product);
-		},
+        addNewProduct(state, product) {
+            state.products.push(product);
+        },
 
-		removeItem(state, index) {
-			state.shoppingCart.splice(index, 1);
-		},
+        removeItem(state, index) {
+            state.shoppingCart.splice(index, 1);
+        },
 
-		setActiveIndex(state, index) {
-			state.activeProductIndex = index;
-		},
+        setActiveIndex(state, index) {
+            state.activeProductIndex = index;
+        }
 
-		agreePrivacyPolicy(state) {
-			localStorage.setItem('agreedToPrivacy', true);
-			state.agreedToPrivacy = true;
-		},
+    },
+    actions: {
+        getProducts({ commit }) {
+            return get(PRODUCTS_URL)
+                .then(response => {
+                    commit('setProducts', response.data)
+                })
+        },
 
-		initialiseStore(state) {
-				//add admin login function
-			
-			// if (localStorage.getItem('agreedToPrivacy')) {
-			// 	state.agreedToPrivacy = true;
-			// }
+        addToCart(context, product) {
+            context.commit("addItem", product);
+        },
 
-			if (localStorage.getItem('cartProducts')){
-				this.replaceState(
-					Object.assign(state, JSON.parse(localStorage.getItem('cartProducts')))
-				);
-			}
-		},
+        addNewProduct(context, product) {
+            context.commit("addNewProduct", product);
+        },
 
-		// shoppingCartStore(state) {
-		// 	if (localStorage) {
-		// 		let shoppingCart = localStorage.getItem('cartProducts');
-		// 		if (shoppingCart) {
-		// 			state.shoppingCart = JSON.parse(shoppingCart);
-		// 		}
-		// 	}
-		// }
+        removeFromCart(context, index) {
+            context.commit("removeItem", index);
+        },
+        async SEND_ORDER(context, payload) {
+            try {
+                await post(ORDER_URL, {
+                    body: {
+                        items: payload.items
+                    },
+                    user: payload.user
+                })
+            } catch (error) {
+                throw new Error(error)
+            }
+        },
 
-	},
-	actions: {
-		getProducts({ commit }) {
-			return get(PRODUCTS_URL)
-			.then(response => {
-				commit('setProducts', response.data)
-			})
-		},
+        async registerUser(context, payload) {
 
-		addToCart(context, product) {
-			context.commit("addItem", product);
-			localStorage.setItem('cartProducts', JSON.stringify(this.state.shoppingCart));
-		},
+            const response = await post(REGISTER_URL, payload)
+            console.log(response)
 
-		addNewProduct(context, product) {
-			context.commit("addNewProduct", product);
-		},
+            console.log(context)
+        },
 
-		removeFromCart(context, index) {
-			context.commit("removeItem", index);
-		},
+        async authenticateUser(context, payload) {
 
-		async registerUser(context, payload) {
+            const response = await post(AUTH_URL, payload)
+            console.log(response)
 
-			const response = await post(REGISTER_URL, payload)
-			console.log(response)
+            setToken(response.data.token);
+            context.commit("hideModal")
 
-			console.log(context)
-		},
+            console.log(context)
+        }
 
-		async authenticateUser(context, payload) {
-
-			const response = await post(AUTH_URL, payload)
-			console.log(response)
-
-			setToken(response.data.token);
-
-			console.log(context)
-		},
-
-		// async createOrder({ commit }) {
-
-		// 	return post(CREATE_ORDER, payload)
-		// 	.then(response => {
-		// 		commit('setProducts', response.data)
-		// 	})
-		// }
-
-	},
-	modules: {}
-}) 
+    },
+    modules: {}
+})

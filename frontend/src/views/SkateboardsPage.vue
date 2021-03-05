@@ -33,12 +33,13 @@
         </p>
       </div>
     </div>
-    <div>
+    <div class="category-name">
       <h3>Skateboards</h3>
     </div>
     <div>
       <FilteredProducts
-        :products="products"
+      :config="filterConfig"
+        :products="localProducts"
         @filtering-products="setNewProducts"
       />
 
@@ -81,12 +82,20 @@ export default {
   data() {
     return {
       localProducts: [],
+      localFilteredProducts: [],
+      filterConfig: {
+        category: false,
+        sort: true,
+        search: true,
+      },
+
     };
   },
 
   async mounted() {
     await this.getProducts();
-    this.localProducts = this.products;
+    this.localProducts = this.products.filter((product) => product.category === "board");
+    this.localFilteredProducts = [...this.localProducts];
   },
 
   computed: {
@@ -95,7 +104,7 @@ export default {
     }),
 
     filteredProducts() {
-      return this.localProducts;
+      return this.localFilteredProducts;
     },
   },
 
@@ -105,7 +114,7 @@ export default {
     ...mapMutations(["showModal"]),
 
     setNewProducts(arrayProducts) {
-      this.localProducts = [...arrayProducts];
+      this.localFilteredProducts = [...arrayProducts];
     },
 
     goTo(path) {
@@ -139,7 +148,9 @@ export default {
   padding: 2% 5% 5% 10%;
   text-align: left;
 }
-
+h1 {
+  align-items: left;
+}
 h3 {
   text-decoration: underline;
 }

@@ -1,40 +1,22 @@
 <template>
-  <div>
-   <main-header>
-            <template v-slot:nav>
-                <go-back-nav msg="Go back"/>
-                    </template>     
-        </main-header>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-         <br>
+<div>
+    <main-header>
+        <template v-slot:nav>
+            <go-back-nav msg="Go back"/>
+        </template>     
+    </main-header>
 
-                <div class="order-container"> 
-                  <br>
-                  
-                   <br>
-                    <br>
-                     <br>
+    <div class="main">
+        <h2>COMPLETE YOUR PURCHASE</h2>
+        <div class="order-container"> 
 
-                   <div>
-                    <h2>COMPLETE YOUR PURCHASE</h2>
-                        <OrderForm />
-                        
-                        <br>
-                        
-                    </div>
-                    
-                    <div>
-                        <OrderCartitems />
-                    </div>
-                    
-                </div>
-    
-  </div>
+        <OrderForm />
+
+        <OrderCartitems />
+        
+        </div>
+    </div>
+</div>
 </template>
 
 
@@ -105,8 +87,8 @@ export default {
         onSubmit: function(){
 
         
-            this.$store.dispatch('registerUser', this.user);
-          
+            // this.$store.dispatch('registerUser', this.user);
+          this.$store.dispatch('SEND_ORDER', this.user);
         },
        
     },
@@ -122,11 +104,10 @@ export default {
 
 <style lang="scss" scoped>
 .order-container {
-  
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 50px;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: $space $main-margin;
 }
 button {
     width: 370px;
