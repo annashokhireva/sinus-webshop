@@ -123,7 +123,7 @@ export default {
       let product = this.$store.getters.productById(id)
       const index = this.$store.getters.products.indexOf(product)
 			this.$store.commit('setActiveIndex', index);
-			this.$store.commit('showModal', 'ProductModal');
+      this.$store.commit('showModal', 'ProductModal');
 		}
   }
 };

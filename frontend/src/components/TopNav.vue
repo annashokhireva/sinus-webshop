@@ -19,7 +19,9 @@
 
 					<div class="account" v-if="visible" @click.stop="toggleDropdown">
 						<img src="../assets/icons/avatar.svg" alt="Avatar icon" >
-						<p class="medium">My account</p>
+						<p v-if="admin" class="medium">Admin</p>
+						<p v-else class="medium">My account</p>
+						
 						<span v-if="showDropdown">
 							<img src="../assets/icons/polygon_up.svg" alt="arrow up">
 						</span>
@@ -44,11 +46,21 @@
 					<li>
 						<router-link to="/profile"><p>My Account</p></router-link>
 					</li>
-					<li v-for="(link, index) in links" :key="index">
+					<li v-if="admin">
+						<router-link to="/admin-products">
+							<p><b>Admin Products</b></p> 
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/orders">
+							<p>Orders</p> 
+						</router-link>
+					</li>
+					<!-- <li v-for="(link, index) in links" :key="index">
 						<router-link :to="{name: link.page}">
 							<p>{{ link.name }}</p>
 						</router-link>
-					</li>
+					</li> -->
 					<li>
 						<p @click.stop="logOut"><i>Log out</i></p>
 					</li>
@@ -91,6 +103,7 @@ export default {
 	computed: {
 		...mapState({
 			visible: 'logedIn',
+			admin: 'isAdmin'
 		}),
 	},
 

@@ -62,8 +62,8 @@ const routes = [
 },
 {
 	path: '/orders',
-	name: 'Orders',
-	component: () => import('../views/AdminOrders.vue')
+	name: 'User Orders',
+	component: () => import('../views/UserOrders.vue')
 },
 {
 	path: '/profile',

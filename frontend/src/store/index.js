@@ -35,8 +35,10 @@ export default new Vuex.Store({
 		navVisible: false,
 		modalComponent: null,
 		bagVisible: false,
-		logedIn: false
+		logedIn: false,
+		isAdmin: false
 	},
+
 	getters: {
 		cart: (state) => state.shoppingCart,
 		products: (state) => state.products,
@@ -55,6 +57,7 @@ export default new Vuex.Store({
 		}
 		},
 	},
+
 	mutations: {
 		setProducts(state, products) {
 			state.products = products;
@@ -112,11 +115,17 @@ export default new Vuex.Store({
 		},
 
 		initialiseStore(state) {
-		//add admin login function
 
-		// if (localStorage.getItem('agreedToPrivacy')) {
-		// 	state.agreedToPrivacy = true;
-		// }
+			const user = localStorage.getItem("user");
+
+			if (user) {
+				setToken(user);
+				state.user = JSON.parse(user);
+				if (user.role === 'admin') {
+					state.isAdmin = true;
+				}
+			}
+			console.log(user.role)
 
 			if (localStorage.getItem("cartProducts") !== null) {
 				this.replaceState(
@@ -133,9 +142,10 @@ export default new Vuex.Store({
 		},
 
 		clearLocalstorage() {
-			localStorage.removeItem('token');
+			localStorage.removeItem("token");
 		},
 	},
+
 	actions: {
 		getProducts({ commit }) {
 			return get(PRODUCTS_URL).then((response) => {
@@ -146,15 +156,14 @@ export default new Vuex.Store({
 		async getOrders({ commit }) {
 			const response = await get(ORDERS_URL);
 			commit("setOrders", response.data);
-			console.log(response.data);
+			// console.log(response.data);
 		},
 
-		async getUser({ commit }) {
+		async getUser({commit}) {
 			const response = await get(USER_URL);
-			commit("getUser", response.data);
-			console.log(response.data);
-		},
 
+			commit("getUser", response.data);
+		},
 
 		addToCart(context, product) {
 			context.commit("addItem", product);
@@ -176,10 +185,6 @@ export default new Vuex.Store({
 			const response = await post(ORDERS_URL, payload);
 			console.log(response);
 			console.log(context);
-			// body: {
-			// 	items: payload.items
-			// },
-			// user: payload.user
 		},
 
 		async registerUser(context, payload) {
@@ -189,15 +194,29 @@ export default new Vuex.Store({
 			console.log(context);
 		},
 
-		async authenticateUser({ commit }, payload) {
+		async authenticateUser(context, payload) {
 			const response = await post(AUTH_URL, payload);
 			setToken(response.data.token);
-			console.log(commit);
 			localStorage.setItem("token", response.data.token);
+
+			if (response.status === 200) {
+				const userResp = await get(USER_URL);
+				context.state.user = userResp;
+
+				localStorage.setItem('user', JSON.stringify(userResp));
+
+				if (userResp.data.role === 'admin') {
+					context.state.isAdmin = true;
+				}
+				else {
+					context.state.isAdmin = false;
+				}	
+			}
 			
-			commit("hideModal");
-			commit("showUser");
+			context.commit("hideModal");
+			context.commit("showUser");
 		},
 	},
+	
 	modules: {},
 });
