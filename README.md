@@ -1,3 +1,26 @@
+# Uppstart av projektet:
+Vi skapade ett nytt Vue projekt som vi cloneat från Anna, sedan lagt till project contributors.
+
+Vi har testat att alla kan commita till projektet och att allt funkar som det ska.
+
+Vår grupp har sedan haft team samtal där vi delat skärm och visat våra figma projekt för Sinus Webshop för att komma överens om vilken design vi ska följa. Vi har kommit fram till att göra Annas wepshop då vi alla ansåg att den var luftig, profesionell och hade bra funktioner och layout.
+
+Vi har gått igenom projektkraven och diskuterat våra mål.
+
+Varje gruppmedlem har valt ut en del att börja med, och tagit sig an fler uppgiter under projektets gång.
+
+# Fördelning av uppgifter och arbetsmetoder:
+För att alla ska få testa på att vara Scrum-master har vi kommit fram till att varje gruppmedlem ska få ta rollen i två dagar.
+Vi har korta avstämningsmöten varje dag där vi går igenom kort vad vi håller på med, om det finns några svårigheter och om vi behöver hjälp. Då vi har olika tider så stämmer vi av dagen innan vilken tid mötet kommande dag ska ske. Vi är överens om att det är OK för en gruppmedlem att hoppa in och göra ändringar/hjälpa till i nångons del om det behövs och så länge som det är ok för båda parter.  Vi diskuterar i grupp om man haft enskilt samtal med lärare, där vi går igenom vad som sagts och gjorts. Vi jobbar enskilt och har parkodat vid behov. Vi har haft daglig kontakt utöver mötena där vi kunnat stötta varann i våra frunderingar och problem. 
+
+För att planera arbetet och ha en bra överblick i vad som bör göras, vad som är påbörjat och vad som är klart så pratade vi om vi skulle använda oss utav Trello eller GitHub. Vi valde att använda GitHub då vi ansåg att det var smidigare att använda så få program som möjligt, och försöka hålla det mesta via samma platform. 
+Vi kom även fram till att Kanban var ett bra system för att få en bra överblick i projektets gång, vad som måste göras och vad som är klart. 
+
+Kanban ska bestå av userstories/uppgifter som varje gruppmedlem kan välja att utföra, samt uppdatera dess status genom att sätta den i rätt kolumn; Att göra, pågående, klar.
+
+Koden ska hållas  enhetlig och snygg genom att vi gör regelbundern code reviewing.
+
+
 # SINUS Webshop
 
 ## Arbetssätt
