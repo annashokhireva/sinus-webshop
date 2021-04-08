@@ -4,8 +4,7 @@
   "description": "Samla era erfarenheter från Kanban, Scrum och diskussionerna av Modern Agile och kom överens i \r gruppen om vilka delar och hur ni ska inkorporera detta i ert arbete. \r Dokumentera vad ni kommer överens om i README.md i ert repository.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "sh deploy.sh"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
