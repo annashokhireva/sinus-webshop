@@ -8,10 +8,6 @@ module.exports = {
 				`@import '@/sass/index.scss';`
 			}
 		}
-	},
-
-	publicPath: process.env.NODE_ENV === 'production'
-	? '/sinus-webshop/'
-	: '/'
+	}
 	
 };
