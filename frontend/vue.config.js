@@ -10,9 +10,8 @@ module.exports = {
 		}
 	},
 
-	module.exports = {
-		publicPath: process.env.NODE_ENV === 'production'
-		? '/sinus-webshop/'
-		: '/'
-	}
+	publicPath: process.env.NODE_ENV === 'production'
+	? '/sinus-webshop/'
+	: '/'
+	
 };
